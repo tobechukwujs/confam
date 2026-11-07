@@ -1,0 +1,15 @@
+{
+  "name": "confam",
+  "private": true,
+  "version": "0.0.0",
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "contract:gen": "uv run python packages/contract/scripts/gen.py",
+    "contract:check": "uv run python packages/contract/scripts/gen.py --check",
+    "contract:tsc": "tsc --noEmit -p packages/contract/tsconfig.json"
+  },
+  "devDependencies": {
+    "json-schema-to-typescript": "^15.0.4",
+    "typescript": "^5.6.3"
+  }
+}

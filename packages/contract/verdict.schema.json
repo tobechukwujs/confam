@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://confam.example/schemas/verdict.schema.json",
+  "title": "Verdict",
+  "description": "The result of one Confam check. Source of truth for the TypeScript and Pydantic types: edit here, then run `pnpm contract:gen`. There is deliberately no confidence, score, grade or percentage field (CLAUDE.md rule 4). Cross-field rules live in `allOf` below; the generated Pydantic and TypeScript types describe shape only, so validate against this schema for the full contract.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "code",
+    "verdict",
+    "reason",
+    "lang",
+    "checked_at",
+    "record_as_of",
+    "notice",
+    "superseded_by",
+    "changes",
+    "conflicts"
+  ],
+  "properties": {
+    "code": {
+      "description": "Check code: 8 characters from the alphabet 23456789ABCDEFGHJKMNPQRSTUVWXYZ (no 0, O, 1, I, L). Stored and sent as 8 characters; presentation inserts a hyphen as XXXX-XXXX.",
+      "type": "string",
+      "pattern": "^[23456789ABCDEFGHJKMNPQRSTUVWXYZ]{8}$"
+    },
+    "verdict": {
+      "type": "string",
+      "enum": ["confirmed", "altered", "not_official", "partial", "cannot_confirm"]
+    },
+    "reason": {
+      "description": "Why the engine cannot confirm. Non-null only when verdict is cannot_confirm, and required then.",
+      "type": ["string", "null"],
+      "enum": ["unclear", "not_in_record", "no_fact", "line_missing", null]
+    },
+    "lang": {
+      "type": "string",
+      "enum": ["en", "pcm", "ha", "yo", "ig"]
+    },
+    "checked_at": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[+-]\\d{2}:\\d{2})$"
+    },
+    "record_as_of": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[+-]\\d{2}:\\d{2})$"
+    },
+    "notice": {
+      "description": "The official notice the check was made against. Null only when verdict is cannot_confirm and reason is not_in_record or no_fact.",
+      "oneOf": [{ "$ref": "#/$defs/Notice" }, { "type": "null" }]
+    },
+    "superseded_by": {
+      "description": "Set when the matched notice has been replaced. Only on confirmed; null otherwise.",
+      "oneOf": [{ "$ref": "#/$defs/SupersededBy" }, { "type": "null" }]
+    },
+    "changes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/Change" }
+    },
+    "conflicts": {
+      "description": "Official facts the copy contradicts. Non-empty exactly when verdict is not_official; empty for every other verdict.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/Conflict" }
+    }
+  },
+  "allOf": [
+    {
+      "description": "reason is required (non-null) for cannot_confirm and null for every other verdict.",
+      "if": { "properties": { "verdict": { "const": "cannot_confirm" } }, "required": ["verdict"] },
+      "then": { "properties": { "reason": { "type": "string" } } },
+      "else": { "properties": { "reason": { "type": "null" } } }
+    },
+    {
+      "description": "notice may be null only for cannot_confirm with reason not_in_record or no_fact. Otherwise it is required.",
+      "if": {
+        "properties": {
+          "verdict": { "const": "cannot_confirm" },
+          "reason": { "enum": ["not_in_record", "no_fact"] }
+        },
+        "required": ["verdict", "reason"]
+      },
+      "then": {},
+      "else": { "properties": { "notice": { "type": "object" } } }
+    },
+    {
+      "description": "superseded_by is allowed only on confirmed.",
+      "if": { "properties": { "verdict": { "const": "confirmed" } }, "required": ["verdict"] },
+      "then": {},
+      "else": { "properties": { "superseded_by": { "type": "null" } } }
+    },
+    {
+      "description": "conflicts is non-empty for not_official and empty for every other verdict.",
+      "if": { "properties": { "verdict": { "const": "not_official" } }, "required": ["verdict"] },
+      "then": { "properties": { "conflicts": { "minItems": 1 } } },
+      "else": { "properties": { "conflicts": { "maxItems": 0 } } }
+    }
+  ],
+  "$defs": {
+    "Notice": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "published", "url"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "published": { "type": "string", "format": "date", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+        "url": { "type": "string", "minLength": 1 }
+      }
+    },
+    "SupersededBy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "published"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "published": { "type": "string", "format": "date", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" }
+      }
+    },
+    "Change": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["op", "kind", "official", "copy"],
+      "properties": {
+        "op": { "type": "string", "enum": ["replace", "insert", "delete"] },
+        "kind": {
+          "type": "string",
+          "enum": ["date", "time", "weekday", "number", "money", "link", "phone", "negation", "text"]
+        },
+        "official": {
+          "description": "The official wording. Null for insert (nothing in the record), a string otherwise.",
+          "type": ["string", "null"]
+        },
+        "copy": {
+          "description": "The forwarded copy's wording. Null for delete (nothing in the copy), a string otherwise.",
+          "type": ["string", "null"]
+        },
+        "box": {
+          "description": "Optional position on a photo from OCR: x, y, width, height, each 0 to 1. Absent for pasted text.",
+          "type": "array",
+          "items": { "type": "number", "minimum": 0, "maximum": 1 },
+          "minItems": 4,
+          "maxItems": 4
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "op": { "const": "insert" } }, "required": ["op"] },
+          "then": { "properties": { "official": { "type": "null" } } },
+          "else": { "properties": { "official": { "type": "string" } } }
+        },
+        {
+          "if": { "properties": { "op": { "const": "delete" } }, "required": ["op"] },
+          "then": { "properties": { "copy": { "type": "null" } } },
+          "else": { "properties": { "copy": { "type": "string" } } }
+        }
+      ]
+    },
+    "Conflict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "copy", "official", "quote"],
+      "properties": {
+        "kind": { "type": "string", "enum": ["date", "link", "money"] },
+        "copy": { "type": "string" },
+        "official": { "type": "string" },
+        "quote": { "type": "string" }
+      }
+    }
+  }
+}
