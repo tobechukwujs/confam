@@ -7,7 +7,8 @@ import { Pin } from "../sheet/Pin";
 // One stage per verdict: the marked figure. Marks ride above the text and never edit it.
 // Pins pair with rows in the "What changed" list (see VerdictLayout).
 
-const isLong = (value: string) => value.length > 10;
+// A date ("29th November") is split into a big day and a small month, so it is never "long".
+const isLong = (value: string) => value.length > 10 && !splitDate(value);
 
 export function ConfirmedStage() {
   return (
@@ -55,7 +56,7 @@ export function ReplacedStage({ verdict, nowLabel }: { verdict: Verdict; nowLabe
       )}
       <div className="figure-row">
         <Pin n={index + 1} tone="pencil" />
-        <span className={`figure${isLong(oldValue) && !splitDate(oldValue) ? " long" : ""}`} lang={NOTICE_LANG}>
+        <span className={`figure${isLong(oldValue) ? " long" : ""}`} lang={NOTICE_LANG}>
           {oldValue ? <FigureValue value={oldValue} /> : <span className="gap" />}
           <Mark kind="bracket" tone="pencil" />
         </span>
@@ -84,7 +85,7 @@ export function AlteredStage({ change }: { change: Change }) {
           </span>
         ) : (
           <span className={`figure${isLong(copy) ? " long" : ""}`} lang={NOTICE_LANG}>
-            {copy}
+            <FigureValue value={copy} />
             <Mark kind={change.op === "insert" ? "strike" : "ring"} tone="red" />
           </span>
         )}

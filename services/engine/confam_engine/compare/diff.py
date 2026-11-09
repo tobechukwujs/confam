@@ -14,6 +14,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from difflib import SequenceMatcher
 
+from .lookalike import is_lookalike
 from .tokenize import Token, tokenize
 
 
@@ -25,6 +26,7 @@ class Diff:
     copy: str | None
     old_span: tuple[int, int]  # token indexes in the COPY (zero-width for a delete)
     new_span: tuple[int, int]  # token indexes in the OFFICIAL text
+    lookalike: bool = False  # differs only by look-alike characters: cannot be called an edit
 
     def to_change(self) -> dict:
         """The contract Change shape without a box."""
@@ -66,6 +68,12 @@ def _make(op: str, kind: str, text: str, span: tuple[int, int], at: int) -> Diff
 
 def _pair_block(old: list[Token], new: list[Token], i0: int, j0: int) -> list[tuple[int, Diff]]:
     out: list[tuple[int, Diff]] = []
+    # A block that differs only by look-alike characters is ONE uncertain difference.
+    if old and new and is_lookalike("".join(t.text for t in old), "".join(t.text for t in new)):
+        kind = next((t.kind for t in new if t.meaningful), "text")
+        return [
+            (i0, Diff("replace", kind, _join(new), _join(old), (i0, i0 + len(old)), (j0, j0 + len(new)), lookalike=True))
+        ]
     old_m = [(i0 + n, t) for n, t in enumerate(old) if t.meaningful]
     new_m = [(j0 + n, t) for n, t in enumerate(new) if t.meaningful]
 

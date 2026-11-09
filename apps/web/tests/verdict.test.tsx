@@ -116,6 +116,18 @@ describe("verdict views", () => {
     expect(container.querySelector(".hand")).toHaveTextContent("28th");
   });
 
+  it("altered date as the engine reports it: the day is the big figure, the month small, official value in hand", () => {
+    const v = structuredClone(sample("altered_replace"));
+    v.changes = [{ op: "replace", kind: "date", official: "28th November", copy: "29th November" }];
+    const { container } = renderSample(v);
+    const figure = container.querySelector(".figure") as HTMLElement;
+    expect(figure.querySelector(".figure-main")).toHaveTextContent("29th");
+    expect(figure.querySelector(".figure-sub")).toHaveTextContent("November");
+    expect(figure).not.toHaveClass("long");
+    expect(container.querySelector('[data-mark="ring"]')).toHaveClass("tone-red");
+    expect(container.querySelector(".hand")).toHaveTextContent("28th November");
+    expect(container.querySelector(".hand")).not.toHaveClass("long");
+  });
   it("altered insert strikes the added words; delete shows a caret", () => {
     const ins = renderSample(sample("altered_insert"));
     expect(ins.container.querySelector('[data-mark="strike"]')).toHaveClass("tone-red");

@@ -176,3 +176,31 @@ def test_spans_point_into_the_copy_tokens():
 def test_to_change_has_exactly_the_contract_keys_and_no_box():
     d = diff_text(OLD, NEW)[0].to_change()
     assert set(d) == {"op", "kind", "official", "copy"}
+
+
+# --- look-alike differences are flagged, real ones are not ------------------
+
+
+@pytest.mark.parametrize(
+    "copy,official",
+    [
+        ("2Bth November", "28th November"),
+        ("Registrat1on", "Registration"),
+        ("l4th November", "14th November"),
+        ("Z026", "2026"),
+        ("O8012345678", "08012345678"),
+        ("modem", "modern"),
+    ],
+)
+def test_lookalike_differences_are_flagged(copy, official):
+    diffs = diff_text(copy, official)
+    assert diffs and all(d.lookalike for d in diffs), [(d.copy, d.official, d.lookalike) for d in diffs]
+
+
+@pytest.mark.parametrize(
+    "copy,official",
+    [("15th November", "14th November"), ("2029", "2026"), ("fee", "free"), ("N500", "N5000")],
+)
+def test_real_differences_are_not_lookalikes(copy, official):
+    diffs = diff_text(copy, official)
+    assert diffs and not any(d.lookalike for d in diffs)

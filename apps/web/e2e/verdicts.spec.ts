@@ -150,3 +150,65 @@ test("an empty paste shows a bold black message, not red", async ({ page }) => {
   expect(color).toBe("rgb(20, 23, 28)"); // print-black #14171c, never red
   expect(await error.evaluate((el) => getComputedStyle(el).fontWeight)).toBe("700");
 });
+
+
+// ---- pasted text through the rule-based engine (fictional notices only) ----
+const CURRENT_NOTICE =
+  "The Simulated Electoral Commission announces that voter registration now closes on 28th November. Register only at https://register.sec.example. Registration is free.";
+
+async function paste(page: Page, text: string) {
+  await page.goto("/");
+  await page.getByLabel("The notice text").fill(text);
+  await page.getByRole("button", { name: "Check this notice" }).click();
+  await expect(page).toHaveURL(/\/v\/[23456789ABCDEFGHJKMNPQRSTUVWXYZ]{8}$/);
+}
+
+test("a pasted copy with one changed date is Altered: the date ringed, the official date written above", async ({ page }) => {
+  await paste(page, CURRENT_NOTICE.replace("28th November", "29th November"));
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Altered");
+  await expect(page.locator(".figure-main")).toHaveText("29th");
+  await expect(page.locator(".figure-sub")).toHaveText("November");
+  await expect(page.locator(".hand")).toHaveText("28th November");
+  await expect(page.locator('[data-mark="ring"]')).toHaveCount(1);
+  await expect(page.locator("ol.changes li")).toHaveCount(1);
+  // Scale Rule and One Screen hold for a real engine result too
+  const bottom = await page.locator(".actions .btn").evaluate((el) => el.getBoundingClientRect().bottom);
+  expect(bottom).toBeLessThanOrEqual(640);
+  const largest = await page.evaluate(() => {
+    let max = { size: 0, text: "" };
+    const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    while (w.nextNode()) {
+      const n = w.currentNode;
+      if (!n.textContent?.trim() || !n.parentElement) continue;
+      const size = parseFloat(getComputedStyle(n.parentElement).fontSize);
+      if (size > max.size) max = { size, text: n.textContent.trim() };
+    }
+    return max;
+  });
+  expect(largest.text).toBe("29th");
+});
+
+test("a cropped copy is Partial, never a green tick", async ({ page }) => {
+  await paste(page, "The Simulated Electoral Commission announces that voter registration now closes on 28th November.");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Partial");
+  await expect(page.locator('[data-mark="tick"]')).toHaveCount(0);
+});
+
+test("a look-alike character is Cannot confirm, not Altered and not Confirmed", async ({ page }) => {
+  await paste(page, CURRENT_NOTICE.replace("28th", "2Bth"));
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Cannot confirm");
+  await expect(page.getByText(/could not read this clearly enough/i)).toBeVisible();
+});
+
+test("an invented notice with a wrong registration link is Not official, with the official sentence quoted", async ({ page }) => {
+  await paste(page, "URGENT. Citizens must register at https://register-sec.example before the voter registration deadline.");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Not official");
+  await expect(page.locator(".claim")).toHaveText("https://register-sec.example");
+  await expect(page.locator(".hand")).toHaveText("https://register.sec.example");
+  await expect(page.locator('[data-mark="cross"]')).toHaveCount(1);
+});
+
+test("an honest copy with different spacing and case is still Confirmed", async ({ page }) => {
+  await paste(page, "  " + CURRENT_NOTICE.toUpperCase().replace(/ /g, "  ") + " ");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Confirmed");
+});
