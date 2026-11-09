@@ -85,7 +85,8 @@ def evaluate_readings(readings: Sequence[Reading], record: Sequence[OfficialNoti
     tb, bb, mb = _per_reading(rb, record)
 
     if len(ta) < MIN_TOKENS and len(tb) < MIN_TOKENS:
-        return Outcome("cannot_confirm", reason="no_fact")  # nothing readable to check
+        # OCR read no usable text. The only case where unclear has no notice (approved contract change).
+        return Outcome("cannot_confirm", reason="unclear")
 
     if ma is None and mb is None:
         # no notice in either reading: a conflict counts only if both readings find the same one

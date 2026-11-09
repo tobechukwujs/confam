@@ -17,7 +17,7 @@ export interface Verdict {
   checked_at: string;
   record_as_of: string;
   /**
-   * The official notice the check was made against. Null only when verdict is cannot_confirm and reason is not_in_record or no_fact.
+   * The official notice the check was made against. Null only when verdict is cannot_confirm and reason is not_in_record or no_fact, or unclear because OCR read no usable text from a photo (the engine uses unclear with a null notice only then). Otherwise required.
    */
   notice: Notice | null;
   /**

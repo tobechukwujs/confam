@@ -142,6 +142,12 @@ export const ha: Strings = {
         instruction: "Ka liƙa sanarwar kanta, da kwanakinta, lambobinta ko hanyoyin haɗinta.",
         action: "Duba wata sanarwa",
       },
+      unreadable: {
+        word: "Ba mu iya tabbatarwa ba",
+        sentence: "Ba mu iya karanta wata kalma a wannan hoton ba.",
+        instruction: "Ka aika hoto mai haske, ko ka liƙa rubutun.",
+        action: "Aika hoto mai haske",
+      },
       unclear: {
         word: "Ba mu iya tabbatarwa ba",
         sentence: "Ba mu iya karanta wannan da kyau ba don mu tabbata.",

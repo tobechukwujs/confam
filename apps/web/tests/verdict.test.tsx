@@ -171,7 +171,19 @@ describe("verdict views", () => {
     expect(container.querySelector(".actions a.btn")).toHaveTextContent("Check another notice");
   });
 
-  it("unclear keeps 'Send a clearer photo' until photo upload exists", () => {
+  it("unreadable photo (unclear, no notice): says it could not read any text and asks for a clearer photo", () => {
+    const { container } = renderSample(sample("unreadable"));
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Cannot confirm");
+    expect(screen.getByText("We could not read any text on this photo.")).toBeInTheDocument();
+    const action = container.querySelector(".actions a.btn") as HTMLElement;
+    expect(action).toHaveTextContent("Send a clearer photo");
+    expect(action).toHaveAttribute("href", "/#upload");
+    expect(container.querySelector('[data-mark="unsure"]')).toHaveClass("tone-pencil");
+    expect(container.querySelector(".tone-red")).toBeNull();
+    expect(screen.getByText("No official notice matched")).toBeInTheDocument();
+    expect(container.querySelector(".receipt a[href^='/record/']")).toBeNull();
+  });
+  it("unclear (with a notice) offers 'Send a clearer photo'", () => {
     const { container } = renderSample(sample("unclear"));
     expect(container.querySelector(".actions a.btn")).toHaveTextContent("Send a clearer photo");
   });

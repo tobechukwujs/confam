@@ -142,6 +142,12 @@ export const yo: Strings = {
         instruction: "Lẹ ìkéde fúnra rẹ̀, pẹ̀lú ọjọ́, nọ́ńbà tàbí ìjápọ̀ rẹ̀.",
         action: "Ṣàyẹ̀wò ìkéde mìíràn",
       },
+      unreadable: {
+        word: "A kò lè jẹ́rìí rẹ̀",
+        sentence: "A kò lè ka ọ̀rọ̀ kankan lórí fọ́tò yìí.",
+        instruction: "Fi fọ́tò tó mọ́ gaara ránṣẹ́, tàbí lẹ ọ̀rọ̀ inú rẹ̀.",
+        action: "Fi fọ́tò tó mọ́ ránṣẹ́",
+      },
       unclear: {
         word: "A kò lè jẹ́rìí rẹ̀",
         sentence: "A kò lè ka èyí dáadáa tó láti dá wa lójú.",

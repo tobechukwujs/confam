@@ -17,7 +17,11 @@ import {
 } from "./views";
 
 function copyFor(v: Verdict, key: ViewKey, s: Strings): VerdictCopy {
-  if (key === "cannot_confirm") return s.verdict.cannot_confirm[v.reason ?? "not_in_record"];
+  if (key === "cannot_confirm") {
+    // unclear with no notice means OCR read no usable text: say we could not read it
+    if (v.reason === "unclear" && v.notice === null) return s.verdict.cannot_confirm.unreadable;
+    return s.verdict.cannot_confirm[v.reason ?? "not_in_record"];
+  }
   return s.verdict[key];
 }
 

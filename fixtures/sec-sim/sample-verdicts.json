@@ -165,7 +165,18 @@
     "changes": [],
     "conflicts": []
   },
-  "unclear": {
+  "unreadable": {
+    "code": "UNRD7BXE",
+    "verdict": "cannot_confirm",
+    "reason": "unclear",
+    "lang": "en",
+    "checked_at": "2026-11-08T10:10:00+01:00",
+    "record_as_of": "2026-11-08T09:00:00+01:00",
+    "notice": null,
+    "superseded_by": null,
+    "changes": [],
+    "conflicts": []
+  },  "unclear": {
     "code": "UNC7EAR2",
     "verdict": "cannot_confirm",
     "reason": "unclear",

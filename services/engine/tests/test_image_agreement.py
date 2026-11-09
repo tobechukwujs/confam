@@ -157,13 +157,21 @@ def test_unrelated_text_is_not_in_record():
     assert v.verdict.value == "cannot_confirm" and v.reason.value == "not_in_record"
 
 
-def test_an_unreadable_image_says_nothing_to_check_never_fake():
-    v = check("", "")
-    assert v.verdict.value == "cannot_confirm" and v.reason.value in {"no_fact", "not_in_record"}
-    assert v.notice is None
-    v = check("x", "~ .")
-    assert v.verdict.value == "cannot_confirm"
+def test_a_photo_with_no_usable_text_is_unclear_with_no_notice():
+    """Approved: unclear may carry notice null ONLY when OCR read no usable text."""
+    for a, b in (("", ""), ("x", "~ ."), ("ok", "")):
+        v = check(a, b)
+        assert v.verdict.value == "cannot_confirm" and v.reason.value == "unclear", (a, b)
+        assert v.notice is None and v.changes == [] and v.conflicts == []
 
+
+def test_unclear_with_a_null_notice_never_happens_when_text_was_read():
+    """Readable text that matches nothing is not_in_record, and an unclear verdict about a
+    readable photo always names the notice it compared with."""
+    v = check("Collect your new ballot cards at the market square on Sunday.", "Collect your new ballot cards at the market square on Sunday.")
+    assert v.reason.value == "not_in_record"
+    v = check(NEW_TEXT.replace("28th", "2Bth"), NEW_TEXT)
+    assert v.reason.value == "unclear" and v.notice is not None
 
 def test_one_reading_that_cannot_find_the_notice_does_not_confirm():
     # reading B is garbage: only reading A matches, so nothing can be confirmed or altered

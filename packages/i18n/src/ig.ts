@@ -142,6 +142,12 @@ export const ig: Strings = {
         instruction: "Tinye ọkwa ahụ n'onwe ya, ya na ụbọchị, ọnụọgụgụ ma ọ bụ njikọ ya.",
         action: "Lelee ọkwa ọzọ",
       },
+      unreadable: {
+        word: "Anyị enweghị ike ikwado ya",
+        sentence: "Anyị enweghị ike ịgụ okwu ọ bụla na foto a.",
+        instruction: "Zipụ foto doro anya, ma ọ bụ tinye ederede.",
+        action: "Zipụ foto doro anya",
+      },
       unclear: {
         word: "Anyị enweghị ike ikwado ya",
         sentence: "Anyị enweghị ike ịgụ nke a nke ọma iji doo anya.",

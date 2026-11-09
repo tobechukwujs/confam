@@ -156,10 +156,21 @@ def test_notice_may_be_null_for_not_in_record_and_no_fact(reason):
     assert valid(make(verdict="cannot_confirm", reason=reason, notice=None))
 
 
-@pytest.mark.parametrize("reason", ["unclear", "line_missing"])
-def test_notice_is_required_for_unclear_and_line_missing(reason):
-    assert not valid(make(verdict="cannot_confirm", reason=reason, notice=None))
-    assert valid(make(verdict="cannot_confirm", reason=reason, notice=copy.deepcopy(NOTICE)))
+def test_notice_is_required_for_line_missing():
+    assert not valid(make(verdict="cannot_confirm", reason="line_missing", notice=None))
+    assert valid(make(verdict="cannot_confirm", reason="line_missing", notice=copy.deepcopy(NOTICE)))
+
+
+def test_unclear_may_have_a_null_notice_when_nothing_could_be_read():
+    """Approved contract change: a photo with no usable text has no notice to point at."""
+    assert valid(make(verdict="cannot_confirm", reason="unclear", notice=None))
+    assert valid(make(verdict="cannot_confirm", reason="unclear", notice=copy.deepcopy(NOTICE)))
+
+
+@pytest.mark.parametrize("verdict", ["confirmed", "altered", "partial", "not_official"])
+def test_unclear_does_not_loosen_the_notice_rule_for_other_verdicts(verdict):
+    extra = {"conflicts": [CONFLICT]} if verdict == "not_official" else {}
+    assert not valid(make(verdict=verdict, notice=None, **extra))
 
 
 @pytest.mark.parametrize("verdict", ["confirmed", "altered", "partial"])

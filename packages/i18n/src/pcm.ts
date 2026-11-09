@@ -141,6 +141,12 @@ export const pcm: Strings = {
         instruction: "Paste di notice itself, with im dates, figures or links.",
         action: "Check another notice",
       },
+      unreadable: {
+        word: "We no fit confirm",
+        sentence: "We no fit read any word for dis photo.",
+        instruction: "Send clearer photo, or paste di text.",
+        action: "Send clearer photo",
+      },
       unclear: {
         word: "We no fit confirm",
         sentence: "We no fit read dis one well enough to sure.",

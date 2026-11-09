@@ -16,6 +16,7 @@ const SAMPLES: [string, string][] = [
   ["partial", "P4RT7A2K"],
   ["cannot confirm: not in record", "U5KN7WN3"],
   ["cannot confirm: unclear", "UNC7EAR2"],
+  ["cannot confirm: unreadable photo", "UNRD7BXE"],
 ];
 
 const htmlLang = (page: Page) => page.locator("html").getAttribute("lang");

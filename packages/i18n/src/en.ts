@@ -149,6 +149,12 @@ export const en = {
         instruction: "Paste the notice itself, with its dates, figures or links.",
         action: "Check another notice",
       },
+      unreadable: {
+        word: "Cannot confirm",
+        sentence: "We could not read any text on this photo.",
+        instruction: "Send a clearer photo, or paste the text.",
+        action: "Send a clearer photo",
+      },
       unclear: {
         word: "Cannot confirm",
         sentence: "We could not read this clearly enough to be sure.",

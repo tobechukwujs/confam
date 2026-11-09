@@ -146,7 +146,7 @@ class Verdict(BaseModel):
     record_as_of: AwareDatetime
     notice: Notice | None = Field(
         ...,
-        description='The official notice the check was made against. Null only when verdict is cannot_confirm and reason is not_in_record or no_fact.',
+        description='The official notice the check was made against. Null only when verdict is cannot_confirm and reason is not_in_record or no_fact, or unclear because OCR read no usable text from a photo (the engine uses unclear with a null notice only then). Otherwise required.',
     )
     superseded_by: SupersededBy | None = Field(
         ...,
