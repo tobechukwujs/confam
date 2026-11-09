@@ -139,6 +139,28 @@ describe("verdict views", () => {
     expect(screen.getByText(/does not mean it is fake/i)).toBeInTheDocument();
   });
 
+  it.each(["not_in_record"])("%s: the main action is 'Check another notice' and 'check again later' is a sentence", (name) => {
+    const { container } = renderSample(sample(name));
+    const action = container.querySelector(".actions a.btn") as HTMLElement;
+    expect(action).toHaveTextContent("Check another notice");
+    expect(action).toHaveAttribute("href", "/");
+    // the advice stays, as plain text, not as a button
+    expect(screen.getByText(/Check again later, or ask the office that issued it/)).toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: /check again later/i })).toBeNull();
+    expect(screen.queryByRole("button", { name: /check again later/i })).toBeNull();
+  });
+
+  it("no_fact also offers 'Check another notice'", () => {
+    const v = { ...sample("not_in_record"), reason: "no_fact" as const };
+    const { container } = renderSample(v);
+    expect(container.querySelector(".actions a.btn")).toHaveTextContent("Check another notice");
+  });
+
+  it("unclear keeps 'Send a clearer photo' until photo upload exists", () => {
+    const { container } = renderSample(sample("unclear"));
+    expect(container.querySelector(".actions a.btn")).toHaveTextContent("Send a clearer photo");
+  });
+
   it("red appears only when a copy differs (quarantine rule)", () => {
     for (const [name, v] of samples) {
       const { container, unmount } = renderSample(v);

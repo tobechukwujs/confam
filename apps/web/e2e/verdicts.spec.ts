@@ -135,6 +135,10 @@ test("text that is not in the record is Cannot confirm, never fake (rule 1)", as
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Cannot confirm");
   await expect(page.getByText(/does not mean it is fake/i)).toBeVisible();
   await expect(page.getByText("Not official")).toHaveCount(0);
+  // the button does something: it takes you back to check another notice
+  await page.getByRole("link", { name: "Check another notice" }).click();
+  await expect(page).toHaveURL("/");
+  await expect(page.getByLabel("The notice text")).toBeVisible();
 });
 
 test("an empty paste shows a bold black message, not red", async ({ page }) => {

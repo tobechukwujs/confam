@@ -85,13 +85,13 @@ export const en = {
         word: "Cannot confirm",
         sentence: "We could not find this in our record. That does not mean it is fake.",
         instruction: "Check again later, or ask the office that issued it.",
-        action: "Check again later",
+        action: "Check another notice",
       },
       no_fact: {
         word: "Cannot confirm",
         sentence: "We found nothing in this message that we can check against the record.",
         instruction: "Paste the notice itself, with its dates, figures or links.",
-        action: "Check again later",
+        action: "Check another notice",
       },
       unclear: {
         word: "Cannot confirm",
