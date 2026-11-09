@@ -134,6 +134,8 @@ def _replace_block(
     text (a caption after an edited last word, a header before an edited first word): the notice
     part is paired as usual and the extra words are tagged as wrapper."""
     n_old, n_new = i2 - i1, j2 - j1
+    if is_lookalike(_join(copy[i1:i2]), _join(official[j1:j2])):
+        return _pair_block(copy[i1:i2], official[j1:j2], i1, j1)  # one uncertain difference, not wrapper
     at_head = i1 == 0 and j1 == 0
     at_tail = i2 == len(copy) and j2 == len(official)
     if n_old > n_new and at_tail and not at_head:

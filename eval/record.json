@@ -1,0 +1,70 @@
+{
+  "_comment": "FICTIONAL evaluation record: notices from the Simulated Electoral Commission, which does not exist. Written to cover every kind of fact (dates, times, weekdays, numbers, money, links, phones, negations). Every address is on the reserved .example domain. Synthetic fixtures: results on them say nothing about real notices.",
+  "record_as_of": "2026-11-08T09:00:00+01:00",
+  "notices": [
+    {
+      "id": "SEC-E-001",
+      "title": "Simulated Electoral Commission: voter registration deadline",
+      "published": "2026-09-03",
+      "url": "https://sec.example/notices/SEC-E-001",
+      "text": "The Simulated Electoral Commission announces that voter registration closes on 14th November. Register only at https://register.sec.example. Registration is free.",
+      "superseded_by": { "id": "SEC-E-002", "published": "2026-10-09" }
+    },
+    {
+      "id": "SEC-E-002",
+      "title": "Simulated Electoral Commission: revised voter registration deadline",
+      "published": "2026-10-09",
+      "url": "https://sec.example/notices/SEC-E-002",
+      "text": "The Simulated Electoral Commission announces that voter registration now closes on 28th November. Register only at https://register.sec.example. Registration is free.",
+      "superseded_by": null
+    },
+    {
+      "id": "SEC-E-003",
+      "title": "Simulated Electoral Commission: polling unit hours",
+      "published": "2026-10-15",
+      "url": "https://sec.example/notices/SEC-E-003",
+      "text": "The Simulated Electoral Commission announces that polling units open at 8:00 am and close at 2:00 pm on Saturday 12th December. Bring your voter card. Do not bring weapons or campaign materials to the polling unit.",
+      "superseded_by": null
+    },
+    {
+      "id": "SEC-E-004",
+      "title": "Simulated Electoral Commission: no fee for registration",
+      "published": "2026-10-20",
+      "url": "https://sec.example/notices/SEC-E-004",
+      "text": "The Simulated Electoral Commission confirms that you should not pay any fee to register. Report any request for a fee on 0800 100 2000.",
+      "superseded_by": null
+    },
+    {
+      "id": "SEC-E-005",
+      "title": "Simulated Electoral Commission: voter card collection",
+      "published": "2026-10-22",
+      "url": "https://sec.example/notices/SEC-E-005",
+      "text": "Permanent voter cards can be collected from your local office between 9:00 am and 4:00 pm from Monday 7th December to Friday 11th December. Collection is free. Bring a valid ID. Cards not collected by 18th December will be returned to the commission.",
+      "superseded_by": null
+    },
+    {
+      "id": "SEC-E-006",
+      "title": "Simulated Electoral Commission: publication of results",
+      "published": "2026-10-28",
+      "url": "https://sec.example/notices/SEC-E-006",
+      "text": "Results will be published on https://results.sec.example within 24 hours of the close of polls. The commission will not announce results by phone or text message. Any message that asks for money to see results is false.",
+      "superseded_by": null
+    },
+    {
+      "id": "SEC-E-007",
+      "title": "Simulated Electoral Commission: observer accreditation",
+      "published": "2026-11-01",
+      "url": "https://sec.example/notices/SEC-E-007",
+      "text": "Observer accreditation costs N5,000 per organisation and closes on 20th November. Apply at https://observers.sec.example. Applications sent after the deadline will not be accepted.",
+      "superseded_by": null
+    },
+    {
+      "id": "SEC-E-008",
+      "title": "Simulated Electoral Commission: helpline",
+      "published": "2026-11-03",
+      "url": "https://sec.example/notices/SEC-E-008",
+      "text": "The commission helpline is 0800 200 3000 and is open from 8:00 am to 6:00 pm every weekday. Calls are free. Do not share your voter card number with anyone who calls you.",
+      "superseded_by": null
+    }
+  ]
+}

@@ -204,3 +204,51 @@ def test_lookalike_differences_are_flagged(copy, official):
 def test_real_differences_are_not_lookalikes(copy, official):
     diffs = diff_text(copy, official)
     assert diffs and not any(d.lookalike for d in diffs)
+
+# --- found by the evaluation suite: spacing and punctuation must not matter -------------------
+
+
+@pytest.mark.parametrize(
+    "spaced,plain,kind",
+    [
+        ("2:00   pm", "2:00 pm", "time"),
+        ("8:00\tam", "8:00 am", "time"),
+        ("2:00\npm", "2:00 pm", "time"),
+        ("0800   100   2000", "0800 100 2000", "phone"),
+        ("0800\n100\n2000", "0800 100 2000", "phone"),
+        ("14th   November", "14th November", "date"),
+        ("N5,000", "N5,000", "money"),
+    ],
+)
+def test_runs_of_spaces_and_line_breaks_do_not_split_a_fact(spaced, plain, kind):
+    toks = tokenize(spaced)
+    assert len(toks) == 1 and toks[0].kind == kind, [(t.text, t.kind) for t in toks]
+    assert diff_text(spaced, plain) == []
+
+
+@pytest.mark.parametrize(
+    "copy,official",
+    [
+        ("B:00 am", "8:00 am"),
+        ("Z:00 pm", "2:00 pm"),
+        ("9:O0 am", "9:00 am"),
+        ("NS,000", "N5,000"),
+        ("O800 100 2000", "0800 100 2000"),
+        ("G:00 pm", "6:00 pm"),
+    ],
+)
+def test_lookalikes_inside_times_money_and_phones_are_flagged_despite_punctuation(copy, official):
+    diffs = diff_text(copy, official)
+    assert diffs and all(d.lookalike for d in diffs), [(d.op, d.kind, d.copy, d.official, d.lookalike) for d in diffs]
+
+
+def test_punctuation_alone_is_never_a_difference():
+    assert diff_text("Registration is free", "Registration is free.") == []
+
+def test_a_lookalike_at_the_very_end_is_not_split_off_as_a_caption():
+    """Found by the evaluation: 'O800 100 2000' (letter O) at the end of a notice was cut into an
+    edited word and a trailing 'caption' before the look-alike check saw the whole thing."""
+    diffs = diff_text("Report any request for a fee on O800 100 2000.", "Report any request for a fee on 0800 100 2000.")
+    assert len(diffs) == 1 and diffs[0].lookalike and diffs[0].edge is None, [(d.op, d.kind, d.copy, d.lookalike, d.edge) for d in diffs]
+    diffs = diff_text("O800 100 2000 is the helpline.", "0800 100 2000 is the helpline.")
+    assert len(diffs) == 1 and diffs[0].lookalike

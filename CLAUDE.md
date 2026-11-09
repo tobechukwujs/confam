@@ -47,7 +47,7 @@ pnpm contract:tsc                  # type-check the generated TS against a sampl
 pnpm test                          # web unit tests (Vitest)
 pnpm e2e                           # Playwright, phone viewport 360x640
 uv run pytest                      # api, engine, worker
-uv run python eval/run.py          # benchmark: 165-case and 150-case suites
+uv run python eval/run.py          # synthetic fictional suites (docs/EVAL.md); the old 165/150-case suites are not in this repo
 uv run alembic upgrade head
 ```
 

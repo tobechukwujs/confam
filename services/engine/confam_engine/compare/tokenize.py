@@ -4,7 +4,8 @@ Kinds: date, time, weekday, number, money, link, phone, negation, text. Two toke
 "say the same thing" when kind and key are equal, so "14th November" and
 "November 14" match, and "N500" and "500 naira" match.
 
-Offsets are into the NFC-normalised text (tone marks stay attached to their letters).
+Offsets are into normalize_space(text): NFC (tone marks stay attached to their letters) with
+whitespace collapsed.
 """
 
 from __future__ import annotations
@@ -147,8 +148,14 @@ def _key(kind: str, text: str) -> str:
     return _straight(text).casefold()
 
 
+def normalize_space(text: str) -> str:
+    """NFC, and every run of whitespace (spaces, tabs, line breaks) as one space. Token offsets
+    refer to this form. A chat wraps lines and doubles spaces anywhere, even inside "2:00 pm"."""
+    return re.sub(r"\s+", " ", unicodedata.normalize("NFC", text)).strip()
+
+
 def tokenize(text: str) -> list[Token]:
-    text = unicodedata.normalize("NFC", text)
+    text = normalize_space(text)
     out: list[Token] = []
     for m in _MASTER.finditer(text):
         kind = m.lastgroup or "word"

@@ -10,7 +10,7 @@ from __future__ import annotations
 import re
 from collections.abc import Sequence
 
-from .compare.tokenize import Token, tokenize
+from .compare.tokenize import Token, normalize_space, tokenize
 from .model import OfficialNotice
 
 CONFLICT_KINDS = ("date", "money", "link")
@@ -93,7 +93,7 @@ def find_conflicts(copy: list[Token], record: Sequence[OfficialNotice]) -> tuple
                                 "kind": kind,
                                 "copy": c.text,
                                 "official": o.text,
-                                "quote": _sentence(notice.text, o.start),
+                                "quote": _sentence(normalize_space(notice.text), o.start),
                             }
                         )
                         break
