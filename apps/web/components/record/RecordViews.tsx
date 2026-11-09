@@ -1,9 +1,9 @@
-import { fill, type Strings } from "@confam/i18n";
+import { fill, type Lang, type Strings } from "@confam/i18n";
 import { formatDate, formatDateTime, isRealSourceUrl } from "@/lib/format";
 import type { RecordEntry, RecordList } from "@/lib/record-types";
 
 /** Public list of every notice in the signed record. No status pills: replacement is said in words. */
-export function RecordIndexView({ list, s }: { list: RecordList; s: Strings }) {
+export function RecordIndexView({ list, s, lang }: { list: RecordList; s: Strings; lang: Lang }) {
   const r = s.record;
   return (
     <div className="answer" style={{ maxWidth: 720 }}>
@@ -11,7 +11,7 @@ export function RecordIndexView({ list, s }: { list: RecordList; s: Strings }) {
       <p>{r.lead}</p>
       <p className="sample-note">{s.sampleNotice}</p>
       <p className="label">
-        {fill(r.asOf, { date: formatDateTime(list.record_as_of) })}
+        {fill(r.asOf, { date: formatDateTime(list.record_as_of, lang) })}
       </p>
       <ul className="record-list">
         {list.notices.map((n) => (
@@ -20,7 +20,7 @@ export function RecordIndexView({ list, s }: { list: RecordList; s: Strings }) {
               {n.title}
             </a>
             <p className="label">
-              {n.id} · {formatDate(n.published)} ·{" "}
+              {n.id} · {formatDate(n.published, lang)} ·{" "}
               {n.superseded_by ? fill(r.replacedBy, { id: n.superseded_by.id }) : r.current}
             </p>
           </li>
@@ -31,7 +31,7 @@ export function RecordIndexView({ list, s }: { list: RecordList; s: Strings }) {
 }
 
 /** One notice: its exact signed text, who signed it and when. */
-export function RecordEntryView({ entry, s }: { entry: RecordEntry; s: Strings }) {
+export function RecordEntryView({ entry, s, lang }: { entry: RecordEntry; s: Strings; lang: Lang }) {
   const r = s.record;
   return (
     <div className="spread">
@@ -46,7 +46,7 @@ export function RecordEntryView({ entry, s }: { entry: RecordEntry; s: Strings }
           <dt>{r.idLabel}</dt>
           <dd>{entry.id}</dd>
           <dt>{r.published}</dt>
-          <dd>{formatDate(entry.published)}</dd>
+          <dd>{formatDate(entry.published, lang)}</dd>
         </dl>
         <p>
           {entry.superseded_by ? (
@@ -85,7 +85,7 @@ export function RecordEntryView({ entry, s }: { entry: RecordEntry; s: Strings }
               <li key={sig.role}>
                 <span className="kind">{sig.role === "first" ? r.first : r.second}</span>
                 <span>
-                  {sig.reviewer}, {formatDateTime(sig.signed_at)}
+                  {sig.reviewer}, {formatDateTime(sig.signed_at, lang)}
                 </span>
               </li>
             ))}

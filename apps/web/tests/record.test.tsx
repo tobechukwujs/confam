@@ -54,21 +54,21 @@ describe("isRealSourceUrl", () => {
 
 describe("Receipt links", () => {
   it("'Open the original' goes to the record page in the same tab, so it never breaks", () => {
-    render(<Receipt verdict={samples.confirmed!} s={s} />);
+    render(<Receipt verdict={samples.confirmed!} s={s} lang="en" />);
     const link = screen.getByRole("link", { name: "Open the original" });
     expect(link).toHaveAttribute("href", "/record/SEC-2026-140");
     expect(link).not.toHaveAttribute("target");
   });
 
   it("no 'View source' link for a fictional .example address", () => {
-    render(<Receipt verdict={samples.confirmed!} s={s} />);
+    render(<Receipt verdict={samples.confirmed!} s={s} lang="en" />);
     expect(screen.queryByRole("link", { name: "View source" })).toBeNull();
   });
 
   it("'View source' appears, as a secondary link, only for a real https address", () => {
     const v = structuredClone(samples.confirmed!);
     v.notice!.url = "https://newspaper.com.ng/notice/1";
-    render(<Receipt verdict={v} s={s} />);
+    render(<Receipt verdict={v} s={s} lang="en" />);
     const link = screen.getByRole("link", { name: "View source" });
     expect(link).toHaveAttribute("href", "https://newspaper.com.ng/notice/1");
     expect(link).toHaveAttribute("rel", expect.stringContaining("noopener"));
@@ -77,7 +77,7 @@ describe("Receipt links", () => {
 
 describe("record index", () => {
   it("lists every notice, linked to its page, with replacement said in words", () => {
-    render(<RecordIndexView list={list} s={s} />);
+    render(<RecordIndexView list={list} s={s} lang="en" />);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("The official record");
     for (const n of notices) {
       const link = screen.getByRole("link", { name: n.title });
@@ -88,12 +88,12 @@ describe("record index", () => {
   });
 
   it("has no badge or pill elements", () => {
-    const { container } = render(<RecordIndexView list={list} s={s} />);
+    const { container } = render(<RecordIndexView list={list} s={s} lang="en" />);
     expect(container.querySelector('[class*="pill"], [class*="badge"]')).toBeNull();
   });
 
   it("is labelled as fictional sample content", () => {
-    render(<RecordIndexView list={list} s={s} />);
+    render(<RecordIndexView list={list} s={s} lang="en" />);
     expect(screen.getByText(/fictional Simulated Electoral Commission/i)).toBeInTheDocument();
   });
 });
@@ -101,7 +101,7 @@ describe("record index", () => {
 describe("record entry", () => {
   it("shows the exact signed text, word for word, in its own language", () => {
     const n = entry("SEC-2026-140");
-    const { container } = render(<RecordEntryView entry={n} s={s} />);
+    const { container } = render(<RecordEntryView entry={n} s={s} lang="en" />);
     const block = container.querySelector(".record-text") as HTMLElement;
     expect(block.textContent).toBe(n.text);
     expect(block).toHaveAttribute("lang", n.lang);
@@ -109,7 +109,7 @@ describe("record entry", () => {
 
   it("shows title, id, published date, and who signed it and when", () => {
     const n = entry("SEC-2026-114");
-    const { container } = render(<RecordEntryView entry={n} s={s} />);
+    const { container } = render(<RecordEntryView entry={n} s={s} lang="en" />);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(n.title);
     expect(container.textContent).toContain("SEC-2026-114");
     expect(container.textContent).toMatch(/3 Sep\w* 2026/);
@@ -123,22 +123,22 @@ describe("record entry", () => {
   });
 
   it("a replaced notice links to the notice that replaced it", () => {
-    render(<RecordEntryView entry={entry("SEC-2026-114")} s={s} />);
+    render(<RecordEntryView entry={entry("SEC-2026-114")} s={s} lang="en" />);
     const link = screen.getByRole("link", { name: /SEC-2026-140/ });
     expect(link).toHaveAttribute("href", "/record/SEC-2026-140");
   });
 
   it("a current notice says so and has no replacement link", () => {
-    const { container } = render(<RecordEntryView entry={entry("SEC-2026-140")} s={s} />);
+    const { container } = render(<RecordEntryView entry={entry("SEC-2026-140")} s={s} lang="en" />);
     expect(screen.getByText("Current notice")).toBeInTheDocument();
     expect(within(container).queryByRole("link", { name: /Replaced by/ })).toBeNull();
   });
 
   it("'View source' is absent for a fictional address and present for a real one", () => {
-    const fake = render(<RecordEntryView entry={entry("SEC-2026-140")} s={s} />);
+    const fake = render(<RecordEntryView entry={entry("SEC-2026-140")} s={s} lang="en" />);
     expect(screen.queryByRole("link", { name: "View source" })).toBeNull();
     fake.unmount();
-    render(<RecordEntryView entry={{ ...entry("SEC-2026-140"), url: "https://newspaper.com.ng/n/1" }} s={s} />);
+    render(<RecordEntryView entry={{ ...entry("SEC-2026-140"), url: "https://newspaper.com.ng/n/1" }} s={s} lang="en" />);
     expect(screen.getByRole("link", { name: "View source" })).toHaveAttribute(
       "href",
       "https://newspaper.com.ng/n/1",

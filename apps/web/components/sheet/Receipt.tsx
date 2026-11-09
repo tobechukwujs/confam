@@ -1,10 +1,10 @@
 import type { Verdict } from "@confam/contract";
-import type { Strings } from "@confam/i18n";
-import { fill } from "@confam/i18n";
-import { formatCode, formatDate, formatDateTime, isRealSourceUrl } from "@/lib/format";
+import type { Lang, Strings } from "@confam/i18n";
+import { Filled } from "../Filled";
+import { NOTICE_LANG, formatCode, formatDate, formatDateTime, isRealSourceUrl } from "@/lib/format";
 
-/** Official notice id, published date, checked time, record as of, check code, and two links. */
-export function Receipt({ verdict, s }: { verdict: Verdict; s: Strings }) {
+/** Official notice id, published date, checked time, record as of, check code, and links. */
+export function Receipt({ verdict, s, lang }: { verdict: Verdict; s: Strings; lang: Lang }) {
   const r = s.receipt;
   const { notice } = verdict;
   return (
@@ -14,11 +14,11 @@ export function Receipt({ verdict, s }: { verdict: Verdict; s: Strings }) {
       </h2>
       <dl>
         <dt>{r.notice}</dt>
-        <dd lang="en">{notice ? `${notice.id}, ${notice.title}` : r.noNotice}</dd>
+        <dd lang={NOTICE_LANG}>{notice ? `${notice.id}, ${notice.title}` : <span lang={lang}>{r.noNotice}</span>}</dd>
         {notice && (
           <>
             <dt>{r.published}</dt>
-            <dd>{formatDate(notice.published)}</dd>
+            <dd>{formatDate(notice.published, lang)}</dd>
           </>
         )}
         {verdict.superseded_by && (
@@ -26,18 +26,22 @@ export function Receipt({ verdict, s }: { verdict: Verdict; s: Strings }) {
             <dt>{r.replacedBy}</dt>
             <dd>
               <a href={`/record/${encodeURIComponent(verdict.superseded_by.id)}`}>
-                {fill(r.replacedByValue, {
-                  id: verdict.superseded_by.id,
-                  date: formatDate(verdict.superseded_by.published),
-                })}
+                <Filled
+                  template={r.replacedByValue}
+                  values={{
+                    id: verdict.superseded_by.id,
+                    date: formatDate(verdict.superseded_by.published, lang),
+                  }}
+                  lang={NOTICE_LANG}
+                />
               </a>
             </dd>
           </>
         )}
         <dt>{r.checked}</dt>
-        <dd>{formatDateTime(verdict.checked_at)}</dd>
+        <dd>{formatDateTime(verdict.checked_at, lang)}</dd>
         <dt>{r.recordAsOf}</dt>
-        <dd>{formatDateTime(verdict.record_as_of)}</dd>
+        <dd>{formatDateTime(verdict.record_as_of, lang)}</dd>
         <dt>{r.code}</dt>
         <dd>{formatCode(verdict.code)}</dd>
       </dl>

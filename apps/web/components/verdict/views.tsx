@@ -1,4 +1,5 @@
-import type { Change, Conflict, Verdict } from "@confam/contract";
+﻿import type { Change, Conflict, Verdict } from "@confam/contract";
+import { NOTICE_LANG } from "@/lib/format";
 import { pickReplacedChange, splitDate } from "@/lib/replaced";
 import { Mark } from "../marks/Mark";
 import { Pin } from "../sheet/Pin";
@@ -47,14 +48,14 @@ export function ReplacedStage({ verdict, nowLabel }: { verdict: Verdict; nowLabe
       {newValue && (
         <span className="hand-line hand-reveal">
           <span className="now-label">{nowLabel}</span>
-          <span className="hand tone-pencil" lang="en">
+          <span className="hand tone-pencil" lang={NOTICE_LANG}>
             {newValue}
           </span>
         </span>
       )}
       <div className="figure-row">
         <Pin n={index + 1} tone="pencil" />
-        <span className={`figure${isLong(oldValue) && !splitDate(oldValue) ? " long" : ""}`} lang="en">
+        <span className={`figure${isLong(oldValue) && !splitDate(oldValue) ? " long" : ""}`} lang={NOTICE_LANG}>
           {oldValue ? <FigureValue value={oldValue} /> : <span className="gap" />}
           <Mark kind="bracket" tone="pencil" />
         </span>
@@ -70,7 +71,7 @@ export function AlteredStage({ change }: { change: Change }) {
   return (
     <div className="stage">
       {change.op !== "insert" && (
-        <span className={`hand tone-red hand-reveal${isLong(official) ? " long" : ""}`} lang="en">
+        <span className={`hand tone-red hand-reveal${isLong(official) ? " long" : ""}`} lang={NOTICE_LANG}>
           {official}
         </span>
       )}
@@ -82,7 +83,7 @@ export function AlteredStage({ change }: { change: Change }) {
             <Mark kind="caret" tone="red" />
           </span>
         ) : (
-          <span className={`figure${isLong(copy) ? " long" : ""}`} lang="en">
+          <span className={`figure${isLong(copy) ? " long" : ""}`} lang={NOTICE_LANG}>
             {copy}
             <Mark kind={change.op === "insert" ? "strike" : "ring"} tone="red" />
           </span>
@@ -96,12 +97,12 @@ export function NotOfficialStage({ conflict }: { conflict: Conflict }) {
   return (
     <div className="stage">
       <div className="sheet">
-        <span className="claim struck" lang="en">
+        <span className="claim struck" lang={NOTICE_LANG}>
           {conflict.copy}
         </span>
         <Mark kind="cross" tone="red" />
       </div>
-      <span className={`hand tone-red hand-reveal${isLong(conflict.official) ? " long" : ""}`} lang="en">
+      <span className={`hand tone-red hand-reveal${isLong(conflict.official) ? " long" : ""}`} lang={NOTICE_LANG}>
         {conflict.official}
       </span>
     </div>
@@ -112,7 +113,7 @@ export function PartialStage({ verdict }: { verdict: Verdict }) {
   return (
     <div className="stage">
       <div className="sheet">
-        <span className="claim" lang="en">
+        <span className="claim" lang={NOTICE_LANG}>
           {verdict.notice?.title}
           <Mark kind="bracket" tone="pencil" />
         </span>

@@ -1,5 +1,6 @@
-// English strings. Rule 4: no scores, percentages or grades in any string.
-// Non-English locales are TODO and need native-speaker review before they ship.
+// English strings: the source for every other locale. Rule 4: no scores, percentages or
+// grades in any string. Every other locale must have exactly these keys and the same
+// {placeholders}; the compiler and tests enforce both.
 
 export type VerdictCopy = {
   word: string;
@@ -11,7 +12,8 @@ export type VerdictCopy = {
 export const en = {
   appName: "Confam",
   independence: "Independent checker. Not INEC or any party.",
-  languageName: "English",
+  languageMenu: "Language",
+  skipLink: "Skip to the page",
   draftTranslation: "Draft translation",
   sampleNotice:
     "Sample only. This notice is from the fictional Simulated Electoral Commission, not a real body.",
@@ -150,7 +152,7 @@ export const en = {
     // Replaced notice: the copy matches an OLD notice. copy = old value, official = new value.
     replacedIntro: "Your copy matches an older official notice word for word. The newer notice differs here:",
     replacedNone: "A newer notice has replaced it. Open it to see the differences.",
-    rowReplace: "{copy} → {official}",
+    to: "to",
     rowInsert: "Only in the old notice: “{copy}”",
     rowDelete: "Added in the newer notice: “{official}”",
     now: "now",

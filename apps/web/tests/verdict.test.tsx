@@ -14,7 +14,7 @@ const samples = Object.entries(raw).filter(([k]) => !k.startsWith("_")) as [stri
 const { s } = getStrings("en");
 
 function renderSample(v: Verdict) {
-  return render(<VerdictLayout verdict={v} s={s} />);
+  return render(<VerdictLayout verdict={v} s={s} lang="en" />);
 }
 const sample = (name: string) => samples.find(([k]) => k === name)![1];
 
@@ -83,7 +83,10 @@ describe("verdict views", () => {
     expect(screen.queryByText(/No differences found/)).toBeNull();
     const rows = container.querySelectorAll("ol.changes li");
     expect(rows).toHaveLength(2);
-    expect(container.querySelector("ol.changes")?.textContent).toContain("Date: 14th November → 28th November");
+    expect(container.querySelector("ol.changes")?.textContent).toContain("Date: 14th November to 28th November");
+    // the arrow is a drawn mark (Andika has no arrow glyph); "to" is said for screen readers
+    expect(container.querySelector("ol.changes .arrow svg")).not.toBeNull();
+    expect(container.querySelector("ol.changes")?.textContent).not.toContain("→");
     expect(container.querySelector("ol.changes")?.textContent).toContain("Added in the newer notice: “now”");
     // the stage pin pairs with the date row (row 2)
     expect(container.querySelector(".stage [data-pin]")).toHaveAttribute("data-pin", "2");
@@ -93,7 +96,7 @@ describe("verdict views", () => {
   it("replaced: the receipt names the replacing notice and links to its record page", () => {
     renderSample(sample("replaced"));
     expect(screen.getByText("Replaced by")).toBeInTheDocument();
-    const link = screen.getByRole("link", { name: "SEC-2026-140, published 9 Oct 2026" });
+    const link = screen.getByRole("link", { name: /SEC-2026-140.*published.*9 Oct 2026/ });
     expect(link).toHaveAttribute("href", "/record/SEC-2026-140");
   });
 

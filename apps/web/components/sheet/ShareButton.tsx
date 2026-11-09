@@ -9,17 +9,22 @@ type Props = {
   url?: string;
   copiedText: string;
   failedText: string;
+  /** Pages we link to carry ?lang= so the person who receives the link sees the same language. */
+  lang: string;
 };
 
-export function ShareButton({ label, text, url, copiedText, failedText }: Props) {
+export function ShareButton({ label, text, url, copiedText, failedText, lang }: Props) {
   const [state, setState] = useState<"idle" | "copied" | "failed">("idle");
 
   async function onClick() {
-    const shareUrl = url
-      ? url.startsWith("/")
-        ? `${window.location.origin}${url}`
-        : url
-      : window.location.href;
+    let shareUrl: string;
+    if (url && !url.startsWith("/")) {
+      shareUrl = url; // an official outside address: leave it exactly as given
+    } else {
+      const own = new URL(url || window.location.href, window.location.origin);
+      own.searchParams.set("lang", lang);
+      shareUrl = own.toString();
+    }
     try {
       if (typeof navigator.share === "function") {
         await navigator.share({ text, url: shareUrl });

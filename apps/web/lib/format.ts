@@ -1,29 +1,36 @@
 import type { Verdict } from "@confam/contract";
+import { intlLocale, type Lang } from "@confam/i18n";
 
-const dateFmt = new Intl.DateTimeFormat("en-GB", {
-  day: "numeric",
-  month: "short",
-  year: "numeric",
-  timeZone: "UTC",
-});
-const dateTimeFmt = new Intl.DateTimeFormat("en-GB", {
-  day: "numeric",
-  month: "short",
-  year: "numeric",
-  hour: "2-digit",
-  minute: "2-digit",
-  hour12: false,
-  timeZone: "Africa/Lagos",
-});
+/**
+ * The language official notices are quoted in. Quotes are never translated and always
+ * carry this lang. TODO: take it from the notice (the record has it; the verdict does not yet).
+ */
+export const NOTICE_LANG = "en";
 
-/** "2026-10-09" -> "9 Oct 2026" */
-export function formatDate(isoDate: string): string {
-  return dateFmt.format(new Date(`${isoDate}T00:00:00Z`));
+const formatters = new Map<string, Intl.DateTimeFormat>();
+function formatter(lang: Lang, withTime: boolean): Intl.DateTimeFormat {
+  const key = `${lang}:${withTime}`;
+  let f = formatters.get(key);
+  if (!f) {
+    f = new Intl.DateTimeFormat(
+      intlLocale(lang),
+      withTime
+        ? { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Africa/Lagos" }
+        : { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" },
+    );
+    formatters.set(key, f);
+  }
+  return f;
 }
 
-/** ISO timestamp -> "8 Nov 2026, 10:00" in Lagos time (WAT). */
-export function formatDateTime(iso: string): string {
-  return `${dateTimeFmt.format(new Date(iso))} WAT`;
+/** "2026-10-09" -> "9 Oct 2026" (month name in the page language). */
+export function formatDate(isoDate: string, lang: Lang = "en"): string {
+  return formatter(lang, false).format(new Date(`${isoDate}T00:00:00Z`));
+}
+
+/** ISO timestamp -> "8 Nov 2026, 10:00 WAT" in Lagos time. */
+export function formatDateTime(iso: string, lang: Lang = "en"): string {
+  return `${formatter(lang, true).format(new Date(iso))} WAT`;
 }
 
 /** The stored code has no hyphen; XXXX-XXXX is presentation only. */

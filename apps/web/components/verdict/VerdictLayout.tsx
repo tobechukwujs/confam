@@ -1,6 +1,8 @@
 import type { Verdict } from "@confam/contract";
-import { fill, type Strings, type VerdictCopy } from "@confam/i18n";
-import { isSample, viewKey, formatDate, type ViewKey } from "@/lib/format";
+import { fill, type Lang, type Strings, type VerdictCopy } from "@confam/i18n";
+import { NOTICE_LANG, formatDate, isSample, viewKey, type ViewKey } from "@/lib/format";
+import { Filled } from "../Filled";
+import { Arrow } from "../sheet/Arrow";
 import { Pin } from "../sheet/Pin";
 import { Receipt } from "../sheet/Receipt";
 import { ShareButton } from "../sheet/ShareButton";
@@ -35,8 +37,20 @@ function Stage({ v, key_, s }: { v: Verdict; key_: ViewKey; s: Strings }) {
   }
 }
 
-function Action({ v, key_, copy, s }: { v: Verdict; key_: ViewKey; copy: VerdictCopy; s: Strings }) {
-  const share = { copiedText: s.share.copied, failedText: s.share.copyFailed };
+function Action({
+  v,
+  key_,
+  copy,
+  s,
+  lang,
+}: {
+  v: Verdict;
+  key_: ViewKey;
+  copy: VerdictCopy;
+  s: Strings;
+  lang: Lang;
+}) {
+  const share = { copiedText: s.share.copied, failedText: s.share.copyFailed, lang };
   switch (key_) {
     case "confirmed":
       return <ShareButton label={copy.action} text="" {...share} />;
@@ -46,7 +60,7 @@ function Action({ v, key_, copy, s }: { v: Verdict; key_: ViewKey; copy: Verdict
           label={copy.action}
           text={fill(s.share.currentNoticeText, {
             id: v.superseded_by?.id ?? "",
-            date: v.superseded_by ? formatDate(v.superseded_by.published) : "",
+            date: v.superseded_by ? formatDate(v.superseded_by.published, lang) : "",
           })}
           url={v.superseded_by ? `/record/${encodeURIComponent(v.superseded_by.id)}` : undefined}
           {...share}
@@ -58,13 +72,13 @@ function Action({ v, key_, copy, s }: { v: Verdict; key_: ViewKey; copy: Verdict
         <ShareButton
           label={copy.action}
           text={fill(s.share.correctNoticeText, { title: v.notice.title })}
-          url={v.notice.url}
+          url={`/record/${encodeURIComponent(v.notice.id)}`}
           {...share}
         />
       ) : null;
     case "partial":
       return v.notice ? (
-        <a className="btn btn-primary" href={v.notice.url} target="_blank" rel="noopener noreferrer">
+        <a className="btn btn-primary" href={`/record/${encodeURIComponent(v.notice.id)}`}>
           {copy.action}
         </a>
       ) : null;
@@ -89,12 +103,22 @@ function ReplacedRows({ v, s }: { v: Verdict; s: Strings }) {
           {changes.map((ch, i) => (
             <li key={i}>
               <Pin n={i + 1} tone="pencil" />
-              <p lang="en">
+              <p>
                 <span className="kind">{c.kinds[ch.kind]}: </span>
-                {fill(ch.op === "replace" ? c.rowReplace : ch.op === "insert" ? c.rowInsert : c.rowDelete, {
-                  copy: ch.copy ?? "",
-                  official: ch.official ?? "",
-                })}
+                {ch.op === "replace" ? (
+                  // old value, an arrow, new value (copy = old, official = new)
+                  <>
+                    <span lang={NOTICE_LANG}>{ch.copy}</span>
+                    <Arrow label={c.to} />
+                    <span lang={NOTICE_LANG}>{ch.official}</span>
+                  </>
+                ) : (
+                  <Filled
+                    template={ch.op === "insert" ? c.rowInsert : c.rowDelete}
+                    values={{ copy: ch.copy ?? "", official: ch.official ?? "" }}
+                    lang={NOTICE_LANG}
+                  />
+                )}
               </p>
             </li>
           ))}
@@ -107,18 +131,17 @@ function ReplacedRows({ v, s }: { v: Verdict; s: Strings }) {
 /** Rows for the "What changed" list; each pairs with a Pin on the sheet. */
 function ChangeRows({ v, s }: { v: Verdict; s: Strings }) {
   const c = s.changes;
-  const rows: { kind: string; text: string; tone: "red" }[] = [
+  const rows: { kind: string; template: string; values: Record<string, string>; tone: "red" }[] = [
     ...v.changes.map((ch) => ({
       kind: c.kinds[ch.kind],
-      text: fill(c[ch.op], {
-        copy: ch.copy ?? "",
-        official: ch.official ?? "",
-      }),
+      template: c[ch.op],
+      values: { copy: ch.copy ?? "", official: ch.official ?? "" },
       tone: "red" as const,
     })),
     ...v.conflicts.map((cf) => ({
       kind: c.conflictKinds[cf.kind],
-      text: fill(c.conflict, { copy: cf.copy, official: cf.official }),
+      template: c.conflict,
+      values: { copy: cf.copy, official: cf.official },
       tone: "red" as const,
     })),
   ];
@@ -128,9 +151,9 @@ function ChangeRows({ v, s }: { v: Verdict; s: Strings }) {
       {rows.map((row, i) => (
         <li key={i}>
           <Pin n={i + 1} tone={row.tone} />
-          <p lang="en">
+          <p>
             <span className="kind">{row.kind}. </span>
-            {row.text}
+            <Filled template={row.template} values={row.values} lang={NOTICE_LANG} />
           </p>
         </li>
       ))}
@@ -138,7 +161,7 @@ function ChangeRows({ v, s }: { v: Verdict; s: Strings }) {
   );
 }
 
-export function VerdictLayout({ verdict, s }: { verdict: Verdict; s: Strings }) {
+export function VerdictLayout({ verdict, s, lang }: { verdict: Verdict; s: Strings; lang: Lang }) {
   const key = viewKey(verdict);
   const copy = copyFor(verdict, key, s);
   return (
@@ -153,7 +176,7 @@ export function VerdictLayout({ verdict, s }: { verdict: Verdict; s: Strings }) 
         <p>{copy.sentence}</p>
         <p>{copy.instruction}</p>
         <div className="actions">
-          <Action v={verdict} key_={key} copy={copy} s={s} />
+          <Action v={verdict} key_={key} copy={copy} s={s} lang={lang} />
         </div>
       </section>
       <section className="proof" aria-label={s.receipt.heading}>
@@ -165,7 +188,7 @@ export function VerdictLayout({ verdict, s }: { verdict: Verdict; s: Strings }) 
           </div>
         )}
         {isSample(verdict) && <p className="sample-note">{s.sampleNotice}</p>}
-        <Receipt verdict={verdict} s={s} />
+        <Receipt verdict={verdict} s={s} lang={lang} />
       </section>
     </div>
   );

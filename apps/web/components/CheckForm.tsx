@@ -2,9 +2,9 @@
 
 import { useActionState } from "react";
 import { checkNotice, type CheckState } from "@/app/(public)/actions";
-import type { Strings } from "@confam/i18n";
+import type { Lang, Strings } from "@confam/i18n";
 
-export function CheckForm({ s }: { s: Strings["home"] }) {
+export function CheckForm({ s, lang }: { s: Strings["home"]; lang: Lang }) {
   const [state, action, pending] = useActionState<CheckState, FormData>(checkNotice, {});
   const message = state.error
     ? {
@@ -17,6 +17,8 @@ export function CheckForm({ s }: { s: Strings["home"] }) {
 
   return (
     <form action={action} className="field">
+      {/* The check carries the language the person is reading in. */}
+      <input type="hidden" name="lang" value={lang} />
       <label htmlFor="text">{s.label}</label>
       <textarea
         id="text"

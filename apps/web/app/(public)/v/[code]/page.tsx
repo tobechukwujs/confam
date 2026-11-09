@@ -4,6 +4,7 @@ import { getStrings } from "@confam/i18n";
 import { VerdictLayout } from "@/components/verdict/VerdictLayout";
 import { getVerdict } from "@/lib/api";
 import { formatCode } from "@/lib/format";
+import { resolveLang } from "@/lib/lang";
 
 type Props = { params: Promise<{ code: string }> };
 
@@ -16,11 +17,8 @@ export default async function VerdictPage({ params }: Props) {
   const { code } = await params;
   const verdict = await getVerdict(code);
   if (!verdict) notFound();
-  const { s, draft } = getStrings(verdict.lang);
-  return (
-    <>
-      {draft && <p className="draft-label">{s.draftTranslation}</p>}
-      <VerdictLayout verdict={verdict} s={s} />
-    </>
-  );
+  // The interface follows the reader's language; official words are never translated.
+  const lang = await resolveLang();
+  const { s } = getStrings(lang);
+  return <VerdictLayout verdict={verdict} s={s} lang={lang} />;
 }
