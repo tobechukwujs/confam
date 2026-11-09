@@ -1,0 +1,25 @@
+/* DESIGN.md tokens as custom properties. */
+:root {
+  --biro-blue: #1b2e96;
+  --cover-deep: #14226f;
+  --cover-line: #5766c2;
+  --cover-text: #e9ecfb;
+  --red-biro: #c40d23;
+  --green-biro: #0a6b42;
+  --pencil: #555b65;
+  --print-black: #14171c;
+  --soft-print: #4a525e;
+  --page: #f6f9fb;
+  --sheet-white: #ffffff;
+  --feint-rule: #d3deea;
+  --page-edge: #a9bcd2;
+  --wash: #e6edf4;
+  --selected-tint: #dfe5f6;
+  --line: 30px;
+  --double-line: 60px;
+  --margin-phone: 38px;
+  --gutter-phone: 14px;
+  --margin-wide: 60px;
+  --gutter-wide: 40px;
+  --radius-sm: 3px;
+}

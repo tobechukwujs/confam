@@ -4,6 +4,10 @@ __pycache__/
 *.pyc
 .pytest_cache/
 .next/
+next-env.d.ts
+test-results/
+playwright-report/
+*.tsbuildinfo
 dist/
 .env
 .env.*

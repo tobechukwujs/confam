@@ -6,7 +6,9 @@
   "scripts": {
     "contract:gen": "uv run python packages/contract/scripts/gen.py",
     "contract:check": "uv run python packages/contract/scripts/gen.py --check",
-    "contract:tsc": "tsc --noEmit -p packages/contract/tsconfig.json"
+    "contract:tsc": "tsc --noEmit -p packages/contract/tsconfig.json",
+    "test": "pnpm --filter web test",
+    "e2e": "pnpm --filter web e2e"
   },
   "devDependencies": {
     "json-schema-to-typescript": "^15.0.4",

@@ -39,7 +39,7 @@ Ask before resolving a conflict that changes what a user sees.
 ```bash
 docker compose up                  # postgres, redis, api, worker, web
 pnpm --filter web dev              # web only, http://localhost:3000
-uv run fastapi dev services/api/main.py
+uv run uvicorn --app-dir services/api main:app --reload   # API, http://localhost:8000
 uv run rq worker checks            # OCR and verdict-image jobs
 pnpm contract:gen                  # regenerate TS + Pydantic from the schema
 pnpm contract:check                # fail if generated files are stale or hand-edited

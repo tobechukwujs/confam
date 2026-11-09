@@ -36,6 +36,27 @@ def test_example_round_trips():
     assert again == model
 
 
+def test_absent_box_is_omitted_not_null_and_payload_validates():
+    import json
+    from pathlib import Path
+
+    from jsonschema import Draft202012Validator
+
+    from confam_contract.serialize import verdict_to_json
+
+    schema = json.loads(
+        (Path(__file__).resolve().parents[1] / "verdict.schema.json").read_text(encoding="utf-8")
+    )
+    change = {"op": "replace", "kind": "date", "official": "14th", "copy": "15th"}
+    payload = verdict_to_json(Verdict.model_validate({**EXAMPLE, "changes": [change]}))
+    assert "box" not in payload["changes"][0]
+    assert payload["changes"][0]["copy"] == "15th"
+    assert list(Draft202012Validator(schema).iter_errors(payload)) == []
+    # and a present box is kept
+    with_box = verdict_to_json(Verdict.model_validate(EXAMPLE))
+    assert with_box["changes"][0]["box"] == [0.21, 0.46, 0.08, 0.03]
+
+
 def test_dump_by_alias_uses_contract_field_name_copy():
     dumped = Verdict.model_validate(EXAMPLE).model_dump(mode="json", by_alias=True)
     change = dumped["changes"][0]

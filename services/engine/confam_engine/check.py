@@ -13,12 +13,19 @@ CODE_ALPHABET = "23456789ABCDEFGHJKMNPQRSTUVWXYZ"
 
 
 @dataclass(frozen=True)
+class Replacement:
+    id: str
+    published: str  # YYYY-MM-DD
+
+
+@dataclass(frozen=True)
 class OfficialNotice:
     id: str
     title: str
     published: str  # YYYY-MM-DD
     url: str
     text: str
+    superseded_by: Replacement | None = None
 
 
 def new_check_code() -> str:
@@ -37,30 +44,53 @@ def check_notice(
     lang: str = "en",
     now: datetime | None = None,
 ) -> Verdict:
-    """STUB: handles only "no match, no conflict".
+    """STUB: an exact (whitespace and case-insensitive) match, or no match.
 
-    A copy that matches a record notice needs the real comparison engine, so the
-    stub refuses rather than guess. It never returns not_official on its own.
+    - Exact match: `confirmed`, with `superseded_by` set if the notice was replaced (rule 2).
+    - Anything else: `cannot_confirm` / `not_in_record` (rule 1). A near-match is NOT
+      compared here, so an altered copy is reported as not in the record, never as fake.
+
+    TODO: port the real comparison engine (diff, meaning rules, allow-list, explain).
+    It never returns altered, partial or not_official on its own.
     """
+    checked_at = (now or datetime.now(timezone.utc)).isoformat()
+    base = {
+        "code": new_check_code(),
+        "lang": lang,
+        "checked_at": checked_at,
+        "record_as_of": record_as_of.isoformat(),
+        "changes": [],
+        "conflicts": [],
+    }
+
     needle = _normalise(text)
     for notice in record:
         if _normalise(notice.text) == needle:
-            raise NotImplementedError(
-                "TODO: matched notices need the real engine (to be ported into services/engine)"
+            return Verdict.model_validate(
+                {
+                    **base,
+                    "verdict": "confirmed",
+                    "reason": None,
+                    "notice": {
+                        "id": notice.id,
+                        "title": notice.title,
+                        "published": notice.published,
+                        "url": notice.url,
+                    },
+                    "superseded_by": (
+                        {"id": notice.superseded_by.id, "published": notice.superseded_by.published}
+                        if notice.superseded_by
+                        else None
+                    ),
+                }
             )
 
-    checked_at = (now or datetime.now(timezone.utc)).isoformat()
     return Verdict.model_validate(
         {
-            "code": new_check_code(),
+            **base,
             "verdict": "cannot_confirm",
             "reason": "not_in_record",
-            "lang": lang,
-            "checked_at": checked_at,
-            "record_as_of": record_as_of.isoformat(),
             "notice": None,
             "superseded_by": None,
-            "changes": [],
-            "conflicts": [],
         }
     )

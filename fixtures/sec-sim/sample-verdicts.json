@@ -1,0 +1,158 @@
+{
+  "_comment": "FICTIONAL sample verdicts for building and demoing the UI before the engine is ported. All notices are from the Simulated Electoral Commission. Keyed by name; every value must validate against packages/contract/verdict.schema.json.",
+  "confirmed": {
+    "code": "C4NF7RM2",
+    "verdict": "confirmed",
+    "reason": null,
+    "lang": "en",
+    "checked_at": "2026-11-08T10:00:00+01:00",
+    "record_as_of": "2026-11-08T09:00:00+01:00",
+    "notice": {
+      "id": "SEC-2026-140",
+      "title": "Simulated Electoral Commission: revised voter registration deadline",
+      "published": "2026-10-09",
+      "url": "https://sec.example/notices/SEC-2026-140"
+    },
+    "superseded_by": null,
+    "changes": [],
+    "conflicts": []
+  },
+  "replaced": {
+    "code": "R3P7ACED",
+    "verdict": "confirmed",
+    "reason": null,
+    "lang": "en",
+    "checked_at": "2026-11-08T10:01:00+01:00",
+    "record_as_of": "2026-11-08T09:00:00+01:00",
+    "notice": {
+      "id": "SEC-2026-114",
+      "title": "Simulated Electoral Commission: voter registration deadline",
+      "published": "2026-09-03",
+      "url": "https://sec.example/notices/SEC-2026-114"
+    },
+    "superseded_by": { "id": "SEC-2026-140", "published": "2026-10-09" },
+    "changes": [],
+    "conflicts": []
+  },
+  "altered_replace": {
+    "code": "A7T3R4ED",
+    "verdict": "altered",
+    "reason": null,
+    "lang": "en",
+    "checked_at": "2026-11-08T10:02:00+01:00",
+    "record_as_of": "2026-11-08T09:00:00+01:00",
+    "notice": {
+      "id": "SEC-2026-140",
+      "title": "Simulated Electoral Commission: revised voter registration deadline",
+      "published": "2026-10-09",
+      "url": "https://sec.example/notices/SEC-2026-140"
+    },
+    "superseded_by": null,
+    "changes": [{ "op": "replace", "kind": "date", "official": "28th", "copy": "29th" }],
+    "conflicts": []
+  },
+  "altered_insert": {
+    "code": "A2NS3RTX",
+    "verdict": "altered",
+    "reason": null,
+    "lang": "en",
+    "checked_at": "2026-11-08T10:03:00+01:00",
+    "record_as_of": "2026-11-08T09:00:00+01:00",
+    "notice": {
+      "id": "SEC-2026-140",
+      "title": "Simulated Electoral Commission: revised voter registration deadline",
+      "published": "2026-10-09",
+      "url": "https://sec.example/notices/SEC-2026-140"
+    },
+    "superseded_by": null,
+    "changes": [{ "op": "insert", "kind": "money", "official": null, "copy": "Fee: 500 naira" }],
+    "conflicts": []
+  },
+  "altered_delete": {
+    "code": "DX7K9PQA",
+    "verdict": "altered",
+    "reason": null,
+    "lang": "en",
+    "checked_at": "2026-11-08T10:04:00+01:00",
+    "record_as_of": "2026-11-08T09:00:00+01:00",
+    "notice": {
+      "id": "SEC-2026-140",
+      "title": "Simulated Electoral Commission: revised voter registration deadline",
+      "published": "2026-10-09",
+      "url": "https://sec.example/notices/SEC-2026-140"
+    },
+    "superseded_by": null,
+    "changes": [{ "op": "delete", "kind": "text", "official": "only", "copy": null }],
+    "conflicts": []
+  },
+  "not_official": {
+    "code": "N9T6FFC7",
+    "verdict": "not_official",
+    "reason": null,
+    "lang": "en",
+    "checked_at": "2026-11-08T10:05:00+01:00",
+    "record_as_of": "2026-11-08T09:00:00+01:00",
+    "notice": {
+      "id": "SEC-2026-140",
+      "title": "Simulated Electoral Commission: revised voter registration deadline",
+      "published": "2026-10-09",
+      "url": "https://sec.example/notices/SEC-2026-140"
+    },
+    "superseded_by": null,
+    "changes": [],
+    "conflicts": [
+      {
+        "kind": "link",
+        "copy": "https://sec-register.example.net",
+        "official": "https://register.sec.example",
+        "quote": "Register only at https://register.sec.example."
+      }
+    ]
+  },
+  "partial": {
+    "code": "P4RT7A2K",
+    "verdict": "partial",
+    "reason": null,
+    "lang": "en",
+    "checked_at": "2026-11-08T10:06:00+01:00",
+    "record_as_of": "2026-11-08T09:00:00+01:00",
+    "notice": {
+      "id": "SEC-2026-140",
+      "title": "Simulated Electoral Commission: revised voter registration deadline",
+      "published": "2026-10-09",
+      "url": "https://sec.example/notices/SEC-2026-140"
+    },
+    "superseded_by": null,
+    "changes": [],
+    "conflicts": []
+  },
+  "not_in_record": {
+    "code": "U5KN7WN3",
+    "verdict": "cannot_confirm",
+    "reason": "not_in_record",
+    "lang": "en",
+    "checked_at": "2026-11-08T10:07:00+01:00",
+    "record_as_of": "2026-11-08T09:00:00+01:00",
+    "notice": null,
+    "superseded_by": null,
+    "changes": [],
+    "conflicts": []
+  },
+  "unclear": {
+    "code": "UNC7EAR2",
+    "verdict": "cannot_confirm",
+    "reason": "unclear",
+    "lang": "en",
+    "checked_at": "2026-11-08T10:08:00+01:00",
+    "record_as_of": "2026-11-08T09:00:00+01:00",
+    "notice": {
+      "id": "SEC-2026-140",
+      "title": "Simulated Electoral Commission: revised voter registration deadline",
+      "published": "2026-10-09",
+      "url": "https://sec.example/notices/SEC-2026-140"
+    },
+    "superseded_by": null,
+    "changes": [],
+    "conflicts": []
+  }
+}

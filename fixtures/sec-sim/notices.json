@@ -1,0 +1,22 @@
+{
+  "_comment": "FICTIONAL. Simulated Electoral Commission notices for tests and demos only. Not INEC, not a real body.",
+  "record_as_of": "2026-11-08T09:00:00+01:00",
+  "notices": [
+    {
+      "id": "SEC-2026-114",
+      "title": "Simulated Electoral Commission: voter registration deadline",
+      "published": "2026-09-03",
+      "url": "https://sec.example/notices/SEC-2026-114",
+      "text": "The Simulated Electoral Commission announces that voter registration closes on 14th November. Register only at https://register.sec.example. Registration is free.",
+      "superseded_by": { "id": "SEC-2026-140", "published": "2026-10-09" }
+    },
+    {
+      "id": "SEC-2026-140",
+      "title": "Simulated Electoral Commission: revised voter registration deadline",
+      "published": "2026-10-09",
+      "url": "https://sec.example/notices/SEC-2026-140",
+      "text": "The Simulated Electoral Commission announces that voter registration now closes on 28th November. Register only at https://register.sec.example. Registration is free.",
+      "superseded_by": null
+    }
+  ]
+}

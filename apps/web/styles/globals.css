@@ -1,0 +1,479 @@
+@import "./tokens.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+/* The exercise-book page: feint rules every 30px, falling 3px under the 18/30
+   baseline, and a margin line at 38px. Flat: no grain, no shadow. */
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: var(--print-black);
+  font-family: var(--font-andika), Roboto, "Noto Sans", "Segoe UI", system-ui, sans-serif;
+  font-size: 18px;
+  line-height: var(--line);
+  background-color: var(--page);
+  background-image:
+    linear-gradient(to right, transparent 37px, var(--page-edge) 37px 38px, transparent 38px),
+    linear-gradient(to bottom, transparent 0 24px, var(--feint-rule) 24px 25px, transparent 25px 30px);
+  background-size: 100% 100%, 100% 30px;
+  background-attachment: scroll, scroll;
+}
+
+h1,
+h2,
+p,
+ol,
+dl,
+dd {
+  margin: 0;
+}
+
+a {
+  color: var(--biro-blue);
+}
+
+:focus-visible {
+  outline: 3px solid var(--biro-blue);
+  outline-offset: 2px;
+}
+
+.skip {
+  position: absolute;
+  left: 8px;
+  top: -80px;
+  background: var(--sheet-white);
+  padding: 0 12px;
+  z-index: 10;
+}
+.skip:focus {
+  top: 8px;
+}
+
+/* ---------- cover ---------- */
+.cover {
+  background: var(--biro-blue);
+  color: var(--cover-text);
+  min-height: var(--double-line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--gutter-phone) 0 var(--margin-phone);
+  border-bottom: 2px solid var(--cover-deep);
+}
+.cover a {
+  color: var(--sheet-white);
+  text-decoration: none;
+}
+.brand {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.lang {
+  font-size: 15px;
+  color: var(--cover-text);
+}
+.draft-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--print-black);
+}
+
+/* ---------- book layout ---------- */
+.book {
+  flex: 1;
+  width: 100%;
+  padding: var(--line) var(--gutter-phone) var(--line) var(--margin-phone);
+}
+
+.footer {
+  padding: 0 var(--gutter-phone) var(--line) var(--margin-phone);
+  font-size: 15px;
+  color: var(--soft-print);
+}
+
+.spread {
+  display: block;
+  position: relative;
+}
+.spread > section + section {
+  margin-top: var(--double-line);
+}
+.staple {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  /* The cover spans the page; its content lines up with the 1280px book. */
+  .cover,
+  .footer {
+    padding-inline: max(var(--margin-wide), calc((100vw - 1280px) / 2 + var(--margin-wide)));
+  }
+  .book {
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: var(--margin-wide);
+  }
+  .spread {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: var(--gutter-wide);
+    align-items: start;
+  }
+  .spread > section + section {
+    margin-top: 0;
+  }
+  .staple {
+    display: block;
+    position: absolute;
+    left: 50%;
+    width: 18px;
+    height: 4px;
+    margin-left: -9px;
+    background: var(--page-edge);
+  }
+  .staple.top {
+    top: 30px;
+  }
+  .staple.bottom {
+    top: 150px;
+  }
+}
+
+/* ---------- type ---------- */
+.display {
+  font-size: 40px;
+  line-height: var(--double-line);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+@media (min-width: 900px) {
+  .display {
+    font-size: 52px;
+  }
+}
+.headline {
+  font-size: 24px;
+  line-height: var(--line);
+  font-weight: 700;
+}
+.label {
+  font-size: 15px;
+  line-height: var(--line);
+  color: var(--soft-print);
+}
+.sample-note {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* ---------- tones ---------- */
+.tone-red {
+  color: var(--red-biro);
+}
+.tone-green {
+  color: var(--green-biro);
+}
+.tone-pencil {
+  color: var(--pencil);
+}
+
+/* ---------- marks ---------- */
+.mark {
+  position: absolute;
+  overflow: visible;
+  pointer-events: none;
+}
+.mark path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.mark.fit {
+  inset: -8px -10px;
+  width: calc(100% + 20px);
+  height: calc(100% + 16px);
+}
+.mark.big {
+  position: static;
+  width: 120px;
+  height: 120px;
+}
+.mark.cross-over {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.9;
+}
+
+/* The pen: the one moving thing. About 1.5s in total. */
+.pen path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 700ms ease-out 100ms forwards;
+}
+.hand-reveal {
+  animation: write 700ms steps(14, end) 800ms backwards;
+}
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes write {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pen path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .hand-reveal {
+    animation: none;
+  }
+}
+
+/* ---------- the stage: the marked figure ---------- */
+.stage {
+  position: relative;
+  min-height: 120px;
+}
+.hand {
+  display: block;
+  font-family: var(--font-hand), "Segoe Print", cursive;
+  font-size: 34px;
+  line-height: var(--double-line);
+  word-break: break-word;
+}
+/* Long handwritten values (links) drop to a smaller hand so they fit on one or two lines. */
+.hand.long {
+  font-size: 22px;
+  line-height: var(--line);
+}
+.figure-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pin {
+  position: absolute;
+  left: calc(-1 * var(--margin-phone) + 4px);
+  top: 15px;
+  width: 30px;
+  height: 30px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  background: var(--page);
+}
+.figure {
+  position: relative;
+  display: inline-block;
+  padding: 0 12px;
+  font-size: 56px;
+  line-height: var(--double-line);
+  font-weight: 700;
+  color: var(--print-black);
+  overflow-wrap: anywhere;
+}
+.figure.long {
+  font-size: 30px;
+  line-height: var(--line);
+  padding-block: var(--line) 0;
+}
+.figure .gap {
+  display: inline-block;
+  width: 72px;
+}
+.sheet {
+  position: relative;
+  background: var(--sheet-white);
+  padding: 15px 20px;
+  font-family: Arial, "Liberation Sans", Helvetica, sans-serif;
+  font-size: 15px;
+  line-height: 24px;
+  box-shadow: 0 1px 2px rgba(20, 23, 28, 0.18), 0 8px 20px rgba(20, 23, 28, 0.1);
+}
+.sheet .claim {
+  position: relative;
+  display: block;
+  font-size: 18px;
+  line-height: var(--line);
+  overflow-wrap: anywhere;
+}
+.struck {
+  text-decoration: line-through;
+  text-decoration-color: var(--red-biro);
+  text-decoration-thickness: 3px;
+}
+.stage-tick {
+  display: flex;
+  align-items: center;
+  min-height: 150px;
+}
+.stage .notice-id {
+  font-size: 30px;
+  line-height: var(--double-line);
+  font-weight: 700;
+  display: inline-block;
+  position: relative;
+  padding: 0 14px;
+}
+
+/* ---------- copy ---------- */
+.answer > * + * {
+  margin-top: var(--line);
+}
+.answer .actions {
+  margin-top: var(--line);
+}
+
+/* ---------- buttons and fields ---------- */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: var(--double-line);
+  padding: 0 20px;
+  border: 2px solid var(--biro-blue);
+  border-radius: var(--radius-sm);
+  font: 700 18px/var(--line) var(--font-andika), system-ui, sans-serif;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 160ms, color 160ms;
+}
+.btn-primary {
+  background: var(--biro-blue);
+  color: var(--sheet-white);
+}
+.btn-primary:hover {
+  background: var(--cover-deep);
+}
+.btn-line {
+  background: transparent;
+  color: var(--biro-blue);
+}
+.btn-line:hover {
+  background: var(--selected-tint);
+}
+.btn:active {
+  transform: translateY(1px);
+}
+.btn[disabled] {
+  background: var(--wash);
+  color: var(--soft-print);
+  border-color: var(--wash);
+  cursor: default;
+}
+.status {
+  margin-top: var(--line);
+  font-weight: 700;
+}
+
+.field label {
+  display: block;
+  font-weight: 700;
+}
+.field textarea {
+  display: block;
+  width: 100%;
+  min-height: 180px;
+  padding: 0 10px;
+  margin-top: 0;
+  background: transparent;
+  border: 2px solid var(--biro-blue);
+  border-radius: 0;
+  color: var(--biro-blue);
+  font: 400 18px/var(--line) var(--font-andika), system-ui, sans-serif;
+  resize: vertical;
+}
+.field textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 1px var(--biro-blue);
+}
+.field textarea[aria-invalid="true"] {
+  border-color: var(--print-black);
+}
+.error {
+  margin-top: var(--line);
+  padding-left: 12px;
+  border-left: 4px solid var(--print-black);
+  font-weight: 700;
+  color: var(--print-black);
+}
+
+/* ---------- proof page ---------- */
+.proof > * + * {
+  margin-top: var(--double-line);
+}
+.changes {
+  list-style: none;
+  padding: 0;
+}
+.changes li {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  column-gap: 12px;
+  align-items: start;
+}
+.changes li + li {
+  margin-top: var(--line);
+}
+.changes .pin {
+  position: static;
+}
+.changes .kind {
+  font-weight: 700;
+}
+.receipt dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 20px;
+}
+.receipt dt {
+  color: var(--soft-print);
+  font-size: 15px;
+}
+.receipt dd {
+  overflow-wrap: anywhere;
+}
+.receipt .links {
+  margin-top: var(--line);
+  display: grid;
+  gap: var(--line);
+}
+.samples {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+.samples a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
