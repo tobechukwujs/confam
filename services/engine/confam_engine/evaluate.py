@@ -51,24 +51,66 @@ def _outside_the_visible_slice(d: Diff, m: Match) -> bool:
     return b <= m.first or a >= m.last
 
 
-def _unlisted(copy: list[Token], allowed: set[str], diffs: list[Diff]) -> list[Diff]:
-    """Links and phone numbers in the copy that are not in the record and not already reported."""
+# What a forger adds around a genuine notice. A wrapper (text outside the aligned notice) is
+# ignored EXCEPT for these: a web address or money amount that is not in the record, and, after
+# the notice, a phone number that is not in the record. A sender's number sits at the head of a
+# forward, so a phone at the head is not a payload.
+_PAYLOAD_HEAD = {"link", "money"}
+_PAYLOAD_TAIL = {"link", "money", "phone"}
+
+
+def _payload_keys(m: Match, record: Sequence[OfficialNotice]) -> set[str]:
+    """Links, phones and money amounts that belong to this notice or to the signed record."""
+    keys = {t.cmp_key for t in m.tokens if t.kind in ("link", "phone", "money")}
+    for n in record:
+        keys |= {t.cmp_key for t in tokenize(n.text) if t.kind in ("link", "phone")}
+    return keys
+
+
+def _is_wrapper_noise(d: Diff, allowed: set[str]) -> bool:
+    """True for copy-only text at the very start or end of the copy that is not a payload."""
+    if d.edge is None:
+        return False
+    payload = _PAYLOAD_HEAD if d.edge == "head" else _PAYLOAD_TAIL
+    if d.kind not in payload:
+        return True
+    tokens = tokenize(d.copy or "")
+    if len(tokens) == 1 and tokens[0].kind == d.kind and tokens[0].cmp_key in allowed:
+        return True  # a link the record already has is not new
+    return False
+
+
+def _unlisted(copy: list[Token], allowed: set[str], diffs: list[Diff], skip: set[int]) -> list[Diff]:
+    """Links and phone numbers in the copy that are not in the record and not already reported.
+    Phone numbers in the head wrapper (`skip`) are a sender's number, not a claim."""
     reported = {d.copy for d in diffs if d.copy}
     out = []
     for i, t in enumerate(copy):
+        if t.kind == "phone" and i in skip:
+            continue
         if t.kind in ("link", "phone") and t.key not in allowed and t.text not in reported:
             out.append(Diff("insert", t.kind, None, t.text, (i, i + 1), (0, 0)))
     return out
 
 
-def _compare(copy: list[Token], m: Match, record: Sequence[OfficialNotice]) -> Outcome:
+def visible_diffs(copy: list[Token], m: Match, record: Sequence[OfficialNotice]) -> tuple[list[Diff], bool]:
+    """Differences between the copy and the matched notice that COUNT, and whether the copy is
+    cropped. The copy is aligned to the notice: wrapper text outside it is ignored, a missing head
+    or tail of the notice means cropped, and everything inside the notice counts."""
     diffs = diff_tokens(copy, m.tokens)
     cropped = [d for d in diffs if _outside_the_visible_slice(d, m)]
-    visible = [d for d in diffs if d not in cropped]
+    inside = [d for d in diffs if d not in cropped]
+    head = {i for d in inside if d.edge == "head" for i in range(*d.old_span)}
+    allowed = _payload_keys(m, record)
+    kept = [d for d in inside if not _is_wrapper_noise(d, allowed)]
+    kept += _unlisted(copy, _allow_list(record), kept, head)
+    return kept, bool(cropped)
 
+
+def _compare(copy: list[Token], m: Match, record: Sequence[OfficialNotice]) -> Outcome:
+    visible, cropped = visible_diffs(copy, m, record)
     definite = [d for d in visible if not d.lookalike]
     uncertain = [d for d in visible if d.lookalike]
-    definite += _unlisted(copy, _allow_list(record), definite + uncertain)
 
     if definite:
         definite.sort(key=lambda d: (d.old_span[0], d.new_span[0]))
@@ -78,7 +120,6 @@ def _compare(copy: list[Token], m: Match, record: Sequence[OfficialNotice]) -> O
     if cropped:
         return Outcome("partial", notice=m.notice)
     return Outcome("confirmed", notice=m.notice, superseded_by=supersession_for(m.notice, record))
-
 
 def evaluate(text: str, record: Sequence[OfficialNotice]) -> Outcome:
     copy = tokenize(text)

@@ -28,6 +28,10 @@ class Diff:
     new_span: tuple[int, int]  # token indexes in the OFFICIAL text
     lookalike: bool = False  # differs only by look-alike characters: cannot be called an edit
     box: tuple[float, float, float, float] | None = None  # x, y, w, h on a photo (0-1); None for typed text
+    # "head" / "tail": copy-only words before the first / after the last official word, with the
+    # official notice lined up right next to them. That is wrapper text (a "Forwarded" label, a
+    # sender, a timestamp, a caption), not part of the notice.
+    edge: str | None = None
 
     def to_change(self) -> dict:
         """The contract Change shape without a box (used for record-to-record changes)."""
@@ -45,7 +49,7 @@ def _join(tokens: list[Token]) -> str:
     return " ".join(t.text for t in tokens)
 
 
-def _singles(tokens: list[Token], base: int, op: str, at: int) -> list[tuple[int, Diff]]:
+def _singles(tokens: list[Token], base: int, op: str, at: int, edge: str | None = None) -> list[tuple[int, Diff]]:
     """Report tokens that exist on one side only. `at` is the position in the other side."""
     out: list[tuple[int, Diff]] = []
     run: list[tuple[int, Token]] = []
@@ -55,22 +59,22 @@ def _singles(tokens: list[Token], base: int, op: str, at: int) -> list[tuple[int
             return
         text = _join([t for _, t in run])
         first, last = run[0][0], run[-1][0] + 1
-        out.append((first, _make(op, "text", text, (first, last), at)))
+        out.append((first, _make(op, "text", text, (first, last), at, edge)))
         run.clear()
 
     for i, tok in enumerate(tokens, start=base):
         if tok.meaningful:
             flush()
-            out.append((i, _make(op, tok.kind, tok.text, (i, i + 1), at)))
+            out.append((i, _make(op, tok.kind, tok.text, (i, i + 1), at, edge)))
         else:
             run.append((i, tok))
     flush()
     return out
 
 
-def _make(op: str, kind: str, text: str, span: tuple[int, int], at: int) -> Diff:
+def _make(op: str, kind: str, text: str, span: tuple[int, int], at: int, edge: str | None = None) -> Diff:
     if op == "insert":  # words only in the copy
-        return Diff("insert", kind, None, text, span, (at, at))
+        return Diff("insert", kind, None, text, span, (at, at), edge=edge)
     return Diff("delete", kind, text, None, (at, at), span)  # words only in the official text
 
 
@@ -122,6 +126,29 @@ def _pair_block(old: list[Token], new: list[Token], i0: int, j0: int) -> list[tu
     return out
 
 
+def _replace_block(
+    copy: list[Token], official: list[Token], i1: int, i2: int, j1: int, j2: int
+) -> list[tuple[int, Diff]]:
+    """A block where both sides differ. If it touches the very end (or start) of both texts and
+    the copy has MORE words than the notice there, the extra words next to the edge are wrapper
+    text (a caption after an edited last word, a header before an edited first word): the notice
+    part is paired as usual and the extra words are tagged as wrapper."""
+    n_old, n_new = i2 - i1, j2 - j1
+    at_head = i1 == 0 and j1 == 0
+    at_tail = i2 == len(copy) and j2 == len(official)
+    if n_old > n_new and at_tail and not at_head:
+        core_end = i1 + n_new
+        return _pair_block(copy[i1:core_end], official[j1:j2], i1, j1) + _singles(
+            copy[core_end:i2], core_end, "insert", j2, "tail"
+        )
+    if n_old > n_new and at_head and not at_tail:
+        core_start = i2 - n_new
+        return _singles(copy[i1:core_start], i1, "insert", j1, "head") + _pair_block(
+            copy[core_start:i2], official[j1:j2], core_start, j1
+        )
+    return _pair_block(copy[i1:i2], official[j1:j2], i1, j1)
+
+
 def diff_tokens(copy: list[Token], official: list[Token]) -> list[Diff]:
     matcher = SequenceMatcher(None, [t.cmp_key for t in copy], [t.cmp_key for t in official], autojunk=False)
     found: list[tuple[int, Diff]] = []
@@ -129,9 +156,10 @@ def diff_tokens(copy: list[Token], official: list[Token]) -> list[Diff]:
         if tag == "equal":
             continue
         if tag == "replace":
-            found += _pair_block(copy[i1:i2], official[j1:j2], i1, j1)
+            found += _replace_block(copy, official, i1, i2, j1, j2)
         elif tag == "delete":  # only in the copy
-            found += _singles(copy[i1:i2], i1, "insert", j1)
+            edge = "head" if (i1 == 0 and j1 == 0) else "tail" if (i2 == len(copy) and j1 == len(official)) else None
+            found += _singles(copy[i1:i2], i1, "insert", j1, edge)
         elif tag == "insert":  # only in the official text
             found += _singles(official[j1:j2], j1, "delete", i1)
     found.sort(key=lambda pair: (pair[0], pair[1].new_span[0]))

@@ -323,7 +323,8 @@ def mutations(text: str):
         for m in re.finditer(src, text):
             out.append(text[: m.start()] + dst + text[m.end():])
     # an extra word, number or link appended
-    for extra in (" Call 08000000000.", " Pay N1000.", " See https://x.example.", " Not valid."):
+    # (a trailing caption such as "Not valid." is wrapper text by design: see test_wrappers.py)
+    for extra in (" Call 08000000000.", " Pay N1000.", " See https://x.example."):
         out.append(text + extra)
     # reordered sentences
     parts = text.split(". ")

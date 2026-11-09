@@ -20,7 +20,7 @@ from ..check import verdict_from_outcome
 from ..compare.diff import Diff, diff_tokens
 from ..compare.match import Match, find_notice
 from ..compare.tokenize import Token
-from ..evaluate import Outcome, _outside_the_visible_slice, _unlisted, _allow_list
+from ..evaluate import Outcome, visible_diffs
 from ..explain import find_conflicts
 from ..model import OfficialNotice
 from ..supersession import supersession_for
@@ -68,14 +68,9 @@ def _per_reading(reading: Reading, record: Sequence[OfficialNotice]):
     return tokens, boxes, find_notice(tokens, record)
 
 
-def _visible(tokens: list[Token], boxes: list[Box | None], m: Match, allowed: set[str]):
-    diffs = diff_tokens(tokens, m.tokens)
-    cropped = [d for d in diffs if _outside_the_visible_slice(d, m)]
-    visible = [d for d in diffs if d not in cropped]
-    visible = _with_boxes(visible, boxes)
-    extra = _with_boxes(_unlisted(tokens, allowed, visible), boxes)
-    return visible + extra, bool(cropped)
-
+def _visible(tokens: list[Token], boxes: list[Box | None], m: Match, record: Sequence[OfficialNotice]):
+    visible, cropped = visible_diffs(tokens, m, record)
+    return _with_boxes(visible, boxes), cropped
 
 def evaluate_readings(readings: Sequence[Reading], record: Sequence[OfficialNotice]) -> Outcome:
     if len(readings) < 2:
@@ -106,9 +101,8 @@ def evaluate_readings(readings: Sequence[Reading], record: Sequence[OfficialNoti
         found = ma or mb
         return Outcome("cannot_confirm", reason="unclear", notice=found.notice)
 
-    allowed = _allow_list(record)
-    da, crop_a = _visible(ta, ba, ma, allowed)
-    db, crop_b = _visible(tb, bb, mb, allowed)
+    da, crop_a = _visible(ta, ba, ma, record)
+    db, crop_b = _visible(tb, bb, mb, record)
 
     agreed: list[Diff] = []
     uncertain = False

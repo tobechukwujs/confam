@@ -214,3 +214,26 @@ test("an honest copy with different spacing and case is still Confirmed", async 
   await paste(page, "  " + CURRENT_NOTICE.toUpperCase().replace(/ /g, "  ") + " ");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Confirmed");
 });
+
+// ---- a genuine notice forwarded in a chat is not "altered" by the lines around it ----
+const FORWARD = (body: string) =>
+  `Forwarded many times\n~ Chidi Okafor\nPlease share this with everyone, it is very important.\n\n${body}\n\nGod bless Nigeria.\n10:42 AM`;
+
+test("a genuine notice with Forwarded, a sender, a caption and a timestamp is Confirmed", async ({ page }) => {
+  await paste(page, FORWARD(CURRENT_NOTICE));
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Confirmed");
+  await expect(page.locator("ol.changes li")).toHaveCount(0);
+});
+
+test("the same forward with one changed date is Altered, and only the date is marked", async ({ page }) => {
+  await paste(page, FORWARD(CURRENT_NOTICE.replace("28th November", "29th November")));
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Altered");
+  await expect(page.locator("ol.changes li")).toHaveCount(1);
+  await expect(page.locator(".figure-main")).toHaveText("29th");
+  await expect(page.locator(".hand")).toHaveText("28th November");
+});
+
+test("a link added around a genuine notice is never Confirmed", async ({ page }) => {
+  await paste(page, `${CURRENT_NOTICE}\nRegister faster at https://fast-register.example`);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Altered");
+});
