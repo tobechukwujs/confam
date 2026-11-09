@@ -23,7 +23,9 @@ def _notice_dict(n: OfficialNotice | None) -> dict | None:
     return {"id": n.id, "title": n.title, "published": n.published, "url": n.url}
 
 
-def _verdict(outcome: Outcome, *, lang: str, record_as_of: datetime, now: datetime | None) -> Verdict:
+def verdict_from_outcome(
+    outcome: Outcome, *, lang: str, record_as_of: datetime, now: datetime | None = None
+) -> Verdict:
     return Verdict.model_validate(
         {
             "code": new_check_code(),
@@ -34,7 +36,7 @@ def _verdict(outcome: Outcome, *, lang: str, record_as_of: datetime, now: dateti
             "record_as_of": record_as_of.isoformat(),
             "notice": _notice_dict(outcome.notice),
             "superseded_by": outcome.superseded_by,
-            "changes": [d.to_change() for d in outcome.changes],
+            "changes": [d.to_photo_change() for d in outcome.changes],
             "conflicts": outcome.conflicts,
         }
     )
@@ -49,4 +51,4 @@ def check_notice(
     now: datetime | None = None,
 ) -> Verdict:
     """Check pasted text against the signed record. Rules decide the verdict (rule 3)."""
-    return _verdict(evaluate(text, record), lang=lang, record_as_of=record_as_of, now=now)
+    return verdict_from_outcome(evaluate(text, record), lang=lang, record_as_of=record_as_of, now=now)

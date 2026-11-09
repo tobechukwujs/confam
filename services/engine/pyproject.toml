@@ -1,9 +1,9 @@
 [project]
 name = "confam-engine"
 version = "0.0.0"
-description = "Confam verification engine (STUB: only the not_in_record branch exists; the real engine is ported in later)"
+description = "Confam verification engine: rule-based comparison and photo reading (not the legacy engine)"
 requires-python = ">=3.12"
-dependencies = ["confam-contract", "pydantic>=2"]
+dependencies = ["confam-contract", "pydantic>=2", "pillow>=10.1", "pytesseract>=0.3.10"]
 
 [build-system]
 requires = ["hatchling"]

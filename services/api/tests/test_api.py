@@ -29,7 +29,7 @@ CURRENT = next(n for n in RECORD.notices if n.id == "SEC-2026-140")
 
 def make_client(**overrides) -> tuple[TestClient, object]:
     settings = Settings(seed_samples=False, cors_origins=("https://app.example",), **overrides)
-    app = create_app(settings=settings, record=RECORD)
+    app = create_app(settings=settings, record=RECORD, readers=None)
     return TestClient(app), app
 
 
@@ -275,4 +275,4 @@ def test_no_score_field_in_any_response():
 
 def test_health():
     client, _ = make_client()
-    assert client.get("/health").json() == {"status": "ok"}
+    assert client.get("/health").json() == {"status": "ok", "photo_checks": False}

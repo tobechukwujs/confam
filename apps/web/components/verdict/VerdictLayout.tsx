@@ -2,6 +2,7 @@ import type { Verdict } from "@confam/contract";
 import { fill, type Lang, type Strings, type VerdictCopy } from "@confam/i18n";
 import { NOTICE_LANG, formatDate, isSample, viewKey, type ViewKey } from "@/lib/format";
 import { Filled } from "../Filled";
+import { PhotoPanel } from "../photo/PhotoPanel";
 import { Arrow } from "../sheet/Arrow";
 import { Pin } from "../sheet/Pin";
 import { Receipt } from "../sheet/Receipt";
@@ -84,7 +85,7 @@ function Action({
       ) : null;
     case "cannot_confirm":
       return (
-        <a className="btn btn-primary" href="/">
+        <a className="btn btn-primary" href={v.reason === "unclear" || v.reason === "line_missing" ? "/#upload" : "/"}>
           {copy.action}
         </a>
       );
@@ -180,6 +181,8 @@ export function VerdictLayout({ verdict, s, lang }: { verdict: Verdict; s: Strin
         </div>
       </section>
       <section className="proof" aria-label={s.receipt.heading}>
+        {/* The person's own photo with the marks on it. Renders only while this tab still holds it. */}
+        <PhotoPanel code={verdict.code} changes={verdict.changes} s={s.photo} />
         {/* Nothing was compared when we cannot confirm, so do not claim "no differences". */}
         {key !== "cannot_confirm" && (
           <div>

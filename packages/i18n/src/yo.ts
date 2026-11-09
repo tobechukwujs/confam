@@ -44,6 +44,40 @@ export const yo: Strings = {
     back: "Ṣàyẹ̀wò ìkéde",
   },
 
+  upload: {
+    heading: "Tàbí ṣàyẹ̀wò fọ́tò",
+    lead: "Lẹ̀, fà sílẹ̀ tàbí yan àwòrán ìkéde náà. A ó ka àwọn ọ̀rọ̀ inú rẹ̀, a ó sì ṣàyẹ̀wò wọn bí ọ̀rọ̀ tí a lẹ̀.",
+    choose: "Yan fọ́tò",
+    camera: "Ya fọ́tò",
+    drop: "Fà fọ́tò náà sílẹ̀ síbí, tàbí lẹ̀ ẹ́ pẹ̀lú Ctrl+V.",
+    sending: "Ń fi fọ́tò náà ránṣẹ́",
+    errorType: "Fáìlì yẹn kì í ṣe àwòrán tí a lè kà. Lo fọ́tò tàbí àwòrán ojú ìwé (JPG, PNG tàbí WebP).",
+    errorSize: "Àwòrán yẹn tóbi jù. Lo èyí tí kò tó 5 MB.",
+    errorBusy: "Àyẹ̀wò pọ̀ jù báyìí. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan sí i lẹ́yìn ìṣẹ́jú kan.",
+    errorDown: "A kò lè dé ibi àyẹ̀wò. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan sí i.",
+    errorOff: "Àyẹ̀wò fọ́tò kò sí lọ́wọ́lọ́wọ́. Jọ̀wọ́ lẹ ọ̀rọ̀ inú ìkéde dípò rẹ̀.",
+  },
+
+  reading: {
+    title: "À ń ka ìkéde rẹ",
+    why: "À ń ka fọ́tò náà lẹ́ẹ̀mejì, a sì ń gbẹ́kẹ̀lé ohun tí ìkàwé méjèèjì fohùn ṣọ̀kan lé lórí nìkan.",
+    stages: {
+      queued: "Ó ń dúró dè àkókò rẹ̀",
+      reading_1: "À ń ka fọ́tò náà, ìgbà àkọ́kọ́",
+      reading_2: "À ń tún un ka, ìgbà kejì",
+      comparing: "À ń fi wé ìwé àkọsílẹ̀ àṣẹ",
+    },
+    failed: "A kò lè ka fọ́tò yẹn. Gbìyànjú èyí tó mọ́ gaara, tàbí lẹ ọ̀rọ̀ inú rẹ̀.",
+    expired: "Àyẹ̀wò yìí kò sí níbí mọ́. Jọ̀wọ́ bẹ̀rẹ̀ lẹ́ẹ̀kan sí i.",
+    back: "Ṣàyẹ̀wò ìkéde mìíràn",
+  },
+
+  photo: {
+    heading: "Fọ́tò rẹ, tí a sàmì sí",
+    note: "Ìwọ nìkan ló lè rí fọ́tò yìí. A kì í tọ́jú rẹ̀.",
+    alt: "Fọ́tò tí o fi ránṣẹ́, pẹ̀lú àmì níbi tó ti yàtọ̀ sí ìkéde àṣẹ",
+  },
+
   record: {
     nav: "Ìwé àkọsílẹ̀ àṣẹ",
     title: "Ìwé àkọsílẹ̀ àṣẹ",

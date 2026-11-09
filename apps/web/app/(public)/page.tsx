@@ -1,5 +1,6 @@
 import { getStrings } from "@confam/i18n";
 import { CheckForm } from "@/components/CheckForm";
+import { UploadZone } from "@/components/photo/UploadZone";
 import { resolveLang } from "@/lib/lang";
 
 export default async function Home() {
@@ -12,6 +13,7 @@ export default async function Home() {
       <h1 className="display">{s.home.title}</h1>
       <p>{s.home.lead}</p>
       <CheckForm s={s.home} lang={lang} />
+      <UploadZone s={s.upload} lang={lang} />
       {showSamples && (
         <section aria-labelledby="samples-h" style={{ marginTop: "var(--double-line)" }}>
           <h2 className="headline" id="samples-h">

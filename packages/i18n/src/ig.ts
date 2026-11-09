@@ -44,6 +44,40 @@ export const ig: Strings = {
     back: "Lelee ọkwa",
   },
 
+  upload: {
+    heading: "Ma ọ bụ lelee foto",
+    lead: "Tinye, tụdo ma ọ bụ họrọ foto ọkwa ahụ. Anyị ga-agụ okwu ndị dị na ya ma lelee ha dị ka ederede e tinyere.",
+    choose: "Họrọ foto",
+    camera: "See foto",
+    drop: "Tụdo foto ahụ ebe a, ma ọ bụ tinye ya site na Ctrl+V.",
+    sending: "Na-ezipụ foto ahụ",
+    errorType: "Faịlụ ahụ abụghị foto anyị nwere ike ịgụ. Jiri foto ma ọ bụ foto ihuenyo (JPG, PNG ma ọ bụ WebP).",
+    errorSize: "Foto ahụ buru ibu. Jiri nke dị ntakịrị karịa 5 MB.",
+    errorBusy: "Nlele dị ọtụtụ ugbu a. Biko nwaa ọzọ mgbe nkeji otu gasịrị.",
+    errorDown: "Anyị enweghị ike iru ebe nlele. Biko nwaa ọzọ.",
+    errorOff: "Nlele foto adịghị ugbu a. Biko tinye ederede kama.",
+  },
+
+  reading: {
+    title: "Na-agụ ọkwa gị",
+    why: "Anyị na-agụ foto ahụ ugboro abụọ, ma anyị na-ekwere naanị ihe ọgụgụ abụọ ahụ kwenyere na ya.",
+    stages: {
+      queued: "Na-eche oge ya",
+      reading_1: "Na-agụ foto ahụ, nke mbụ",
+      reading_2: "Na-agụ ya ọzọ, nke abụọ",
+      comparing: "Na-eji ya tụnyere ndekọ gọọmentị",
+    },
+    failed: "Anyị enweghị ike ịgụ foto ahụ. Nwaa nke doro anya, ma ọ bụ tinye ederede.",
+    expired: "Nlele a adịghị ebe a ọzọ. Biko malite ọzọ.",
+    back: "Lelee ọkwa ọzọ",
+  },
+
+  photo: {
+    heading: "Foto gị, e kaara akara",
+    note: "Naanị gị nwere ike ịhụ foto a. Anyị anaghị edebe ya.",
+    alt: "Foto i zitere, nwere akara ebe ọ dị iche na ọkwa gọọmentị",
+  },
+
   record: {
     nav: "Ndekọ gọọmentị",
     title: "Ndekọ gọọmentị",

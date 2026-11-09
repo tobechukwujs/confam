@@ -19,6 +19,7 @@ class Settings:
     cors_origins: tuple[str, ...] = ()
     seed_samples: bool = False
     rate_limit_per_minute: int = 30
+    photo_workers: int = 1  # one picture at a time keeps memory small on a free host
     ip_salt: str = "dev-only-salt-change-me"
     record_path: Path = field(default=DEFAULT_RECORD_PATH)
 
@@ -33,6 +34,7 @@ class Settings:
             cors_origins=origins,
             seed_samples=_flag(os.environ.get("CONFAM_SEED_SAMPLES"), False),
             rate_limit_per_minute=int(os.environ.get("CONFAM_RATE_LIMIT_PER_MINUTE", "30")),
+            photo_workers=int(os.environ.get("CONFAM_PHOTO_WORKERS", "1")),
             ip_salt=os.environ.get("CONFAM_IP_SALT", cls.ip_salt),
             record_path=Path(os.environ.get("CONFAM_RECORD_PATH", str(DEFAULT_RECORD_PATH))),
         )

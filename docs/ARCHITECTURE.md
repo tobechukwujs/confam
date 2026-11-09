@@ -87,8 +87,8 @@ The contract extends the handoff's shape with three fields: `superseded_by`, a l
 
 | Method | Path | Purpose | Auth |
 | --- | --- | --- | --- |
-| POST | /v1/checks | Submit text or an image; returns `{job_id}` for images, a verdict for text | Rate-limited |
-| GET | /v1/checks/{job\_id} | Poll a job; streams OCR stage for the reading screen | Rate-limited |
+| POST | /v1/checks | Submit text (JSON body) or an image (raw body, `Content-Type: image/png|jpeg|webp`, `?lang=`); returns `{job_id}` (202) for images, a verdict for text | Rate-limited |
+| GET | /v1/checks/{job\_id} | Poll a job: `{job_id, status, stage, code}` per `packages/contract/job.schema.json`; the stage is the real step (queued, reading_1, reading_2, comparing) | Rate-limited |
 | GET | /v1/verdicts/{code} | Public verification page data | Public |
 | GET | /v1/record | Search the signed official record | Public |
 | POST | /v1/record/drafts | Watch loop or reviewer proposes an entry | Reviewer, worker |

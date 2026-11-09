@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://confam.example/schemas/job.schema.json",
+  "title": "Job",
+  "description": "Progress of a photo check. POST /v1/checks with an image returns 202 with only {job_id}; GET /v1/checks/{job_id} returns this. The stage is the real step the server is on. There is no progress percentage and no confidence (CLAUDE.md rule 4). When status is done, `code` is the check code to open at /v/{code}.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["job_id", "status", "stage", "code"],
+  "properties": {
+    "job_id": { "type": "string", "pattern": "^[A-Za-z0-9_-]{16,64}$" },
+    "status": { "type": "string", "enum": ["working", "done", "failed"] },
+    "stage": {
+      "type": "string",
+      "enum": ["queued", "reading_1", "reading_2", "comparing", "done", "failed"]
+    },
+    "code": {
+      "description": "The check code (8 characters, no hyphen). Present only when status is done.",
+      "type": ["string", "null"],
+      "pattern": "^[23456789ABCDEFGHJKMNPQRSTUVWXYZ]{8}$"
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "status": { "const": "done" } }, "required": ["status"] },
+      "then": { "properties": { "code": { "type": "string" }, "stage": { "const": "done" } } },
+      "else": { "properties": { "code": { "type": "null" } } }
+    },
+    {
+      "if": { "properties": { "status": { "const": "failed" } }, "required": ["status"] },
+      "then": { "properties": { "stage": { "const": "failed" } } }
+    },
+    {
+      "if": { "properties": { "status": { "const": "working" } }, "required": ["status"] },
+      "then": { "properties": { "stage": { "enum": ["queued", "reading_1", "reading_2", "comparing"] } } }
+    }
+  ]
+}

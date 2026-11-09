@@ -51,6 +51,40 @@ export const en = {
     back: "Check a notice",
   },
 
+  upload: {
+    heading: "Or check a photo",
+    lead: "Paste, drop or choose a picture of the notice. We read the words on it and check them like pasted text.",
+    choose: "Choose a photo",
+    camera: "Take a photo",
+    drop: "Drop the photo here, or paste it with Ctrl+V.",
+    sending: "Sending the photo",
+    errorType: "That file is not a picture we can read. Use a photo or screenshot (JPG, PNG or WebP).",
+    errorSize: "That picture is too big. Use one under 5 MB.",
+    errorBusy: "Too many checks just now. Please try again in a minute.",
+    errorDown: "We could not reach the checker. Please try again.",
+    errorOff: "Photo checks are not available right now. Please paste the text instead.",
+  },
+
+  reading: {
+    title: "Reading your notice",
+    why: "We read the photo twice and only trust what both readings agree on.",
+    stages: {
+      queued: "Waiting its turn",
+      reading_1: "Reading the photo, first time",
+      reading_2: "Reading it again, second time",
+      comparing: "Comparing with the official record",
+    },
+    failed: "We could not read that photo. Try a clearer one, or paste the text.",
+    expired: "This check is no longer here. Please start again.",
+    back: "Check another notice",
+  },
+
+  photo: {
+    heading: "Your photo, marked",
+    note: "Only you can see this photo. It is not kept.",
+    alt: "The photo you sent, with marks where it differs from the official notice",
+  },
+
   record: {
     nav: "Official record",
     title: "The official record",

@@ -44,6 +44,40 @@ export const ha: Strings = {
     back: "Duba wata sanarwa",
   },
 
+  upload: {
+    heading: "Ko ka duba hoto",
+    lead: "Liƙa, jefa ko zaɓi hoton sanarwar. Za mu karanta kalmomin da ke ciki mu duba su kamar rubutun da aka liƙa.",
+    choose: "Zaɓi hoto",
+    camera: "Ɗauki hoto",
+    drop: "Jefa hoton a nan, ko ka liƙa shi da Ctrl+V.",
+    sending: "Ana aika hoton",
+    errorType: "Wannan fayil ba hoto ba ne da za mu iya karantawa. Yi amfani da hoto ko hoton allo (JPG, PNG ko WebP).",
+    errorSize: "Wannan hoto ya yi girma da yawa. Yi amfani da wanda bai kai 5 MB ba.",
+    errorBusy: "Ana yawan bincike a yanzu. Ka sake gwadawa bayan minti ɗaya.",
+    errorDown: "Ba mu iya isa ga mai bincike ba. Ka sake gwadawa.",
+    errorOff: "Binciken hoto bai samuwa a yanzu. Ka liƙa rubutun maimakon haka.",
+  },
+
+  reading: {
+    title: "Ana karanta sanarwarka",
+    why: "Muna karanta hoton sau biyu, kuma muna amincewa da abin da karatun biyu suka amince a kai kawai.",
+    stages: {
+      queued: "Yana jiran lokacinsa",
+      reading_1: "Ana karanta hoton, karo na farko",
+      reading_2: "Ana sake karanta shi, karo na biyu",
+      comparing: "Ana kwatanta shi da bayanan hukuma",
+    },
+    failed: "Ba mu iya karanta wannan hoton ba. Gwada mai haske, ko ka liƙa rubutun.",
+    expired: "Wannan bincike ba ya nan kuma. Ka sake farawa.",
+    back: "Duba wata sanarwa",
+  },
+
+  photo: {
+    heading: "Hotonka, tare da alamomi",
+    note: "Kai kaɗai ne za ka iya ganin wannan hoton. Ba ma adana shi.",
+    alt: "Hoton da ka aika, tare da alamomi a inda ya bambanta da sanarwar hukuma",
+  },
+
   record: {
     nav: "Bayanan hukuma",
     title: "Bayanan hukuma",

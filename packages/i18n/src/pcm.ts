@@ -43,6 +43,40 @@ export const pcm: Strings = {
     back: "Check a notice",
   },
 
+  upload: {
+    heading: "Or check photo",
+    lead: "Paste, drop or choose picture of di notice. We go read di words wey dey inside come check dem like pasted text.",
+    choose: "Choose photo",
+    camera: "Take photo",
+    drop: "Drop di photo here, or paste am with Ctrl+V.",
+    sending: "Dey send di photo",
+    errorType: "Dat file no be picture wey we fit read. Use photo or screenshot (JPG, PNG or WebP).",
+    errorSize: "Dat picture too big. Use one wey small pass 5 MB.",
+    errorBusy: "Plenty checks dey now. Abeg try again after one minute.",
+    errorDown: "We no fit reach di checker. Abeg try again.",
+    errorOff: "Photo checks no dey work now. Abeg paste di text instead.",
+  },
+
+  reading: {
+    title: "We dey read your notice",
+    why: "We dey read di photo two times, we go only trust wetin both readings agree on.",
+    stages: {
+      queued: "Dey wait im turn",
+      reading_1: "We dey read di photo, first time",
+      reading_2: "We dey read am again, second time",
+      comparing: "We dey compare am with di official record",
+    },
+    failed: "We no fit read dat photo. Try clearer one, or paste di text.",
+    expired: "Dis check no dey here again. Abeg start again.",
+    back: "Check another notice",
+  },
+
+  photo: {
+    heading: "Your photo, wey we mark",
+    note: "Na only you fit see dis photo. We no dey keep am.",
+    alt: "Di photo wey you send, with marks where e no match di official notice",
+  },
+
   record: {
     nav: "Official record",
     title: "Di official record",

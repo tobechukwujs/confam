@@ -27,10 +27,18 @@ class Diff:
     old_span: tuple[int, int]  # token indexes in the COPY (zero-width for a delete)
     new_span: tuple[int, int]  # token indexes in the OFFICIAL text
     lookalike: bool = False  # differs only by look-alike characters: cannot be called an edit
+    box: tuple[float, float, float, float] | None = None  # x, y, w, h on a photo (0-1); None for typed text
 
     def to_change(self) -> dict:
-        """The contract Change shape without a box."""
+        """The contract Change shape without a box (used for record-to-record changes)."""
         return {"op": self.op, "kind": self.kind, "official": self.official, "copy": self.copy}
+
+    def to_photo_change(self) -> dict:
+        """The contract Change shape, with a box when the copy came from a photo."""
+        change = self.to_change()
+        if self.box is not None:
+            change["box"] = [round(v, 4) for v in self.box]
+        return change
 
 
 def _join(tokens: list[Token]) -> str:

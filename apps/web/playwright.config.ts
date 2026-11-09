@@ -37,7 +37,7 @@ export default defineConfig({
       url: "http://localhost:3000",
       reuseExistingServer: true,
       timeout: 240_000,
-      env: { API_URL: "http://localhost:8000", SHOW_SAMPLES: "1" },
+      env: { API_URL: "http://localhost:8000", NEXT_PUBLIC_API_URL: "http://localhost:8000", SHOW_SAMPLES: "1" },
     },
   ],
 });

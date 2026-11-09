@@ -1,19 +1,19 @@
 # Render blueprint for the Confam API. Prepared, NOT deployed: create the service
 # from this file in the Render dashboard when you are ready.
-# UNVERIFIED on Render: check the first build log (uv install, Python version).
+# Docker, because photo checks need the Tesseract program installed in the image.
+# UNVERIFIED on Render: check the first build log. The free plan has 512 MB of memory;
+# photos are shrunk before reading and one is read at a time, but watch it.
 services:
   - type: web
     name: confam-api
-    runtime: python
+    runtime: docker
     plan: free
-    rootDir: .
-    buildCommand: pip install uv && uv sync --frozen --no-dev --package confam-api
-    startCommand: uv run --no-sync --package confam-api uvicorn --app-dir services/api main:app --host 0.0.0.0 --port $PORT
+    dockerfilePath: ./services/api/Dockerfile
+    dockerContext: .
     healthCheckPath: /health
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.12.7
       # Set to your Vercel URL(s), comma separated, e.g. https://confam-web.vercel.app
+      # Photos go from the browser straight to this API, so the web origin must be listed.
       - key: CONFAM_CORS_ORIGINS
         sync: false
       # "1" serves the fictional sample verdicts at /v/<code>. Fine for a labelled demo;
@@ -22,5 +22,7 @@ services:
         value: "1"
       - key: CONFAM_RATE_LIMIT_PER_MINUTE
         value: "30"
+      - key: CONFAM_PHOTO_WORKERS
+        value: "1"
       - key: CONFAM_IP_SALT
         generateValue: true

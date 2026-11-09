@@ -656,3 +656,79 @@ a {
   align-items: center;
   min-height: 44px;
 }
+
+
+/* ---------- photo checks ---------- */
+.upload {
+  margin-top: var(--double-line);
+}
+.dropzone {
+  border: 2px dashed var(--biro-blue);
+  padding: var(--line) var(--gutter-phone);
+  transition: background-color 160ms;
+}
+.upload.over .dropzone {
+  background: var(--selected-tint);
+}
+.upload-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--gutter-phone);
+  margin-top: var(--line);
+}
+.stages {
+  list-style: none;
+  padding: 0;
+}
+.stages li {
+  position: relative;
+  padding-left: 28px;
+  color: var(--soft-print);
+}
+.stages li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 10px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--pencil);
+  border-radius: 50%;
+}
+.stages li.past::before {
+  background: var(--pencil);
+}
+.stages li.now {
+  color: var(--print-black);
+  font-weight: 700;
+}
+.stages li.now::before {
+  border-color: var(--biro-blue);
+  background: var(--biro-blue);
+}
+.photo-frame {
+  position: relative;
+  width: 100%;
+}
+.photo-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--page-edge);
+}
+.photo-mark {
+  position: absolute;
+  color: var(--red-biro);
+}
+.photo-mark .mark.fit {
+  inset: -4px;
+  width: calc(100% + 8px);
+  height: calc(100% + 8px);
+}
+.photo-mark .pin {
+  left: -10px;
+  top: -24px;
+  width: 24px;
+  height: 24px;
+  font-size: 13px;
+}
