@@ -112,7 +112,7 @@
     "conflicts": [
       {
         "kind": "link",
-        "copy": "https://sec-register.example.net",
+        "copy": "https://register-sec.example",
         "official": "https://register.sec.example",
         "quote": "Register only at https://register.sec.example."
       }

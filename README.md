@@ -8,7 +8,8 @@ See [CLAUDE.md](CLAUDE.md), [PRODUCT.md](PRODUCT.md), [DESIGN.md](DESIGN.md) and
 - `packages/i18n`: English strings only (other languages TODO, need native-speaker review).
 - `services/engine`: **stub**. Exact match gives `confirmed` (with `superseded_by` when replaced); anything else gives `cannot_confirm` / `not_in_record`. The real engine is not ported yet.
 - `services/api`: `POST /v1/checks` (text), `GET /v1/verdicts/{code}`, in-memory store, fictional record from `fixtures/sec-sim`.
-- `apps/web`: home, verdict page (`/v/[code]`) with all five verdicts plus "Real, but replaced".
+- `apps/web`: home, verdict page (`/v/[code]`) with all five verdicts plus "Real, but replaced", and the public record (`/record`, `/record/[id]`: exact signed text, who signed and when). "Open the original" links to our own record page, so it never breaks; "View source" shows only for a real https address.
+- Fixtures use only `*.example` addresses; a test fails the build if any government-style address appears anywhere in the repo.
 
 ## Run locally
 

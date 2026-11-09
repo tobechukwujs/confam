@@ -1,22 +1,32 @@
 {
-  "_comment": "FICTIONAL. Simulated Electoral Commission notices for tests and demos only. Not INEC, not a real body.",
+  "_comment": "FICTIONAL. Simulated Electoral Commission notices for tests and demos only. Not INEC, not a real body. Every URL is on the reserved .example domain; reviewers are sample names.",
   "record_as_of": "2026-11-08T09:00:00+01:00",
   "notices": [
     {
       "id": "SEC-2026-114",
       "title": "Simulated Electoral Commission: voter registration deadline",
       "published": "2026-09-03",
+      "lang": "en",
       "url": "https://sec.example/notices/SEC-2026-114",
       "text": "The Simulated Electoral Commission announces that voter registration closes on 14th November. Register only at https://register.sec.example. Registration is free.",
-      "superseded_by": { "id": "SEC-2026-140", "published": "2026-10-09" }
+      "superseded_by": { "id": "SEC-2026-140", "published": "2026-10-09" },
+      "signatures": [
+        { "reviewer": "Reviewer A (sample)", "role": "first", "signed_at": "2026-09-04T10:15:00+01:00" },
+        { "reviewer": "Reviewer B (sample)", "role": "second", "signed_at": "2026-09-04T14:40:00+01:00" }
+      ]
     },
     {
       "id": "SEC-2026-140",
       "title": "Simulated Electoral Commission: revised voter registration deadline",
       "published": "2026-10-09",
+      "lang": "en",
       "url": "https://sec.example/notices/SEC-2026-140",
       "text": "The Simulated Electoral Commission announces that voter registration now closes on 28th November. Register only at https://register.sec.example. Registration is free.",
-      "superseded_by": null
+      "superseded_by": null,
+      "signatures": [
+        { "reviewer": "Reviewer B (sample)", "role": "first", "signed_at": "2026-10-10T09:05:00+01:00" },
+        { "reviewer": "Reviewer A (sample)", "role": "second", "signed_at": "2026-10-10T11:30:00+01:00" }
+      ]
     }
   ]
 }

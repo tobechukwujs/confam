@@ -44,6 +44,29 @@ export function viewKey(v: Verdict): ViewKey {
   return v.verdict;
 }
 
+const RESERVED_SUFFIXES = [".example", ".test", ".invalid", ".localhost", ".local"];
+const RESERVED_HOSTS = ["localhost", "example.com", "example.org", "example.net"];
+
+/**
+ * A source address is only shown ("View source") when it is a real, public https address.
+ * Fictional notices use reserved names (*.example, example.com...) which never resolve.
+ */
+export function isRealSourceUrl(value: string): boolean {
+  let url: URL;
+  try {
+    url = new URL(value);
+  } catch {
+    return false;
+  }
+  if (url.protocol !== "https:") return false;
+  const host = url.hostname.toLowerCase();
+  if (!host.includes(".")) return false;
+  if (/^[\d.]+$/.test(host) || host.includes(":")) return false; // IP addresses
+  if (RESERVED_SUFFIXES.some((s) => host.endsWith(s))) return false;
+  if (RESERVED_HOSTS.some((h) => host === h || host.endsWith(`.${h}`))) return false;
+  return true;
+}
+
 /** True for notices from the fictional Simulated Electoral Commission. */
 export function isSample(v: Verdict): boolean {
   return Boolean(v.notice?.id.startsWith("SEC-"));

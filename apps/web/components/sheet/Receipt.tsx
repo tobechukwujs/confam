@@ -1,7 +1,7 @@
 import type { Verdict } from "@confam/contract";
 import type { Strings } from "@confam/i18n";
 import { fill } from "@confam/i18n";
-import { formatCode, formatDate, formatDateTime } from "@/lib/format";
+import { formatCode, formatDate, formatDateTime, isRealSourceUrl } from "@/lib/format";
 
 /** Official notice id, published date, checked time, record as of, check code, and two links. */
 export function Receipt({ verdict, s }: { verdict: Verdict; s: Strings }) {
@@ -42,12 +42,13 @@ export function Receipt({ verdict, s }: { verdict: Verdict; s: Strings }) {
         <dd>{formatCode(verdict.code)}</dd>
       </dl>
       <div className="links">
-        {notice && (
-          <a href={notice.url} target="_blank" rel="noopener noreferrer">
-            {r.openOriginal}
+        {notice && <a href={`/record/${encodeURIComponent(notice.id)}`}>{r.openOriginal}</a>}
+        <a href={`/v/${verdict.code}`}>{r.verify}</a>
+        {notice && isRealSourceUrl(notice.url) && (
+          <a className="secondary-link" href={notice.url} target="_blank" rel="noopener noreferrer">
+            {r.viewSource}
           </a>
         )}
-        <a href={`/v/${verdict.code}`}>{r.verify}</a>
       </div>
     </section>
   );

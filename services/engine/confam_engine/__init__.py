@@ -8,13 +8,14 @@ allow-list, conflicts) comes next. See docs/ARCHITECTURE.md for the pipeline.
 """
 
 from .check import check_notice, new_check_code
-from .model import OfficialNotice, RecordError, Replacement
+from .model import OfficialNotice, RecordError, Replacement, Signature
 from .supersession import latest_successor, supersession_for
 
 __all__ = [
     "OfficialNotice",
     "RecordError",
     "Replacement",
+    "Signature",
     "check_notice",
     "latest_successor",
     "new_check_code",

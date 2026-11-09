@@ -44,6 +44,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </main>
         <footer className="footer">
+          <p>
+            <a href="/record">{s.record.nav}</a>
+          </p>
           <p>{s.independence}</p>
         </footer>
       </body>

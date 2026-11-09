@@ -49,6 +49,26 @@ export const en = {
     back: "Check a notice",
   },
 
+  record: {
+    nav: "Official record",
+    title: "The official record",
+    lead: "Every notice Confam checks against, word for word, with who signed it.",
+    asOf: "Record as of {date}",
+    current: "Current notice",
+    replacedBy: "Replaced by {id}",
+    published: "Published",
+    idLabel: "Notice number",
+    textHeading: "Exact text of the notice",
+    textNote: "Shown word for word, in the language it was written in.",
+    signedHeading: "Signed by",
+    first: "First signature",
+    second: "Second signature",
+    viewSource: "View source",
+    back: "All notices",
+    notFoundTitle: "No such notice",
+    notFoundBody: "That notice number is not in the official record.",
+  },
+
   verdict: {
     confirmed: {
       word: "Confirmed",
@@ -147,6 +167,7 @@ export const en = {
     recordAsOf: "Record as of",
     code: "Check code",
     openOriginal: "Open the original",
+    viewSource: "View source",
     verify: "Verify this check",
   },
 

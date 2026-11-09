@@ -5,7 +5,7 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
 
-from confam_engine import OfficialNotice, Replacement, latest_successor
+from confam_engine import OfficialNotice, RecordError, Replacement, Signature, latest_successor
 
 
 @dataclass
@@ -25,6 +25,16 @@ class RecordHolder:
     record: Record = field(default=None)  # type: ignore[assignment]
 
 
+def _signatures(notice_id: str, raw: list[dict]) -> tuple[Signature, ...]:
+    """Rule 5: two people sign every record entry, one first and one second, never the same person."""
+    sigs = tuple(Signature(reviewer=s["reviewer"], role=s["role"], signed_at=s["signed_at"]) for s in raw)
+    if len(sigs) != 2 or sorted(s.role for s in sigs) != ["first", "second"]:
+        raise RecordError(f"{notice_id} needs exactly one first and one second signature")
+    if sigs[0].reviewer == sigs[1].reviewer:
+        raise RecordError(f"{notice_id} was signed twice by the same reviewer")
+    return tuple(sorted(sigs, key=lambda s: s.role != "first"))
+
+
 def load_record(path: Path) -> Record:
     data = json.loads(Path(path).read_text(encoding="utf-8"))
     notices = [
@@ -34,11 +44,13 @@ def load_record(path: Path) -> Record:
             published=n["published"],
             url=n["url"],
             text=n["text"],
+            lang=n.get("lang", "en"),
             superseded_by=(
                 Replacement(id=n["superseded_by"]["id"], published=n["superseded_by"]["published"])
                 if n.get("superseded_by")
                 else None
             ),
+            signatures=_signatures(n["id"], n.get("signatures", [])),
         )
         for n in data["notices"]
     ]

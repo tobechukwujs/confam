@@ -11,6 +11,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from confam_contract.serialize import verdict_to_json
 from confam_contract.verdict import Verdict
+from confam_engine import OfficialNotice, latest_successor
 
 from .ratelimit import RateLimiter
 from .record import Record, RecordHolder, load_record
@@ -35,6 +36,50 @@ class CheckRequest(BaseModel):
         if not value.strip():
             raise ValueError("Paste the notice text to check it.")
         return value
+
+
+ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$")
+
+
+class SupersededRef(BaseModel):
+    id: str
+    published: str
+
+
+class SignatureOut(BaseModel):
+    reviewer: str
+    role: Literal["first", "second"]
+    signed_at: str
+
+
+class RecordSummary(BaseModel):
+    id: str
+    title: str
+    published: str
+    lang: str
+    superseded_by: SupersededRef | None
+
+
+class RecordList(BaseModel):
+    record_as_of: str
+    notices: list[RecordSummary]
+
+
+class RecordEntry(RecordSummary):
+    url: str
+    text: str
+    signatures: list[SignatureOut]
+
+
+def _summary(notice: OfficialNotice, notices: list[OfficialNotice]) -> dict:
+    newest = latest_successor(notice, notices)
+    return {
+        "id": notice.id,
+        "title": notice.title,
+        "published": notice.published,
+        "lang": notice.lang,
+        "superseded_by": {"id": newest.id, "published": newest.published} if newest else None,
+    }
 
 
 def _client_ip(request: Request) -> str:
@@ -90,5 +135,28 @@ def create_app(settings: Settings | None = None, record: Record | None = None) -
         if verdict is None:
             raise HTTPException(status_code=404, detail="No check with that code.")
         return JSONResponse(verdict_to_json(service.refreshed(verdict)))
+
+    @app.get("/v1/record", response_model=RecordList)
+    def list_record() -> dict:
+        rec = holder.record
+        return {
+            "record_as_of": rec.record_as_of.isoformat(),
+            "notices": [_summary(n, rec.notices) for n in rec.notices],
+        }
+
+    @app.get("/v1/record/{notice_id}", response_model=RecordEntry)
+    def get_record_entry(notice_id: str) -> dict:
+        rec = holder.record
+        notice = rec.get(notice_id) if ID_RE.match(notice_id) else None
+        if notice is None:
+            raise HTTPException(status_code=404, detail="No such notice in the record.")
+        return {
+            **_summary(notice, rec.notices),
+            "url": notice.url,
+            "text": notice.text,  # exact signed text, never reworded
+            "signatures": [
+                {"reviewer": s.reviewer, "role": s.role, "signed_at": s.signed_at} for s in notice.signatures
+            ],
+        }
 
     return app

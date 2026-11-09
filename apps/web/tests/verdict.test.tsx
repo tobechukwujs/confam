@@ -125,7 +125,7 @@ describe("verdict views", () => {
   it("not official crosses the sheet and writes the official fact", () => {
     const { container } = renderSample(sample("not_official"));
     expect(container.querySelector('[data-mark="cross"]')).toHaveClass("tone-red");
-    expect(container.querySelector(".claim")).toHaveTextContent("https://sec-register.example.net");
+    expect(container.querySelector(".claim")).toHaveTextContent("https://register-sec.example");
     expect(container.querySelector(".hand")).toHaveTextContent("https://register.sec.example");
   });
 

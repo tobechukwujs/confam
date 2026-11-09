@@ -496,6 +496,54 @@ a {
   display: grid;
   gap: var(--line);
 }
+/* ---------- record pages ---------- */
+.record-list {
+  list-style: none;
+  padding: 0;
+}
+.record-list li + li {
+  margin-top: var(--line);
+}
+.record-title {
+  font-weight: 700;
+  font-size: 20px;
+}
+.record-h1 {
+  font-size: 32px;
+  line-height: var(--double-line);
+}
+.facts {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 20px;
+}
+.facts dt {
+  color: var(--soft-print);
+  font-size: 15px;
+}
+.record-text {
+  white-space: pre-wrap;
+  font-size: 16px;
+  line-height: var(--line);
+}
+.signatures {
+  list-style: none;
+  padding: 0;
+}
+.signatures li {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 20px;
+}
+.signatures .kind {
+  color: var(--soft-print);
+  font-size: 15px;
+  font-weight: 400;
+}
+.secondary-link {
+  font-size: 15px;
+  color: var(--soft-print);
+}
 .samples {
   list-style: none;
   padding: 0;
