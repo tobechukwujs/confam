@@ -1,4 +1,5 @@
 import type { Change, Conflict, Verdict } from "@confam/contract";
+import { pickReplacedChange, splitDate } from "@/lib/replaced";
 import { Mark } from "../marks/Mark";
 import { Pin } from "../sheet/Pin";
 
@@ -15,18 +16,49 @@ export function ConfirmedStage() {
   );
 }
 
-export function ReplacedStage({ verdict }: { verdict: Verdict }) {
-  const oldId = verdict.notice?.id ?? "";
-  const newId = verdict.superseded_by?.id ?? "";
+/** The value of the OLD notice, with its day big and month small when it is a date. */
+function FigureValue({ value }: { value: string }) {
+  const split = splitDate(value);
+  if (!split) return <>{value}</>;
+  return (
+    <>
+      <span className="figure-main">{split.main}</span>
+      <span className="figure-sub">{split.rest}</span>
+    </>
+  );
+}
+
+/**
+ * "Real, but replaced": the changed fact, not notice ids. The old value (what the copy
+ * says) sits in pencil brackets and the new value is handwritten above it in pencil.
+ * "now" is interface text, so it is set in Andika, not in the hand font.
+ */
+export function ReplacedStage({ verdict, nowLabel }: { verdict: Verdict; nowLabel: string }) {
+  const picked = pickReplacedChange(verdict);
+  if (!picked) {
+    // Nothing expressible as a fact: bracket the old notice's title instead of showing ids.
+    return <PartialStage verdict={verdict} />;
+  }
+  const { change, index } = picked;
+  const oldValue = change.copy ?? "";
+  const newValue = change.official ?? "";
   return (
     <div className="stage">
-      <span className="hand tone-pencil hand-reveal" lang="en">
-        {newId}
-      </span>
-      <span className="notice-id" lang="en">
-        {oldId}
-        <Mark kind="bracket" tone="pencil" />
-      </span>
+      {newValue && (
+        <span className="hand-line hand-reveal">
+          <span className="now-label">{nowLabel}</span>
+          <span className="hand tone-pencil" lang="en">
+            {newValue}
+          </span>
+        </span>
+      )}
+      <div className="figure-row">
+        <Pin n={index + 1} tone="pencil" />
+        <span className={`figure${isLong(oldValue) && !splitDate(oldValue) ? " long" : ""}`} lang="en">
+          {oldValue ? <FigureValue value={oldValue} /> : <span className="gap" />}
+          <Mark kind="bracket" tone="pencil" />
+        </span>
+      </div>
     </div>
   );
 }

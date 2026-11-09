@@ -14,7 +14,7 @@ from jsonschema import Draft202012Validator
 from confam_api.app import create_app
 from confam_api.record import Record, load_record
 from confam_api.settings import Settings
-from confam_engine import Replacement
+from confam_engine import OfficialNotice, RecordError, Replacement, supersession_for
 
 ROOT = Path(__file__).resolve().parents[3]
 SCHEMA = json.loads((ROOT / "packages/contract/verdict.schema.json").read_text(encoding="utf-8"))
@@ -95,25 +95,71 @@ def test_text_matching_current_notice_has_no_superseded_by():
     assert body["verdict"] == "confirmed" and body["superseded_by"] is None
 
 
+def test_replaced_check_carries_url_title_and_changes_from_the_record():
+    client, _ = make_client()
+    sup = post(client, OLD.text).json()["superseded_by"]
+    assert sup["url"] == CURRENT.url and sup["title"] == CURRENT.title
+    got = {(c["op"], c["kind"], c["official"], c["copy"]) for c in sup["changes"]}
+    assert ("replace", "date", "28th November", "14th November") in got
+    assert all("box" not in c for c in sup["changes"])
+
+
 def test_cache_hit_still_flags_supersession():
     """A cached confirmed verdict must be re-checked for supersession on a hit."""
     client, app = make_client()
     first = post(client, CURRENT.text).json()
     assert first["superseded_by"] is None
     # The record changes: SEC-2026-140 is now replaced by a newer notice.
-    newer = replace(
-        CURRENT,
-        superseded_by=Replacement(id="SEC-2026-199", published="2026-11-07"),
+    newest = OfficialNotice(
+        id="SEC-2026-199",
+        title="Simulated Electoral Commission: voter registration extended",
+        published="2026-11-07",
+        url="https://sec.example/notices/SEC-2026-199",
+        text=CURRENT.text.replace("28th November", "5th December"),
     )
+    newer = replace(CURRENT, superseded_by=Replacement(id="SEC-2026-199", published="2026-11-07"))
     app.state.holder.record = Record(
-        notices=[OLD, newer], record_as_of=RECORD.record_as_of
+        notices=[OLD, newer, newest], record_as_of=RECORD.record_as_of
     )
     second = post(client, CURRENT.text).json()
     assert second["code"] == first["code"], "second call should be a cache hit"
-    assert second["superseded_by"] == {"id": "SEC-2026-199", "published": "2026-11-07"}
+    assert second["superseded_by"]["id"] == "SEC-2026-199"
+    got = {(c["op"], c["kind"], c["official"], c["copy"]) for c in second["superseded_by"]["changes"]}
+    assert ("replace", "date", "5th December", "28th November") in got
     assert_valid(second)
     # and the public page serves the updated flag too
     assert client.get(f"/v1/verdicts/{first['code']}").json()["superseded_by"]["id"] == "SEC-2026-199"
+
+
+def test_sample_replaced_verdict_matches_what_the_engine_computes():
+    """Samples are static JSON; this stops them drifting from the record."""
+    for name, sample in SAMPLES.items():
+        if not sample["superseded_by"]:
+            continue
+        notice = RECORD.get(sample["notice"]["id"])
+        assert notice is not None, name
+        assert sample["superseded_by"] == supersession_for(notice, RECORD.notices), name
+
+
+def test_loading_a_record_with_a_dangling_replacement_fails(tmp_path):
+    path = tmp_path / "notices.json"
+    path.write_text(
+        json.dumps(
+            {
+                "record_as_of": "2026-11-08T09:00:00+01:00",
+                "notices": [
+                    {
+                        "id": "SEC-2026-114", "title": "t", "published": "2026-09-03",
+                        "url": "https://sec.example/n", "text": "x",
+                        "superseded_by": {"id": "SEC-NOPE", "published": "2026-10-09"},
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    with pytest.raises(RecordError):
+        load_record(path)
 
 
 # --- public verdict page data ----------------------------------------------

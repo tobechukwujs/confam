@@ -18,12 +18,12 @@ function copyFor(v: Verdict, key: ViewKey, s: Strings): VerdictCopy {
   return s.verdict[key];
 }
 
-function Stage({ v, key_ }: { v: Verdict; key_: ViewKey }) {
+function Stage({ v, key_, s }: { v: Verdict; key_: ViewKey; s: Strings }) {
   switch (key_) {
     case "confirmed":
       return <ConfirmedStage />;
     case "replaced":
-      return <ReplacedStage verdict={v} />;
+      return <ReplacedStage verdict={v} nowLabel={s.changes.now} />;
     case "altered":
       return v.changes[0] ? <AlteredStage change={v.changes[0]} /> : <CannotConfirmStage />;
     case "not_official":
@@ -48,6 +48,7 @@ function Action({ v, key_, copy, s }: { v: Verdict; key_: ViewKey; copy: Verdict
             id: v.superseded_by?.id ?? "",
             date: v.superseded_by ? formatDate(v.superseded_by.published) : "",
           })}
+          url={v.superseded_by ? `/record/${encodeURIComponent(v.superseded_by.id)}` : undefined}
           {...share}
         />
       );
@@ -74,6 +75,33 @@ function Action({ v, key_, copy, s }: { v: Verdict; key_: ViewKey; copy: Verdict
         </a>
       );
   }
+}
+
+/** "Real, but replaced": what the newer notice changed. copy = old value, official = new value. */
+function ReplacedRows({ v, s }: { v: Verdict; s: Strings }) {
+  const c = s.changes;
+  const changes = v.superseded_by?.changes ?? [];
+  return (
+    <>
+      <p>{changes.length > 0 ? c.replacedIntro : c.replacedNone}</p>
+      {changes.length > 0 && (
+        <ol className="changes">
+          {changes.map((ch, i) => (
+            <li key={i}>
+              <Pin n={i + 1} tone="pencil" />
+              <p lang="en">
+                <span className="kind">{c.kinds[ch.kind]}: </span>
+                {fill(ch.op === "replace" ? c.rowReplace : ch.op === "insert" ? c.rowInsert : c.rowDelete, {
+                  copy: ch.copy ?? "",
+                  official: ch.official ?? "",
+                })}
+              </p>
+            </li>
+          ))}
+        </ol>
+      )}
+    </>
+  );
 }
 
 /** Rows for the "What changed" list; each pairs with a Pin on the sheet. */
@@ -121,7 +149,7 @@ export function VerdictLayout({ verdict, s }: { verdict: Verdict; s: Strings }) 
         <h1 className="display" id="verdict-word">
           {copy.word}
         </h1>
-        <Stage v={verdict} key_={key} />
+        <Stage v={verdict} key_={key} s={s} />
         <p>{copy.sentence}</p>
         <p>{copy.instruction}</p>
         <div className="actions">
@@ -133,7 +161,7 @@ export function VerdictLayout({ verdict, s }: { verdict: Verdict; s: Strings }) 
         {key !== "cannot_confirm" && (
           <div>
             <h2 className="headline">{s.changes.heading}</h2>
-            <ChangeRows v={verdict} s={s} />
+            {key === "replaced" ? <ReplacedRows v={verdict} s={s} /> : <ChangeRows v={verdict} s={s} />}
           </div>
         )}
         {isSample(verdict) && <p className="sample-note">{s.sampleNotice}</p>}

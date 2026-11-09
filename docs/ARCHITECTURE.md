@@ -76,7 +76,10 @@ The contract extends the handoff's shape with three fields: `superseded_by`, a l
   "checked_at": "2026-11-05T14:02:00+01:00",
   "record_as_of": "2026-11-05T13:40:00+01:00",
   "notice": { "id": "SEC-2026-114", "title": "...", "published": "2026-09-03", "url": "..." },
-  "superseded_by": { "id": "SEC-2026-140", "published": "2026-10-09" },
+  "superseded_by": {
+    "id": "SEC-2026-140", "published": "2026-10-09", "url": "...", "title": "...",
+    "changes": [ { "op": "replace", "kind": "date", "official": "28th November", "copy": "14th November" } ]
+  },
   "changes": [ { "op": "replace", "kind": "date", "official": "14th", "copy": "15th", "box": [0.21, 0.46, 0.08, 0.03] } ],
   "conflicts": []
 }

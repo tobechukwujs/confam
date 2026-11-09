@@ -3,29 +3,15 @@
 import re
 import secrets
 from collections.abc import Sequence
-from dataclasses import dataclass
 from datetime import datetime, timezone
 
 from confam_contract.verdict import Verdict
 
+from .model import OfficialNotice
+from .supersession import supersession_for
+
 # Same alphabet as the contract: no 0, O, 1, I, L.
 CODE_ALPHABET = "23456789ABCDEFGHJKMNPQRSTUVWXYZ"
-
-
-@dataclass(frozen=True)
-class Replacement:
-    id: str
-    published: str  # YYYY-MM-DD
-
-
-@dataclass(frozen=True)
-class OfficialNotice:
-    id: str
-    title: str
-    published: str  # YYYY-MM-DD
-    url: str
-    text: str
-    superseded_by: Replacement | None = None
 
 
 def new_check_code() -> str:
@@ -77,11 +63,7 @@ def check_notice(
                         "published": notice.published,
                         "url": notice.url,
                     },
-                    "superseded_by": (
-                        {"id": notice.superseded_by.id, "published": notice.superseded_by.published}
-                        if notice.superseded_by
-                        else None
-                    ),
+                    "superseded_by": supersession_for(notice, record),
                 }
             )
 

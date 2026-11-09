@@ -123,7 +123,10 @@ then run `pnpm contract:gen`. Never hand-edit the generated types.
   "checked_at": "2026-11-05T14:02:00+01:00",
   "record_as_of": "2026-11-05T13:40:00+01:00",
   "notice": { "id": "SEC-2026-114", "title": "...", "published": "2026-09-03", "url": "..." },
-  "superseded_by": { "id": "SEC-2026-140", "published": "2026-10-09" },
+  "superseded_by": {
+    "id": "SEC-2026-140", "published": "2026-10-09", "url": "...", "title": "...",
+    "changes": [ { "op": "replace", "kind": "date", "official": "28th November", "copy": "14th November" } ]
+  },
   "changes": [
     { "op": "replace", "kind": "date", "official": "14th", "copy": "15th",
       "box": [0.21, 0.46, 0.08, 0.03] }
@@ -133,7 +136,7 @@ then run `pnpm contract:gen`. Never hand-edit the generated types.
 ```
 
 - `code`: 8 characters, alphabet `23456789ABCDEFGHJKMNPQRSTUVWXYZ` (no 0, O, 1, I, L). Stored and sent as 8 characters with no hyphen; `XXXX-XXXX` is presentation only.
-- `superseded_by`: only on `confirmed`; `null` otherwise.
+- `superseded_by`: only on `confirmed`; `null` otherwise. `changes[]` is the old notice diffed against the notice that replaced it: `official` is the value in the NEW notice, `copy` is the value in the OLD (matched) notice. No `box`. May be empty.
 - `changes[].box`: x, y, width, height from OCR, each 0–1. Needed to place a mark on a photo.
 - `conflicts[]`: only on `not_official`: `kind` (date, link, money), `copy`, `official`, `quote`.
 

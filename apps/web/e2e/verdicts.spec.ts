@@ -69,6 +69,34 @@ test("Scale Rule: the changed figure is the largest text on the altered screen",
   expect(result.cls).toContain("figure");
 });
 
+test("Scale Rule on 'Real, but replaced': the changed figure is the largest text", async ({ page }) => {
+  await page.goto("/v/R3P7ACED");
+  const largest = await page.evaluate(() => {
+    let max = { size: 0, text: "", cls: "" };
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    while (walker.nextNode()) {
+      const node = walker.currentNode;
+      if (!node.textContent?.trim() || !node.parentElement) continue;
+      const style = getComputedStyle(node.parentElement);
+      if (style.display === "none" || style.visibility === "hidden") continue;
+      const size = parseFloat(style.fontSize);
+      if (size > max.size) max = { size, text: node.textContent.trim(), cls: node.parentElement.className };
+    }
+    return max;
+  });
+  expect(largest.text).toBe("14th");
+  expect(largest.cls).toContain("figure-main");
+  // the screen shows the facts, not notice ids
+  await expect(page.locator(".stage")).not.toContainText("SEC-");
+  await expect(page.locator(".stage .hand")).toHaveText("28th November");
+});
+
+test("replaced: the receipt links to the replacing notice's record page", async ({ page }) => {
+  await page.goto("/v/R3P7ACED");
+  const link = page.getByRole("link", { name: "SEC-2026-140, published 9 Oct 2026" });
+  await expect(link).toHaveAttribute("href", "/record/SEC-2026-140");
+});
+
 test("the independence line is on every public page", async ({ page }) => {
   for (const url of ["/", "/v/C4NF7RM2", "/v/ZZZZZZZZ"]) {
     await page.goto(url);

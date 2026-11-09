@@ -30,7 +30,16 @@
       "published": "2026-09-03",
       "url": "https://sec.example/notices/SEC-2026-114"
     },
-    "superseded_by": { "id": "SEC-2026-140", "published": "2026-10-09" },
+    "superseded_by": {
+      "id": "SEC-2026-140",
+      "published": "2026-10-09",
+      "url": "https://sec.example/notices/SEC-2026-140",
+      "title": "Simulated Electoral Commission: revised voter registration deadline",
+      "changes": [
+        { "op": "delete", "kind": "text", "official": "now", "copy": null },
+        { "op": "replace", "kind": "date", "official": "28th November", "copy": "14th November" }
+      ]
+    },
     "changes": [],
     "conflicts": []
   },

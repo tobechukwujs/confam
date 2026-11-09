@@ -127,9 +127,13 @@ export const en = {
       text: "Words",
     },
     conflictKinds: { date: "Date", link: "Link", money: "Money" },
-    officialSays: "Official notice",
-    replacedBy: "Replaced by",
-    oldNotice: "Old notice",
+    // Replaced notice: the copy matches an OLD notice. copy = old value, official = new value.
+    replacedIntro: "Your copy matches an older official notice word for word. The newer notice differs here:",
+    replacedNone: "A newer notice has replaced it. Open it to see the differences.",
+    rowReplace: "{copy} → {official}",
+    rowInsert: "Only in the old notice: “{copy}”",
+    rowDelete: "Added in the newer notice: “{official}”",
+    now: "now",
   },
 
   receipt: {
@@ -137,6 +141,8 @@ export const en = {
     notice: "Official notice",
     noNotice: "No official notice matched",
     published: "Published",
+    replacedBy: "Replaced by",
+    replacedByValue: "{id}, published {date}",
     checked: "Checked",
     recordAsOf: "Record as of",
     code: "Check code",

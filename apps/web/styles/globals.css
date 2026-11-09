@@ -303,6 +303,36 @@ a {
   line-height: var(--line);
   padding-block: var(--line) 0;
 }
+/* Dates: the day is the changed figure (big), the month is small. */
+.figure-main {
+  font-size: 56px;
+  line-height: var(--double-line);
+}
+.figure-sub {
+  font-size: 24px;
+  line-height: var(--line);
+  font-weight: 400;
+  margin-left: 6px;
+}
+/* "now" is interface text: Andika, never the hand font. */
+.hand-line {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.hand-line {
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+.hand-line .hand {
+  display: inline;
+  font-size: 28px;
+}
+.now-label {
+  font-size: 15px;
+  line-height: var(--line);
+  color: var(--soft-print);
+}
 .figure .gap {
   display: inline-block;
   width: 72px;

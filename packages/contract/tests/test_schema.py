@@ -173,7 +173,13 @@ def test_not_official_requires_notice():
 
 # --- superseded_by ---------------------------------------------------------
 
-SUPERSEDED = {"id": "SEC-2026-140", "published": "2026-10-09"}
+SUPERSEDED = {
+    "id": "SEC-2026-140",
+    "published": "2026-10-09",
+    "url": "https://sec.example/notices/SEC-2026-140",
+    "title": "Simulated Electoral Commission: revised voter registration deadline",
+    "changes": [{"op": "replace", "kind": "date", "official": "28th November", "copy": "14th November"}],
+}
 
 
 def test_superseded_by_allowed_on_confirmed():
@@ -195,9 +201,50 @@ def test_superseded_by_rejected_on_cannot_confirm():
     )
 
 
-def test_superseded_by_requires_id_and_published():
-    assert not valid(make(superseded_by={"id": "SEC-2026-140"}))
-    assert not valid(make(superseded_by={"published": "2026-10-09"}))
+@pytest.mark.parametrize("missing", ["id", "published", "url", "title", "changes"])
+def test_superseded_by_requires_all_five_fields(missing):
+    partial = {k: v for k, v in SUPERSEDED.items() if k != missing}
+    assert not valid(make(superseded_by=partial))
+
+
+def test_superseded_by_rejects_extra_fields():
+    assert not valid(make(superseded_by={**SUPERSEDED, "confidence": 1}))
+
+
+def test_superseded_by_changes_may_be_empty():
+    assert valid(make(superseded_by={**SUPERSEDED, "changes": []}))
+
+
+def test_superseded_by_change_rejects_a_box():
+    change = {"op": "replace", "kind": "date", "official": "28th", "copy": "14th", "box": [0, 0, 1, 1]}
+    assert not valid(make(superseded_by={**SUPERSEDED, "changes": [change]}))
+
+
+def test_superseded_by_change_insert_has_null_official_and_delete_null_copy():
+    insert = {"op": "insert", "kind": "text", "official": None, "copy": "old words"}
+    delete = {"op": "delete", "kind": "text", "official": "new words", "copy": None}
+    assert valid(make(superseded_by={**SUPERSEDED, "changes": [insert, delete]}))
+    bad_insert = {**insert, "official": "x"}
+    bad_delete = {**delete, "copy": "x"}
+    assert not valid(make(superseded_by={**SUPERSEDED, "changes": [bad_insert]}))
+    assert not valid(make(superseded_by={**SUPERSEDED, "changes": [bad_delete]}))
+
+
+def test_superseded_by_change_replace_needs_both_strings():
+    for field in ("official", "copy"):
+        change = {"op": "replace", "kind": "date", "official": "28th", "copy": "14th", field: None}
+        assert not valid(make(superseded_by={**SUPERSEDED, "changes": [change]}))
+
+
+@pytest.mark.parametrize("kind", ["date", "time", "weekday", "number", "money", "link", "phone", "negation", "text"])
+def test_superseded_by_change_kind_accepts_the_nine_kinds(kind):
+    change = {"op": "replace", "kind": kind, "official": "a", "copy": "b"}
+    assert valid(make(superseded_by={**SUPERSEDED, "changes": [change]}))
+
+
+def test_superseded_by_change_kind_rejects_others():
+    change = {"op": "replace", "kind": "name", "official": "a", "copy": "b"}
+    assert not valid(make(superseded_by={**SUPERSEDED, "changes": [change]}))
 
 
 # --- conflicts (both directions) ------------------------------------------

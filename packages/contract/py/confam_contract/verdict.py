@@ -42,14 +42,6 @@ class Notice(BaseModel):
     url: str = Field(..., min_length=1)
 
 
-class SupersededBy(BaseModel):
-    model_config = ConfigDict(
-        extra='forbid',
-    )
-    id: str = Field(..., min_length=1)
-    published: date_aliased
-
-
 class Op(Enum):
     replace = 'replace'
     insert = 'insert'
@@ -66,6 +58,16 @@ class Kind(Enum):
     phone = 'phone'
     negation = 'negation'
     text = 'text'
+
+
+class RecordChange(BaseModel):
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    op: Op
+    kind: Kind
+    official: str | None
+    copy_: str | None = Field(..., alias='copy')
 
 
 class BoxItem(RootModel[float]):
@@ -95,7 +97,7 @@ class Change(BaseModel):
     )
 
 
-class Kind1(Enum):
+class Kind2(Enum):
     date = 'date'
     link = 'link'
     money = 'money'
@@ -105,10 +107,24 @@ class Conflict(BaseModel):
     model_config = ConfigDict(
         extra='forbid',
     )
-    kind: Kind1
+    kind: Kind2
     copy_: str = Field(..., alias='copy')
     official: str
     quote: str
+
+
+class SupersededBy(BaseModel):
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    id: str = Field(..., min_length=1)
+    published: date_aliased
+    url: str = Field(..., min_length=1)
+    title: str = Field(..., min_length=1)
+    changes: list[RecordChange] = Field(
+        ...,
+        description='Old notice versus the replacing notice. May be empty when the differences cannot be expressed as facts. No box: these come from record text, not a photo.',
+    )
 
 
 class Verdict(BaseModel):

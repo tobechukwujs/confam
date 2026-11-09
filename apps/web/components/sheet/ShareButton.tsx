@@ -5,7 +5,7 @@ import { useState } from "react";
 type Props = {
   label: string;
   text: string;
-  /** Leave empty to share the address of the current page. */
+  /** Leave empty to share the current page. A path starting with "/" is made absolute. */
   url?: string;
   copiedText: string;
   failedText: string;
@@ -15,7 +15,11 @@ export function ShareButton({ label, text, url, copiedText, failedText }: Props)
   const [state, setState] = useState<"idle" | "copied" | "failed">("idle");
 
   async function onClick() {
-    const shareUrl = url || window.location.href;
+    const shareUrl = url
+      ? url.startsWith("/")
+        ? `${window.location.origin}${url}`
+        : url
+      : window.location.href;
     try {
       if (typeof navigator.share === "function") {
         await navigator.share({ text, url: shareUrl });

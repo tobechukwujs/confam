@@ -41,12 +41,32 @@ export interface Notice {
   url: string;
 }
 /**
+ * The notice that replaced the matched one, and how it differs. In `changes`, `official` is the value in the NEW notice and `copy` is the value in the OLD (matched) notice, which is what the forwarded copy says.
+ *
  * This interface was referenced by `Verdict`'s JSON-Schema
  * via the `definition` "SupersededBy".
  */
 export interface SupersededBy {
   id: string;
   published: string;
+  url: string;
+  title: string;
+  /**
+   * Old notice versus the replacing notice. May be empty when the differences cannot be expressed as facts. No box: these come from record text, not a photo.
+   */
+  changes: RecordChange[];
+}
+/**
+ * Same rules as Change, without `box`.
+ *
+ * This interface was referenced by `Verdict`'s JSON-Schema
+ * via the `definition` "RecordChange".
+ */
+export interface RecordChange {
+  op: "replace" | "insert" | "delete";
+  kind: "date" | "time" | "weekday" | "number" | "money" | "link" | "phone" | "negation" | "text";
+  official: string | null;
+  copy: string | null;
 }
 /**
  * This interface was referenced by `Verdict`'s JSON-Schema

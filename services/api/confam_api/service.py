@@ -7,7 +7,7 @@ import re
 
 from confam_contract.serialize import verdict_to_json
 from confam_contract.verdict import Verdict
-from confam_engine import check_notice
+from confam_engine import check_notice, supersession_for
 
 from .record import RecordHolder
 from .store import CheckStore
@@ -50,10 +50,6 @@ class CheckService:
         if notice is None:
             return verdict
         payload = verdict_to_json(verdict)
-        payload["superseded_by"] = (
-            {"id": notice.superseded_by.id, "published": notice.superseded_by.published}
-            if notice.superseded_by
-            else None
-        )
+        payload["superseded_by"] = supersession_for(notice, record.notices)
         payload["record_as_of"] = record.record_as_of.isoformat()
         return Verdict.model_validate(payload)

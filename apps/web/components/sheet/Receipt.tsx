@@ -1,5 +1,6 @@
 import type { Verdict } from "@confam/contract";
 import type { Strings } from "@confam/i18n";
+import { fill } from "@confam/i18n";
 import { formatCode, formatDate, formatDateTime } from "@/lib/format";
 
 /** Official notice id, published date, checked time, record as of, check code, and two links. */
@@ -18,6 +19,19 @@ export function Receipt({ verdict, s }: { verdict: Verdict; s: Strings }) {
           <>
             <dt>{r.published}</dt>
             <dd>{formatDate(notice.published)}</dd>
+          </>
+        )}
+        {verdict.superseded_by && (
+          <>
+            <dt>{r.replacedBy}</dt>
+            <dd>
+              <a href={`/record/${encodeURIComponent(verdict.superseded_by.id)}`}>
+                {fill(r.replacedByValue, {
+                  id: verdict.superseded_by.id,
+                  date: formatDate(verdict.superseded_by.published),
+                })}
+              </a>
+            </dd>
           </>
         )}
         <dt>{r.checked}</dt>

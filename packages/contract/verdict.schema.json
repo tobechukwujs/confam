@@ -109,13 +109,48 @@
       }
     },
     "SupersededBy": {
+      "description": "The notice that replaced the matched one, and how it differs. In `changes`, `official` is the value in the NEW notice and `copy` is the value in the OLD (matched) notice, which is what the forwarded copy says.",
       "type": "object",
       "additionalProperties": false,
-      "required": ["id", "published"],
+      "required": ["id", "published", "url", "title", "changes"],
       "properties": {
         "id": { "type": "string", "minLength": 1 },
-        "published": { "type": "string", "format": "date", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" }
+        "published": { "type": "string", "format": "date", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+        "url": { "type": "string", "minLength": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "changes": {
+          "description": "Old notice versus the replacing notice. May be empty when the differences cannot be expressed as facts. No box: these come from record text, not a photo.",
+          "type": "array",
+          "items": { "$ref": "#/$defs/RecordChange" }
+        }
       }
+    },
+    "RecordChange": {
+      "description": "Same rules as Change, without `box`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["op", "kind", "official", "copy"],
+      "properties": {
+        "op": { "type": "string", "enum": ["replace", "insert", "delete"] },
+        "kind": {
+          "type": "string",
+          "enum": ["date", "time", "weekday", "number", "money", "link", "phone", "negation", "text"]
+        },
+        "official": { "type": ["string", "null"] },
+        "copy": { "type": ["string", "null"] }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "op": { "const": "insert" } }, "required": ["op"] },
+          "then": { "properties": { "official": { "type": "null" } } },
+          "else": { "properties": { "official": { "type": "string" } } }
+        },
+        {
+          "if": { "properties": { "op": { "const": "delete" } }, "required": ["op"] },
+          "then": { "properties": { "copy": { "type": "null" } } },
+          "else": { "properties": { "copy": { "type": "string" } } }
+        }
+      ]
     },
     "Change": {
       "type": "object",

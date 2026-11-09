@@ -41,7 +41,7 @@ describe("verdict views", () => {
   it.each(samples)("%s: every change has a row in the list, and pins never outnumber rows", (_n, v) => {
     const { container } = renderSample(v);
     const rows = container.querySelectorAll("ol.changes li");
-    expect(rows.length).toBe(v.changes.length + v.conflicts.length);
+    expect(rows.length).toBe(v.changes.length + v.conflicts.length + (v.superseded_by?.changes.length ?? 0));
     const stagePins = container.querySelectorAll(".stage [data-pin]");
     expect(stagePins.length).toBeLessThanOrEqual(rows.length);
   });
@@ -58,7 +58,52 @@ describe("verdict views", () => {
     expect(container.querySelector('[data-mark="tick"]')).toBeNull();
     expect(container.querySelector(".tone-green")).toBeNull();
     expect(container.querySelector('[data-mark="bracket"]')).toHaveClass("tone-pencil");
-    expect(within(container.querySelector(".stage") as HTMLElement).getByText("SEC-2026-140")).toBeInTheDocument();
+  });
+
+  it("replaced shows the changed fact, not notice ids: old value bracketed, new value handwritten", () => {
+    const { container } = renderSample(sample("replaced"));
+    const stage = container.querySelector(".stage") as HTMLElement;
+    expect(stage.textContent).not.toMatch(/SEC-/);
+    // old value from the copy, in pencil brackets, day big and month small
+    expect(stage.querySelector(".figure-main")).toHaveTextContent("14th");
+    expect(stage.querySelector(".figure-sub")).toHaveTextContent("November");
+    expect(stage.querySelector('[data-mark="bracket"]')).toHaveClass("tone-pencil");
+    // new value in the pencil hand, with "now" as interface text outside the hand font
+    expect(stage.querySelector(".hand")).toHaveTextContent("28th November");
+    expect(stage.querySelector(".hand")).toHaveClass("tone-pencil");
+    expect(stage.querySelector(".hand")).toHaveAttribute("lang", "en");
+    expect(stage.querySelector(".now-label")).toHaveTextContent("now");
+    expect(stage.querySelector(".hand")?.textContent).not.toMatch(/now/);
+    expect(stage.querySelector(".tone-red")).toBeNull();
+  });
+
+  it("replaced: the list says the copy matches an older notice, then lists each difference", () => {
+    const { container } = renderSample(sample("replaced"));
+    expect(screen.getByText(/Your copy matches an older official notice word for word/)).toBeInTheDocument();
+    expect(screen.queryByText(/No differences found/)).toBeNull();
+    const rows = container.querySelectorAll("ol.changes li");
+    expect(rows).toHaveLength(2);
+    expect(container.querySelector("ol.changes")?.textContent).toContain("Date: 14th November → 28th November");
+    expect(container.querySelector("ol.changes")?.textContent).toContain("Added in the newer notice: “now”");
+    // the stage pin pairs with the date row (row 2)
+    expect(container.querySelector(".stage [data-pin]")).toHaveAttribute("data-pin", "2");
+    expect(rows[1]!.querySelector("[data-pin]")).toHaveAttribute("data-pin", "2");
+  });
+
+  it("replaced: the receipt names the replacing notice and links to its record page", () => {
+    renderSample(sample("replaced"));
+    expect(screen.getByText("Replaced by")).toBeInTheDocument();
+    const link = screen.getByRole("link", { name: "SEC-2026-140, published 9 Oct 2026" });
+    expect(link).toHaveAttribute("href", "/record/SEC-2026-140");
+  });
+
+  it("replaced with no expressible changes shows no ids and says a newer notice replaced it", () => {
+    const v = structuredClone(sample("replaced"));
+    v.superseded_by!.changes = [];
+    const { container } = renderSample(v);
+    expect((container.querySelector(".stage") as HTMLElement).textContent).not.toMatch(/SEC-2026-140/);
+    expect(screen.getByText(/A newer notice has replaced it/)).toBeInTheDocument();
+    expect(container.querySelectorAll("ol.changes li")).toHaveLength(0);
   });
 
   it("altered replace rings the copy figure in red, with the official value above", () => {

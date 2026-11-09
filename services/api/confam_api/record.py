@@ -5,7 +5,7 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
 
-from confam_engine import OfficialNotice, Replacement
+from confam_engine import OfficialNotice, Replacement, latest_successor
 
 
 @dataclass
@@ -42,4 +42,6 @@ def load_record(path: Path) -> Record:
         )
         for n in data["notices"]
     ]
+    for notice in notices:  # a dangling or circular replacement is a broken record
+        latest_successor(notice, notices)
     return Record(notices=notices, record_as_of=datetime.fromisoformat(data["record_as_of"]))
