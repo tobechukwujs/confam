@@ -12,7 +12,7 @@ from PIL import Image, ImageOps, UnidentifiedImageError
 
 MAX_BYTES = 5 * 1024 * 1024  # about 5 MB
 MAX_PIXELS = 25_000_000  # refuses decompression bombs
-OCR_MAX_SIDE = 2400  # long side we read at; bigger pictures are shrunk first
+OCR_MAX_SIDE = 1600  # long side we read at; bigger pictures are shrunk first (keeps memory low on a 512 MB host)
 
 
 class ImageError(ValueError):

@@ -1,0 +1,228 @@
+[
+  {
+    "image": "01_clean_honest.png",
+    "kb": 33.5,
+    "size": [
+      1200,
+      312
+    ],
+    "note": "clean screenshot, honest",
+    "expected": [
+      "confirmed"
+    ],
+    "got": "confirmed",
+    "ok": true,
+    "changes": [],
+    "seconds": 0.5,
+    "reading_1": "The Simulated Electoral Commission announces that voter registration NOW closes ON 28th November. Register only at https://register.sec.example. Regis",
+    "reading_2": "The Simulated Electoral Commission €NnNOunces that voter registration NOW closes ON 28th November. Register only at https://register.sec.example. Regi"
+  },
+  {
+    "image": "02_clean_wrapped_date_edit.png",
+    "kb": 42.0,
+    "size": [
+      1200,
+      467
+    ],
+    "note": "clean chat screenshot with Forwarded/sender/time, date changed",
+    "expected": [
+      "altered"
+    ],
+    "got": "altered",
+    "ok": true,
+    "changes": [
+      [
+        "insert",
+        "number",
+        null,
+        "4"
+      ],
+      [
+        "replace",
+        "text",
+        "announces",
+        "nnounces"
+      ],
+      [
+        "replace",
+        "date",
+        "28th November",
+        "29th November"
+      ]
+    ],
+    "seconds": 0.5,
+    "reading_1": "Forwarded ~ Ngozi Eze The Simulated Electoral Commission 4nnounces that voter registration NOW closes ON 29th November. Register only at https://regis",
+    "reading_2": "Forwarded ~ Ngozi Eze The Simulated Electoral Commission @4NnOunces that voter registration NOW closes ON 29th November. Register only at https://regi"
+  },
+  {
+    "image": "03_whatsapp_honest.jpg",
+    "kb": 13.7,
+    "size": [
+      720,
+      280
+    ],
+    "note": "chat screenshot, shrunk to 60% and JPEG quality 30, honest",
+    "expected": [
+      "confirmed"
+    ],
+    "got": "confirmed",
+    "ok": true,
+    "changes": [],
+    "seconds": 0.4,
+    "reading_1": "Forwarded Nyozi Eze The Simulated Electoral Commission announces that voter registration NOW closes ON 28th November. Register only at https://registe",
+    "reading_2": "Forwarded ~ Ngozi Eze The Simulated Electoral Commission @Nnounces that voter registration NOW closes ON 28th November. Register only at https://regis"
+  },
+  {
+    "image": "04_whatsapp_date_edit.jpg",
+    "kb": 13.7,
+    "size": [
+      720,
+      280
+    ],
+    "note": "same compression, date changed",
+    "expected": [
+      "altered"
+    ],
+    "got": "altered",
+    "ok": true,
+    "changes": [
+      [
+        "replace",
+        "date",
+        "28th November",
+        "29th November"
+      ]
+    ],
+    "seconds": 0.4,
+    "reading_1": "Forwarded Nyozi Eze The Simulated Electoral Commission announces that voter registration NOW closes ON 29th November. Register only at https://registe",
+    "reading_2": "Forwarded ~ Ngozi Eze The Simulated Electoral Commission @Nnounces that voter registration NOW closes ON 29th November. Register only at https://regis"
+  },
+  {
+    "image": "05_cropped_tail.png",
+    "kb": 23.3,
+    "size": [
+      1200,
+      171
+    ],
+    "note": "bottom of the notice cut off",
+    "expected": [
+      "partial"
+    ],
+    "got": "cannot_confirm/unclear",
+    "ok": false,
+    "changes": [],
+    "seconds": 0.4,
+    "reading_1": "The Simulated Electoral Commission 4nnounces that voter registration NOW closes ON 28th November. Register only at",
+    "reading_2": "The Simulated Electoral Commission €NnNOunces that voter registration NOW closes ON 28th November. Register only at"
+  },
+  {
+    "image": "06_cropped_head.png",
+    "kb": 22.6,
+    "size": [
+      1200,
+      206
+    ],
+    "note": "first lines cut off",
+    "expected": [
+      "partial"
+    ],
+    "got": "partial",
+    "ok": true,
+    "changes": [],
+    "seconds": 0.4,
+    "reading_1": "registration NOW closes ON 28th November. Register only at https://register.sec.example. Registration is free.",
+    "reading_2": "registration NOW closes ON 28th November. Register only at https://register.sec.example. Registration is free."
+  },
+  {
+    "image": "07_phone_photo_honest.jpg",
+    "kb": 41.3,
+    "size": [
+      1000,
+      469
+    ],
+    "note": "photo of a screen: tilt, perspective, blur, noise, uneven light, JPEG 55",
+    "expected": [
+      "confirmed"
+    ],
+    "got": "cannot_confirm/unclear",
+    "ok": false,
+    "changes": [],
+    "seconds": 0.6,
+    "reading_1": "forwarded Noel Bae The Simulated Electoral Commission announces that voter registration now closes ©N 28th November. Register only at https://register",
+    "reading_2": "Forwarded ~ Ngozi Eze The Simulated Electoral Commission announces that voter registration now closes 0 28th November. Register only at https://regist"
+  },
+  {
+    "image": "08_phone_photo_link_edit.jpg",
+    "kb": 41.5,
+    "size": [
+      1000,
+      469
+    ],
+    "note": "photo of a screen, web address changed",
+    "expected": [
+      "altered"
+    ],
+    "got": "altered",
+    "ok": true,
+    "changes": [
+      [
+        "insert",
+        "number",
+        null,
+        "0"
+      ],
+      [
+        "replace",
+        "text",
+        "on",
+        "M"
+      ]
+    ],
+    "seconds": 0.6,
+    "reading_1": "peonwvarduat Rat bee The Simulated Electoral Commission announces that voter registration now closes 0M 28th November. Register only at httpsi//regist",
+    "reading_2": "Forwarded ~ Ngozl Eze The Simulated Electoral Commission announces that voter registration now closes 0M 28th November. Register only at https://regis"
+  },
+  {
+    "image": "09_low_res_honest.png",
+    "kb": 30.2,
+    "size": [
+      480,
+      125
+    ],
+    "note": "480 px wide screenshot, honest",
+    "expected": [
+      "confirmed"
+    ],
+    "got": "cannot_confirm/unclear",
+    "ok": false,
+    "changes": [],
+    "seconds": 0.3,
+    "reading_1": "The Simulated Electoral Commission announces that voter registration NOW closes ON 28th November. Register only at httpsi//register.sec.example, Regis",
+    "reading_2": "The Simulated Electoral Commission announces that voter registration NOW closes ON 28th November. Register only at https://register.sec.example. Regis"
+  },
+  {
+    "image": "10_low_res_date_edit.png",
+    "kb": 30.2,
+    "size": [
+      480,
+      125
+    ],
+    "note": "480 px wide screenshot, date changed",
+    "expected": [
+      "altered"
+    ],
+    "got": "altered",
+    "ok": true,
+    "changes": [
+      [
+        "replace",
+        "date",
+        "28th November",
+        "29th November"
+      ]
+    ],
+    "seconds": 0.3,
+    "reading_1": "The Simulated Electoral Commission announces that voter registration NOW closes ON 29th November. Register only at httpsi//register.sec.example, Regis",
+    "reading_2": "The Simulated Electoral Commission announces that voter registration NOW closes ON 29th November. Register only at https://register.sec.example. Regis"
+  }
+]

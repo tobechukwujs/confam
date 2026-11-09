@@ -20,6 +20,7 @@ from PIL import Image, ImageFilter, ImageOps
 from .types import Reading, Word
 
 WINDOWS_DEFAULT = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+MAX_OCR_SIDE = 2400  # the most pixels on the long side Tesseract is ever given
 
 
 class OcrUnavailable(RuntimeError):
@@ -80,7 +81,8 @@ def prepare_threshold(img: Image.Image) -> Image.Image:
 
 def prepare_upscale(img: Image.Image) -> Image.Image:
     gray = ImageOps.autocontrast(img.convert("L"), cutoff=1)
-    big = gray.resize((gray.width * 2, gray.height * 2), Image.LANCZOS)
+    factor = min(2.0, MAX_OCR_SIDE / max(gray.size))  # 2x, but never more than MAX_OCR_SIDE px (memory)
+    big = gray.resize((round(gray.width * factor), round(gray.height * factor)), Image.LANCZOS)
     return big.filter(ImageFilter.UnsharpMask(radius=2, percent=120, threshold=3))
 
 

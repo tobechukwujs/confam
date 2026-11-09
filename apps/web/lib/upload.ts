@@ -2,7 +2,7 @@
 
 export const ACCEPTED_TYPES = ["image/jpeg", "image/png", "image/webp"] as const;
 export const MAX_BYTES = 5 * 1024 * 1024; // about 5 MB
-export const MAX_SIDE = 2400; // longest side we send; phone photos are shrunk to this first
+export const MAX_SIDE = 1600; // longest side we send (the server reads at 1600); phone photos are shrunk to this first
 
 export type Problem = "type" | "size" | "busy" | "off" | "down";
 

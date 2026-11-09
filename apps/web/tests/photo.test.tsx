@@ -41,14 +41,14 @@ describe("upload checks", () => {
 
   it("the limits match the server", () => {
     expect(MAX_BYTES).toBe(5 * 1024 * 1024);
-    expect(MAX_SIDE).toBe(2400);
+    expect(MAX_SIDE).toBe(1600); // matches the server, which reads at 1600 px to keep memory low
     expect([...ACCEPTED_TYPES]).toEqual(["image/jpeg", "image/png", "image/webp"]);
   });
 
   it("fitSize only shrinks, and keeps the shape", () => {
     expect(fitSize(1000, 500)).toEqual({ width: 1000, height: 500 });
-    expect(fitSize(4800, 2400)).toEqual({ width: 2400, height: 1200 });
-    expect(fitSize(3000, 6000)).toEqual({ width: 1200, height: 2400 });
+    expect(fitSize(3200, 1600)).toEqual({ width: 1600, height: 800 });
+    expect(fitSize(3000, 6000)).toEqual({ width: 800, height: 1600 });
     expect(fitSize(1, 1)).toEqual({ width: 1, height: 1 });
   });
 

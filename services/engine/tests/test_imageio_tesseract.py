@@ -115,6 +115,16 @@ def test_upscale_preparation_doubles_the_size_and_keeps_the_shape():
     assert out.size == (300, 180)
 
 
+def test_ocr_reads_at_1600_px_at_most_and_the_enlargement_is_capped_for_memory():
+    """Render's free plan has 512 MB: shrink before OCR, and never hand Tesseract more than 2400 px."""
+    assert imageio.OCR_MAX_SIDE == 1600
+    big = load_image(encode(Image.new("RGB", (4000, 3000), "white"), "PNG"))
+    assert max(big.size) == 1600
+    assert max(prepare_upscale(big).size) <= 2400  # not 3200
+    assert prepare_upscale(picture(1000, 600)).size == (2000, 1200)  # smaller pictures still double
+    assert prepare_upscale(picture(1600, 1000)).size == (2400, 1500)
+
+
 def test_the_two_preparations_really_differ():
     img = Image.new("RGB", (100, 60), (200, 200, 200))
     for x in range(20, 40):
