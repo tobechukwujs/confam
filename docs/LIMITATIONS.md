@@ -62,15 +62,20 @@ built on synthetic fictional fixtures.
 - A cut-off notice followed by a caption cannot be told apart from an edited ending, so it is
   reported as altered or cannot-confirm, never partial and never confirmed. A notice cut off at
   the start, with extra words before the cut, has the same ambiguity.
-- **Short paraphrases.** A short message built from common words, or quoting one sentence of a
-  notice, can match a real notice and be reported as `altered` instead of `cannot_confirm`. The
-  evaluation shows this. Fixing it means changing a match threshold, which has not been done.
-- A rewrite of a real notice that shares too little wording is not recognised as related and
-  comes back `cannot_confirm`.
-- Look-alike characters (0/O, 1/l/I/i, 5/S, 8/B, 2/Z, 6/G, rn/m, vv/w, cl/d) give
-  `cannot_confirm` with reason `unclear`. The set is generous on purpose: it withholds an answer
-  rather than risk confirming a forgery, so a real one-letter change of that kind is not called
-  `altered`.
+- **Short paraphrases.** A copy is only called `altered` if it lines up with at least 0.45 of the
+  notice's words; below that it is treated as not matching and goes the `not_official` /
+  `cannot_confirm` way. The value comes from the fictional suites (real edits line up with at
+  least 0.59, paraphrases with 0.22 to 0.33): it is untested on real messages. The cost: a heavy
+  rewrite of a real notice that lines up with little of it (0.36 in one eval case) comes back
+  `cannot_confirm` instead of `altered`, and an edited crop that lines up with less than 0.45 of
+  the notice is no longer called `altered` either.
+- Look-alike characters (4/A, 0/O, 1/l/I/i, 5/S, 8/B, 2/Z, 6/G, rn/m, vv/w, cl/d). In TYPED
+  text they give `cannot_confirm` with reason `unclear`: a look-alike there may be deliberate (a
+  homoglyph), so it is never waved through. The set is generous on purpose, so a real one-letter
+  change of that kind is not called `altered`. On a PHOTO the rule differs: a look-alike mixed
+  into a word that equals the official word after normalisation (`4nnounces`, `2Bth`, `O800`) is
+  treated as a reading slip and ignored; a look-alike in a standalone fact (`B:00 am`) is still
+  `unclear`. So `2Bth` on a photo reads as the genuine `28th`.
 - Equivalent forms are treated as the same fact (14th November and November 14, N500 and 500
   naira). Forms the tokenizer does not know are not: unusual date styles, amounts written in
   words, numbers written in words.
@@ -83,15 +88,22 @@ built on synthetic fictional fixtures.
 - Photos need Tesseract. Without it the API says photo checks are unavailable and text checks
   keep working.
 - **Two reading passes of the same engine make the same mistakes and then agree on them.** On the
-  synthetic pictures only 5 of 64 honest pictures came out `confirmed`; most were called
-  `altered` because both passes misread a word identically (for example "announces" read as
-  "4nnounces"), and a digit inside a garbled word counts as a fact. Cropped pictures were
-  mostly not recognised as partial (see `docs/EVAL.md` for the figures).
+  synthetic pictures only 8 of 64 honest pictures came out `confirmed`, 30 were called `altered`
+  (false alarms) and 26 `cannot_confirm`, because both passes can misread a word identically.
+  Reading slips of the look-alike kind are now ignored (it was 5 confirmed and 41 false alarms
+  before). Cropped pictures were mostly not recognised as partial (`docs/EVAL.md` has the figures).
+- **Photo checks are labelled Beta** in the interface, with a note that they may say they cannot
+  confirm a real notice and that pasting the text is more reliable. Text checks are not labelled.
+- **The confidence gate is built but OFF.** A change resting on a word the reader was not sure of
+  can be made `cannot_confirm` instead of `altered`. The threshold is the product owner's choice
+  (`docs/EVAL.md` has the trade-off table); until it is set (`CONFAM_MIN_WORD_CONFIDENCE`), photo
+  false alarms stay at the figures above. The gate never makes an honest picture `confirmed`: it
+  only turns a false alarm into `cannot_confirm`.
 - The safe direction held in the evaluation: no edited picture was confirmed. But the list of
   changes shown with an `altered` picture can contain reading noise next to, or instead of, the
   real edit, so the marks can point at the wrong place.
 - A second independent reader (for example Azure AI Vision Read) is a planned plug-in point and is
-  **not implemented**. Reading thresholds were not tuned on purpose before the results were reviewed.
+  **not implemented**.
 - A photo with no readable text returns `cannot_confirm` / `unclear` with no notice. A readable
   photo that matches nothing is `not_in_record`.
 - Pictures are shrunk to 1600 pixels on the long side before reading, with the second pass
