@@ -42,7 +42,7 @@ Then `uv run pytest -rs` runs the picture tests that are skipped without Tessera
 
 - Web: Vercel, Root Directory `apps/web`. Set `API_URL` (and `SHOW_SAMPLES` only for a labelled demo).
 - API: Render, from `render.yaml`, which now builds `services/api/Dockerfile` (Tesseract is installed in the image; untested because there is no Docker on the dev machine). Set `CONFAM_CORS_ORIGINS` to the Vercel URL: photos go from the browser straight to the API (set `NEXT_PUBLIC_API_URL` in Vercel to the Render URL).
-- Variables are listed in `.env.example`.
+- Variables are listed in `.env.example`. Step by step, caveats and the post-deploy check (`python scripts/smoke.py --api … --web …`): [docs/DEPLOY.md](docs/DEPLOY.md).
 
 ## TODO
 
