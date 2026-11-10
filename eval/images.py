@@ -48,8 +48,13 @@ def render(
     width: int = 1200,
     font_size: int = 38,
     bubble: bool = False,
+    aligned: bool = False,
 ) -> Rendered:
-    """A notice (plus optional chat-style lines above and below) as a picture."""
+    """A notice (plus optional chat-style lines above and below) as a picture.
+
+    `aligned=True` puts every word on one shared baseline. The default places each word by its own
+    glyph top, which makes short words (announces, now, on) ride a little high: the evaluation
+    uses that, so its numbers stay comparable; the demo set uses `aligned=True` so it looks right."""
     pad = 60
     body_font, small = _font(font_size), _font(int(font_size * 0.72))
     probe = ImageDraw.Draw(Image.new("L", (10, 10)))
@@ -68,8 +73,9 @@ def render(
         d.text((x0, y), line, font=small, fill=GREY)
         y += small_h
     placed = []
+    reference_top = d.textbbox((0, 0), "Hg", font=body_font)[1]
     for word, wx, li, w in words:
-        top = d.textbbox((0, 0), word, font=body_font)[1]
+        top = reference_top if aligned else d.textbbox((0, 0), word, font=body_font)[1]
         px, py = x0 + wx, y + li * line_h
         d.text((px, py - top + 6), word, font=body_font, fill=INK)
         bb = d.textbbox((px, py - top + 6), word, font=body_font)
@@ -114,6 +120,13 @@ def whatsapp_compress(img: Image.Image) -> bytes:
 def low_resolution(img: Image.Image, width: int = 480) -> bytes:
     small = img.resize((width, max(1, round(img.height * width / img.width))), Image.LANCZOS)
     return to_png(small)
+
+
+def blur(img: Image.Image, radius: float = 7.0) -> bytes:
+    """Out of focus: a heavy blur, then shrunk and enlarged so the detail is really gone."""
+    soft = img.filter(ImageFilter.GaussianBlur(radius))
+    small = soft.resize((max(1, img.width // 3), max(1, img.height // 3)), Image.LANCZOS)
+    return to_png(small.resize(img.size, Image.BICUBIC))
 
 
 def crop_bottom(img: Image.Image, keep_fraction: float) -> bytes:

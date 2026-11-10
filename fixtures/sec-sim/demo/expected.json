@@ -1,0 +1,92 @@
+{
+  "01_honest_confirmed": {
+    "scenario": "honest_confirmed",
+    "verdict": "confirmed",
+    "reason": null,
+    "notice": "SEC-2026-140",
+    "changes": [],
+    "conflicts": [],
+    "rendering": {
+      "chat_bubble": true,
+      "font_size": 38
+    },
+    "kb": 37.9
+  },
+  "02_altered_date": {
+    "scenario": "altered_date",
+    "verdict": "altered",
+    "reason": null,
+    "notice": "SEC-2026-140",
+    "changes": [
+      {
+        "kind": "date",
+        "copy": "29th November",
+        "official": "28th November"
+      }
+    ],
+    "conflicts": [],
+    "rendering": {
+      "chat_bubble": true,
+      "font_size": 38
+    },
+    "kb": 37.8
+  },
+  "03_altered_link_PASTE": {
+    "scenario": "altered_link",
+    "mode": "paste this text into the check box (not a photo)",
+    "verdict": "altered",
+    "notice": "SEC-2026-140",
+    "changes": [
+      {
+        "kind": "link",
+        "copy": "https://register-sec.example",
+        "official": "https://register.sec.example"
+      }
+    ]
+  },
+  "04_not_official": {
+    "scenario": "not_official",
+    "verdict": "not_official",
+    "reason": null,
+    "notice": "SEC-2026-140",
+    "changes": [],
+    "conflicts": [
+      {
+        "kind": "link",
+        "copy": "https://register-sec.example",
+        "official": "https://register.sec.example"
+      }
+    ],
+    "rendering": {
+      "chat_bubble": true,
+      "font_size": 38
+    },
+    "kb": 28.9
+  },
+  "05_partial_crop": {
+    "scenario": "partial_crop",
+    "verdict": "partial",
+    "reason": null,
+    "notice": "SEC-2026-140",
+    "changes": [],
+    "conflicts": [],
+    "rendering": {
+      "chat_bubble": true,
+      "font_size": 38
+    },
+    "kb": 25.7
+  },
+  "06_cannot_confirm_blurry": {
+    "scenario": "cannot_confirm_blurry",
+    "verdict": "cannot_confirm",
+    "reason": "no_fact",
+    "notice": null,
+    "changes": [],
+    "conflicts": [],
+    "rendering": {
+      "chat_bubble": true,
+      "font_size": 38
+    },
+    "kb": 58.6
+  }
+}
