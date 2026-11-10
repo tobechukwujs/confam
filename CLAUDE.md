@@ -258,6 +258,7 @@ Official text is always quoted word for word in its own language.
 - Keep changes small and focused. One concern per commit.
 - Ask before adding a dependency, changing the contract, or changing a rule above.
 - Do not commit, push or open a PR unless asked.
+- Do not add `Co-Authored-By` trailers (or any other AI attribution) to commit messages.
 - Never put secrets in code. Use `.env` (git-ignored) and document new variables in `.env.example`.
 - If something in this file is out of date, say so and propose the edit.
 
