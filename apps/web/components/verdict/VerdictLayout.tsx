@@ -139,7 +139,13 @@ function ChangeRows({ v, s }: { v: Verdict; s: Strings }) {
   const rows: { kind: string; template: string; values: Record<string, string>; tone: "red" }[] = [
     ...v.changes.map((ch) => ({
       kind: c.kinds[ch.kind],
-      template: c[ch.op],
+      // words added OUTSIDE the notice (after or before it) say so
+      template:
+        ch.op === "insert" && ch.placement === "after_notice"
+          ? c.addedAfter
+          : ch.op === "insert" && ch.placement === "before_notice"
+            ? c.addedBefore
+            : c[ch.op],
       values: { copy: ch.copy ?? "", official: ch.official ?? "" },
       tone: "red" as const,
     })),

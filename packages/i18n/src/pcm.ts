@@ -187,6 +187,8 @@ export const pcm: Strings = {
     to: "go",
     rowInsert: "E dey only for di old notice: “{copy}”",
     rowDelete: "Dem add am for di newer notice: “{official}”",
+    addedAfter: "Dem add am after di notice: “{copy}”",
+    addedBefore: "Dem add am before di notice: “{copy}”",
     now: "now",
   },
 

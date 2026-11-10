@@ -188,6 +188,8 @@ export const yo: Strings = {
     to: "sí",
     rowInsert: "Inú ìkéde àtijọ́ nìkan ló wà: “{copy}”",
     rowDelete: "A fi kún ìkéde tuntun: “{official}”",
+    addedAfter: "A fi kún un lẹ́yìn ìkéde náà: “{copy}”",
+    addedBefore: "A fi kún un ṣáájú ìkéde náà: “{copy}”",
     now: "báyìí",
   },
 

@@ -57,8 +57,9 @@ def check(a: str, b: str, record=RECORD):
     v = check_readings([reading(a), reading(b)], record, record_as_of=AS_OF, lang="en", now=NOW)
     payload = v.model_dump(mode="json", by_alias=True)
     for ch in payload["changes"]:
-        if ch.get("box") is None:
-            ch.pop("box", None)
+        for optional in ("box", "placement"):
+            if ch.get(optional) is None:
+                ch.pop(optional, None)
     errors = [e.message for e in VALIDATOR.iter_errors(payload)]
     assert errors == [], errors
     return v

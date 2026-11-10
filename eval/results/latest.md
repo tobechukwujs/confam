@@ -1,6 +1,6 @@
 # Evaluation results
 
-Run `2026-11-10T07:22:30+00:00` on commit `9d5017f + uncommitted changes` by `uv run python eval/run.py`.
+Run `2026-11-10T09:08:33+00:00` on commit `9b202ed + uncommitted changes` by `uv run python eval/run.py`.
 
 > SYNTHETIC. Every case is built from the fictional Simulated Electoral Commission record in eval/record.json. These numbers say nothing about real notices, real letterheads or stamps, or real photographs.
 

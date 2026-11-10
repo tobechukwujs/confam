@@ -12,6 +12,7 @@ const SAMPLES: [string, string][] = [
   ["altered insert", "A2NS3RTX"],
   ["altered delete", "DX7K9PQA"],
   ["altered on a photo", "PHT7B3XA"],
+  ["altered: link added after the notice", "AFT3R7XQ"],
   ["not official", "N9T6FFC7"],
   ["partial", "P4RT7A2K"],
   ["cannot confirm: not in record", "U5KN7WN3"],

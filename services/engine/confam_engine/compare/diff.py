@@ -50,6 +50,8 @@ class Diff:
         change = self.to_change()
         if self.box is not None:
             change["box"] = [round(v, 4) for v in self.box]
+        if self.edge is not None and self.op == "insert":  # added outside the notice itself
+            change["placement"] = "before_notice" if self.edge == "head" else "after_notice"
         return change
 
 

@@ -10,6 +10,7 @@ const SAMPLES: [string, string][] = [
   ["altered insert", "A2NS3RTX"],
   ["altered delete", "DX7K9PQA"],
   ["altered on a photo", "PHT7B3XA"],
+  ["altered: link added after the notice", "AFT3R7XQ"],
   ["not official", "N9T6FFC7"],
   ["partial", "P4RT7A2K"],
   ["cannot confirm: not in record", "U5KN7WN3"],
@@ -236,4 +237,6 @@ test("the same forward with one changed date is Altered, and only the date is ma
 test("a link added around a genuine notice is never Confirmed", async ({ page }) => {
   await paste(page, `${CURRENT_NOTICE}\nRegister faster at https://fast-register.example`);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Altered");
+  // the added words are labelled as sitting outside the notice
+  await expect(page.locator("ol.changes li").first()).toContainText("Added after the notice: “https://fast-register.example”");
 });

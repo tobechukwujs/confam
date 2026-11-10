@@ -195,6 +195,8 @@ export const en = {
     to: "to",
     rowInsert: "Only in the old notice: “{copy}”",
     rowDelete: "Added in the newer notice: “{official}”",
+    addedAfter: "Added after the notice: “{copy}”",
+    addedBefore: "Added before the notice: “{copy}”",
     now: "now",
   },
 

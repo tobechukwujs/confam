@@ -392,3 +392,34 @@ def test_timestamps_accept_offsets(field, value):
 @pytest.mark.parametrize("value", ["2026-11-05T14:02:00", "2026-11-05", "yesterday"])
 def test_timestamps_require_an_offset(field, value):
     assert not valid(make(**{field: value}))
+
+
+# --- placement: a change that sits outside the notice (a link added after it, for example) ---------
+
+
+@pytest.mark.parametrize("placement", ["before_notice", "after_notice"])
+def test_an_insert_may_say_it_sits_before_or_after_the_notice(placement):
+    change = {"op": "insert", "kind": "link", "official": None, "copy": "https://x.example", "placement": placement}
+    assert valid(make(verdict="altered", changes=[change]))
+
+
+def test_placement_is_optional():
+    change = {"op": "insert", "kind": "link", "official": None, "copy": "https://x.example"}
+    assert valid(make(verdict="altered", changes=[change]))
+
+
+def test_unknown_placement_is_rejected():
+    for bad in ("inside", "after", "", None, 1):
+        change = {"op": "insert", "kind": "link", "official": None, "copy": "x", "placement": bad}
+        assert not valid(make(verdict="altered", changes=[change])), bad
+
+
+@pytest.mark.parametrize("op,fields", [("replace", {"official": "a", "copy": "b"}), ("delete", {"official": "a", "copy": None})])
+def test_only_an_insert_can_have_a_placement(op, fields):
+    change = {"op": op, "kind": "text", **fields, "placement": "after_notice"}
+    assert not valid(make(verdict="altered", changes=[change]))
+
+
+def test_record_changes_have_no_placement():
+    change = {"op": "insert", "kind": "text", "official": None, "copy": "old words", "placement": "after_notice"}
+    assert not valid(make(superseded_by={**SUPERSEDED, "changes": [change]}))

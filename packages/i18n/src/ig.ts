@@ -188,6 +188,8 @@ export const ig: Strings = {
     to: "gaa",
     rowInsert: "Ọ nọ naanị n'ọkwa ochie: “{copy}”",
     rowDelete: "E gbakwunyere ya n'ọkwa ọhụrụ: “{official}”",
+    addedAfter: "E gbakwunyere ya mgbe ọkwa ahụ gasịrị: “{copy}”",
+    addedBefore: "E gbakwunyere ya tupu ọkwa ahụ: “{copy}”",
     now: "ugbu a",
   },
 

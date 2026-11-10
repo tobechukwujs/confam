@@ -170,6 +170,11 @@
           "description": "The forwarded copy's wording. Null for delete (nothing in the copy), a string otherwise.",
           "type": ["string", "null"]
         },
+        "placement": {
+          "description": "Only on an insert. Set when the added words sit OUTSIDE the notice itself: after it (a link, amount or phone number added below a genuine notice) or before it. Absent when the change is inside the notice body.",
+          "type": "string",
+          "enum": ["before_notice", "after_notice"]
+        },
         "box": {
           "description": "Optional position on a photo from OCR: x, y, width, height, each 0 to 1. Absent for pasted text.",
           "type": "array",
@@ -188,6 +193,11 @@
           "if": { "properties": { "op": { "const": "delete" } }, "required": ["op"] },
           "then": { "properties": { "copy": { "type": "null" } } },
           "else": { "properties": { "copy": { "type": "string" } } }
+        },
+        {
+          "if": { "properties": { "op": { "const": "insert" } }, "required": ["op"] },
+          "then": {},
+          "else": { "not": { "required": ["placement"] } }
         }
       ]
     },

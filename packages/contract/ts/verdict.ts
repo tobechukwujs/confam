@@ -84,6 +84,10 @@ export interface Change {
    */
   copy: string | null;
   /**
+   * Only on an insert. Set when the added words sit OUTSIDE the notice itself: after it (a link, amount or phone number added below a genuine notice) or before it. Absent when the change is inside the notice body.
+   */
+  placement?: "before_notice" | "after_notice";
+  /**
    * Optional position on a photo from OCR: x, y, width, height, each 0 to 1. Absent for pasted text.
    *
    * @minItems 4

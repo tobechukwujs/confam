@@ -128,6 +128,23 @@ describe("verdict views", () => {
     expect(container.querySelector(".hand")).toHaveTextContent("28th November");
     expect(container.querySelector(".hand")).not.toHaveClass("long");
   });
+  it("a change added AFTER the notice is labelled 'Added after the notice: ...' and is not a mid-notice edit", () => {
+    const { container } = renderSample(sample("altered_after"));
+    const row = container.querySelector("ol.changes li p") as HTMLElement;
+    expect(row).toHaveTextContent("Link. Added after the notice: “https://fast-register.example”");
+    expect(row.querySelector("span[lang='en']")).toHaveTextContent("https://fast-register.example");
+    expect(container.querySelector('[data-mark="strike"]')).toHaveClass("tone-red");
+  });
+
+  it("a change added BEFORE the notice says so, and one inside the notice has no such label", () => {
+    const v = structuredClone(sample("altered_after"));
+    v.changes[0]!.placement = "before_notice";
+    renderSample(v);
+    expect(screen.getByText(/Added before the notice:/)).toBeInTheDocument();
+    const inside = renderSample(sample("altered_insert"));
+    expect(inside.container.querySelector("ol.changes")?.textContent).toContain("Your copy adds");
+    expect(inside.container.querySelector("ol.changes")?.textContent).not.toMatch(/Added (after|before) the notice/);
+  });
   it("altered insert strikes the added words; delete shows a caret", () => {
     const ins = renderSample(sample("altered_insert"));
     expect(ins.container.querySelector('[data-mark="strike"]')).toHaveClass("tone-red");

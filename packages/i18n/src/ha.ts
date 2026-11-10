@@ -188,6 +188,8 @@ export const ha: Strings = {
     to: "zuwa",
     rowInsert: "Yana cikin tsohuwar sanarwar kawai: “{copy}”",
     rowDelete: "An ƙara shi a sabuwar sanarwar: “{official}”",
+    addedAfter: "An ƙara shi bayan sanarwar: “{copy}”",
+    addedBefore: "An ƙara shi kafin sanarwar: “{copy}”",
     now: "yanzu",
   },
 

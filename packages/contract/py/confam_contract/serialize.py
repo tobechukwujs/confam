@@ -15,6 +15,7 @@ from .verdict import Verdict
 def verdict_to_json(verdict: Verdict) -> dict[str, Any]:
     payload = verdict.model_dump(mode="json", by_alias=True)
     for change in payload["changes"]:
-        if change.get("box") is None:
-            change.pop("box", None)
+        for optional in ("box", "placement"):
+            if change.get(optional) is None:
+                change.pop(optional, None)
     return payload

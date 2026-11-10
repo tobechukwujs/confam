@@ -70,6 +70,11 @@ class RecordChange(BaseModel):
     copy_: str | None = Field(..., alias='copy')
 
 
+class Placement(Enum):
+    before_notice = 'before_notice'
+    after_notice = 'after_notice'
+
+
 class BoxItem(RootModel[float]):
     root: float = Field(..., ge=0.0, le=1.0)
 
@@ -88,6 +93,10 @@ class Change(BaseModel):
         ...,
         alias='copy',
         description="The forwarded copy's wording. Null for delete (nothing in the copy), a string otherwise.",
+    )
+    placement: Placement | None = Field(
+        None,
+        description='Only on an insert. Set when the added words sit OUTSIDE the notice itself: after it (a link, amount or phone number added below a genuine notice) or before it. Absent when the change is inside the notice body.',
     )
     box: list[BoxItem] | None = Field(
         None,

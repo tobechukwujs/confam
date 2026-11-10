@@ -60,8 +60,9 @@ def check(text, record=RECORD):
     v = check_notice(text, record, record_as_of=AS_OF, lang="en", now=NOW)
     payload = v.model_dump(mode="json", by_alias=True)
     for ch in payload["changes"]:
-        if ch.get("box") is None:
-            ch.pop("box", None)
+        for optional in ("box", "placement"):
+            if ch.get(optional) is None:
+                ch.pop(optional, None)
     assert [e.message for e in VALIDATOR.iter_errors(payload)] == []
     return v
 
@@ -244,3 +245,42 @@ def test_a_wrapped_photo_where_only_one_reading_sees_an_edit_is_unclear():
 @pytest.mark.parametrize("name", PAYLOAD_WRAPPERS)
 def test_a_payload_in_a_photo_wrapper_is_not_confirmed(name):
     assert photo(PAYLOAD_WRAPPERS[name](NEW_TEXT)).verdict.value != "confirmed"
+
+
+# --- placement: what a forger adds around a genuine notice is labelled as outside it -------------
+
+
+def placement_of(v, kind):
+    return [(c.copy_, c.placement.value if c.placement else None) for c in v.changes if c.kind.value == kind]
+
+
+def test_a_link_money_or_phone_added_after_the_notice_is_labelled_after_the_notice():
+    v = check(PAYLOAD_WRAPPERS["link_below"](NEW_TEXT))
+    assert placement_of(v, "link") == [("https://fast-register.example", "after_notice")]
+    v = check(PAYLOAD_WRAPPERS["money_below"](NEW_TEXT))
+    assert [p for _, p in placement_of(v, "money")] == ["after_notice"]
+    v = check(PAYLOAD_WRAPPERS["phone_below"](NEW_TEXT))
+    assert [p for _, p in placement_of(v, "phone")] == ["after_notice"]
+
+
+def test_a_link_added_before_the_notice_is_labelled_before_the_notice():
+    v = check(PAYLOAD_WRAPPERS["link_above"](NEW_TEXT))
+    assert placement_of(v, "link") == [("https://fast-register.example", "before_notice")]
+
+
+def test_a_change_inside_the_notice_has_no_placement():
+    v = check(NEW_TEXT.replace("Register only", "Pay N500 to your ward officer first. Register only"))
+    assert v.verdict.value == "altered"
+    assert all(c.placement is None for c in v.changes)
+    v = check(NEW_TEXT.replace("28th", "29th"))
+    assert all(c.placement is None for c in v.changes)
+
+
+def test_the_same_labels_come_from_a_photo():
+    def reading(text):
+        return Reading([Word(w, (i % 10) * 0.09, (i // 10) * 0.05, 0.08, 0.04) for i, w in enumerate(text.split())])
+
+    text = PAYLOAD_WRAPPERS["link_below"](NEW_TEXT)
+    v = check_readings([reading(text), reading(text)], RECORD, record_as_of=AS_OF, lang="en", now=NOW)
+    assert v.verdict.value == "altered"
+    assert placement_of(v, "link") == [("https://fast-register.example", "after_notice")]
