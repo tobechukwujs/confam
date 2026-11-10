@@ -27,9 +27,10 @@ class Settings:
     seed_samples: bool = False
     rate_limit_per_minute: int = 30
     photo_workers: int = 1  # one picture at a time keeps memory small on a free host
-    # Confidence gate for photo checks (0-100). None = use the engine default, which is OFF until the
-    # product owner chooses a threshold from the table in docs/EVAL.md.
+    # Confidence gate for photo checks (0-100). None = the engine default, which is 95 (gate ON).
+    # CONFAM_MIN_WORD_CONFIDENCE=off switches the gate off (confidence_gate_off).
     min_word_confidence: float | None = None
+    confidence_gate_off: bool = False
     ip_salt: str = "dev-only-salt-change-me"
     record_path: Path = field(default=DEFAULT_RECORD_PATH)
 
@@ -46,6 +47,7 @@ class Settings:
             rate_limit_per_minute=int(os.environ.get("CONFAM_RATE_LIMIT_PER_MINUTE", "30")),
             photo_workers=int(os.environ.get("CONFAM_PHOTO_WORKERS", "1")),
             min_word_confidence=_optional_float(os.environ.get("CONFAM_MIN_WORD_CONFIDENCE")),
+            confidence_gate_off=(os.environ.get("CONFAM_MIN_WORD_CONFIDENCE") or "").strip().lower() in {"off", "none", "false"},
             ip_salt=os.environ.get("CONFAM_IP_SALT", cls.ip_salt),
             record_path=Path(os.environ.get("CONFAM_RECORD_PATH", str(DEFAULT_RECORD_PATH))),
         )

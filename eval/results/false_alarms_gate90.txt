@@ -1,0 +1,48 @@
+Honest pictures still called altered at confidence gate 90, and proposals (NOT applied). SYNTHETIC fictional pictures: see docs/EVAL.md.
+
+honest pictures: 64; still called altered at gate 90: 6
+
+1. honest_image/SEC-E-003/phone  (phone)
+     official: '2:00 pm'                  pass 1 read: '2:00 '                (conf 92.0) pass 2 read: '2:00 '                (conf 92.0)
+     kind time/replace; character differences vs official: ['->pm']
+     official: None                       pass 1 read: 'P'                    (conf 91.0) pass 2 read: 'P'                    (conf 92.0)
+     kind text/insert; character differences vs official: ['P>-']
+
+2. honest_image/SEC-E-005/phone_wrapped  (phone+wrapper)
+     official: '4:00 pm'                  pass 1 read: '4:00 '                (conf 93.0) pass 2 read: '4:00 '                (conf 91.0)
+     kind time/replace; character differences vs official: ['->pm']
+
+3. honest_image/SEC-E-006/clean  (clean)
+     official: 'on'                       pass 1 read: None                   (conf 91.0) pass 2 read: None                   (conf 91.0)
+     kind text/delete; character differences vs official: ['->on']
+     official: 'or'                       pass 1 read: 'OF'                   (conf 90.0) pass 2 read: 'OF'                   (conf 94.0)
+     kind text/replace; character differences vs official: ['OF>or']
+
+4. honest_image/SEC-E-006/clean_wrapped  (clean+wrapper)
+     official: 'on'                       pass 1 read: None                   (conf 91.0) pass 2 read: None                   (conf 91.0)
+     kind text/delete; character differences vs official: ['->on']
+     official: 'or'                       pass 1 read: 'OF'                   (conf 92.0) pass 2 read: 'OF'                   (conf 95.0)
+     kind text/replace; character differences vs official: ['OF>or']
+
+5. honest_image/SEC-E-006/whatsapp  (whatsapp)
+     official: 'on'                       pass 1 read: None                   (conf 90.0) pass 2 read: None                   (conf 91.0)
+     kind text/delete; character differences vs official: ['->on']
+
+6. honest_image/SEC-E-006/whatsapp_wrapped  (whatsapp+wrapper)
+     official: 'or'                       pass 1 read: 'OF'                   (conf 94.0) pass 2 read: 'OF'                   (conf 92.0)
+     kind text/replace; character differences vs official: ['OF>or']
+
+Candidate additions to the reading-slip rule (NOT applied): effect on all picture suites at gate 90
+  M/N                        honest false alarms 6   edited pictures altered 61/92   FORGED CONFIRMED 0
+  rn/m + cl/d (already in)   honest false alarms 6   edited pictures altered 61/92   FORGED CONFIRMED 0
+  u/v                        honest false alarms 6   edited pictures altered 61/92   FORGED CONFIRMED 0
+  e/c                        honest false alarms 6   edited pictures altered 61/92   FORGED CONFIRMED 0
+  a/o                        honest false alarms 9   edited pictures altered 61/92   FORGED CONFIRMED 0
+  h/b                        honest false alarms 6   edited pictures altered 61/92   FORGED CONFIRMED 0
+
+Proposal (NOT applied): gate 95 for everything, but a lower floor for web addresses and phone numbers
+  no separate floor (the default)  honest false alarms 0    edited pictures altered 32/92 (link+phone edits caught 0/24)   FORGED CONFIRMED 0
+  link/phone floor 90              honest false alarms 0    edited pictures altered 36/92 (link+phone edits caught 4/24)   FORGED CONFIRMED 0
+  link/phone floor 85              honest false alarms 0    edited pictures altered 37/92 (link+phone edits caught 5/24)   FORGED CONFIRMED 0
+  link/phone floor 80              honest false alarms 0    edited pictures altered 41/92 (link+phone edits caught 9/24)   FORGED CONFIRMED 0
+  link/phone floor 75              honest false alarms 0    edited pictures altered 41/92 (link+phone edits caught 9/24)   FORGED CONFIRMED 0

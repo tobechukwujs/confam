@@ -88,17 +88,27 @@ built on synthetic fictional fixtures.
 - Photos need Tesseract. Without it the API says photo checks are unavailable and text checks
   keep working.
 - **Two reading passes of the same engine make the same mistakes and then agree on them.** On the
-  synthetic pictures only 8 of 64 honest pictures came out `confirmed`, 30 were called `altered`
-  (false alarms) and 26 `cannot_confirm`, because both passes can misread a word identically.
-  Reading slips of the look-alike kind are now ignored (it was 5 confirmed and 41 false alarms
-  before). Cropped pictures were mostly not recognised as partial (`docs/EVAL.md` has the figures).
+  synthetic pictures only 8 of 64 honest pictures came out `confirmed` at the default settings; the
+  other 56 were `cannot_confirm`. Cropped pictures were mostly not recognised as partial
+  (`docs/EVAL.md` has the figures). Look-alike slips inside words are ignored on photos.
 - **Photo checks are labelled Beta** in the interface, with a note that they may say they cannot
   confirm a real notice and that pasting the text is more reliable. Text checks are not labelled.
-- **The confidence gate is built but OFF.** A change resting on a word the reader was not sure of
-  can be made `cannot_confirm` instead of `altered`. The threshold is the product owner's choice
-  (`docs/EVAL.md` has the trade-off table); until it is set (`CONFAM_MIN_WORD_CONFIDENCE`), photo
-  false alarms stay at the figures above. The gate never makes an honest picture `confirmed`: it
-  only turns a false alarm into `cannot_confirm`.
+- **The confidence gate is ON at 95 (the product owner's decision).** A change resting on a word the
+  reader was less than 95 sure of is `cannot_confirm`, never `altered`. The reason: a false
+  "altered" on a genuine notice is the worst error we can make, and a missed edit only becomes
+  `cannot_confirm` and is never confirmed. On the synthetic pictures this took honest-picture false
+  alarms from 30 to **0**, at a large cost: only **32 of 92** edited pictures are still called
+  `altered` (84 with the gate off); the other 60 are `cannot_confirm`. Forged copies confirmed
+  stays 0. Set `CONFAM_MIN_WORD_CONFIDENCE=off` to switch it off or a number to change it.
+- **At 95, a changed web address or phone number on a photo is never called altered** (0 of 16
+  addresses and 0 of 8 phone numbers in the evaluation; dates by day 7 of 20, times 2 of 12).
+  Tesseract gives web addresses a confidence of about 84 to 91 at every picture size, so the gate
+  always withholds them. A photo of a notice with a swapped link or phone number therefore says
+  "Cannot confirm", not "Altered": safe, but not helpful on the most common scam edits. The same
+  edit pasted as text is reported correctly. A lower floor just for these kinds is proposed, not
+  applied (`docs/EVAL.md`).
+- The gate never makes an honest picture `confirmed`: it only turns a false alarm into
+  `cannot_confirm`. Getting more honest pictures confirmed needs better reading.
 - The safe direction held in the evaluation: no edited picture was confirmed. But the list of
   changes shown with an `altered` picture can contain reading noise next to, or instead of, the
   real edit, so the marks can point at the wrong place.

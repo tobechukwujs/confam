@@ -160,8 +160,36 @@ def test_changes_are_ordered_link_money_phone_date_time_number_negation_then_the
 # --- (b) the confidence gate -------------------------------------------------------
 
 
-def test_the_gate_is_off_by_default_until_the_owner_chooses_a_threshold():
-    assert DEFAULT_MIN_CONFIDENCE is None
+def test_the_gate_is_ON_by_default_at_95():
+    """Decision: a false "altered" on a genuine notice is the worst error; a missed edit becomes
+    cannot_confirm and is never confirmed. Numbers at 95 are in docs/EVAL.md."""
+    assert DEFAULT_MIN_CONFIDENCE == 95.0
+
+
+def photo_default(a, b=None, *, ca=None, cb=None):
+    """check_readings WITHOUT passing a threshold: the default applies."""
+    ra, rb = reading(a, ca), reading(b if b is not None else a, cb if cb is not None else ca)
+    return check_readings([ra, rb], RECORD, record_as_of=NOW, lang="en", now=NOW)
+
+
+def test_by_default_a_change_below_95_is_cannot_confirm_and_one_at_or_above_is_altered():
+    edited = TEXT.replace("28th", "29th")
+    assert photo_default(edited, ca={"29th": 94.0}).verdict.value == "cannot_confirm"
+    assert photo_default(edited, ca={"29th": 95.0}).verdict.value == "altered"
+    assert photo_default(edited, ca={"29th": 99.0}).verdict.value == "altered"
+
+
+def test_the_gate_can_still_be_switched_off_explicitly():
+    edited = TEXT.replace("28th", "29th")
+    ra, rb = reading(edited, {"29th": 10.0}), reading(edited, {"29th": 10.0})
+    v = check_readings([ra, rb], RECORD, record_as_of=NOW, lang="en", now=NOW, min_confidence=None)
+    assert v.verdict.value == "altered"
+
+
+def test_a_missed_edit_is_never_confirmed_whatever_the_gate_does():
+    edited = TEXT.replace("28th", "29th")
+    for conf in (0.0, 50.0, 94.9, 95.0, 100.0):
+        assert photo_default(edited, ca={"29th": conf}).verdict.value in {"altered", "cannot_confirm"}
 
 
 def test_a_change_on_a_low_confidence_word_is_unclear_never_altered():

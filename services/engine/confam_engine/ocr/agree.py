@@ -32,10 +32,12 @@ MIN_TOKENS = 3  # fewer words than this is not a readable notice
 NEAR = 0.03  # boxes within this distance (of the image) are "the same spot"
 
 # Confidence gate: a change resting on a word read with LESS confidence than this (0-100) in either
-# reading is cannot_confirm / unclear, never altered. None switches the gate off. The threshold is
-# the product owner's choice (see docs/EVAL.md for the trade-off); it is OFF until they choose.
+# reading is cannot_confirm / unclear, never altered. None switches the gate off.
+# 95 is the product owner's decision: a false "altered" on a genuine notice is the worst error we can
+# make, and a missed edit only becomes cannot_confirm (never confirmed). The cost, measured on the
+# fictional pictures in docs/EVAL.md: far fewer edited pictures are called altered.
 # Confidence stays inside the engine: it is never returned, serialised or shown (rule 4).
-DEFAULT_MIN_CONFIDENCE: float | None = None
+DEFAULT_MIN_CONFIDENCE: float | None = 95.0
 _USE_DEFAULT = object()
 
 

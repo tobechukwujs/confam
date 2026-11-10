@@ -285,3 +285,42 @@ def test_no_scores_or_progress_numbers_anywhere():
     body = json.dumps(wait_done(client, job_id)).lower()
     for word in ("confidence", "score", "percent", "progress", "eta"):
         assert word not in body
+
+
+# --- the confidence gate setting -------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    "value,expected_gate,expected_off",
+    [(None, None, False), ("", None, False), ("90", 90.0, False), ("97.5", 97.5, False), ("off", None, True), ("OFF", None, True), ("none", None, True), ("garbage", None, False)],
+)
+def test_the_gate_setting_from_the_environment(monkeypatch, value, expected_gate, expected_off):
+    from confam_api.settings import Settings
+
+    if value is None:
+        monkeypatch.delenv("CONFAM_MIN_WORD_CONFIDENCE", raising=False)
+    else:
+        monkeypatch.setenv("CONFAM_MIN_WORD_CONFIDENCE", value)
+    s = Settings.from_env()
+    assert s.min_word_confidence == expected_gate
+    assert s.confidence_gate_off is expected_off
+
+
+def test_unset_means_the_engine_default_of_95_applies_to_photo_jobs():
+    """A low-confidence reading of an edited notice is withheld by default; with the gate off it is altered."""
+    edited = NEW_TEXT.replace("28th November", "29th November")
+
+    class Low(FakeReader):
+        def read(self, image):
+            r = super().read(image)
+            from confam_engine.ocr import Reading, Word
+
+            return Reading([Word(w.text, w.x, w.y, w.w, w.h, 60.0) for w in r.words])
+
+    client, _ = make((Low("a", edited), Low("b", edited)))
+    job = wait_done(client, upload(client).json()["job_id"])
+    assert client.get(f"/v1/verdicts/{job['code']}").json()["verdict"] == "cannot_confirm"
+
+    client, _ = make((Low("a", edited), Low("b", edited)), confidence_gate_off=True)
+    job = wait_done(client, upload(client).json()["job_id"])
+    assert client.get(f"/v1/verdicts/{job['code']}").json()["verdict"] == "altered"

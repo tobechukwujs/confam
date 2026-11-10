@@ -137,7 +137,12 @@ def create_app(
         set_stage("comparing")
         del image
         rec = holder.record
-        gate = {} if settings.min_word_confidence is None else {"min_confidence": settings.min_word_confidence}
+        if settings.confidence_gate_off:
+            gate = {"min_confidence": None}
+        elif settings.min_word_confidence is not None:
+            gate = {"min_confidence": settings.min_word_confidence}
+        else:
+            gate = {}  # the engine default: 95
         verdict = check_readings([first, second], rec.notices, record_as_of=rec.record_as_of, lang=lang, **gate)
         store.put(verdict)
         return verdict.code
