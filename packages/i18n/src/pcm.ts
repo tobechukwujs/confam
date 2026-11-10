@@ -54,11 +54,14 @@ export const pcm: Strings = {
     errorSize: "Dat picture too big. Use one wey small pass 5 MB.",
     errorBusy: "Plenty checks dey now. Abeg try again after one minute.",
     errorDown: "We no fit reach di checker. Abeg try again.",
+    beta: "Beta",
+    betaNote: "Photo checks na new thing, we still dey test dem. Dem fit talk say dem no fit confirm notice wey real. To paste di text dey more reliable.",
     errorOff: "Photo checks no dey work now. Abeg paste di text instead.",
   },
 
   reading: {
     title: "We dey read your notice",
+    beta: "Beta",
     why: "We dey read di photo two times, we go only trust wetin both readings agree on.",
     stages: {
       queued: "Dey wait im turn",
@@ -67,12 +70,13 @@ export const pcm: Strings = {
       comparing: "We dey compare am with di official record",
     },
     failed: "We no fit read dat photo. Try clearer one, or paste di text.",
-    expired: "Dis check no dey here again. Abeg start again.",
+    expired: "Something go wrong, abeg try again.",
     back: "Check another notice",
   },
 
   photo: {
     heading: "Your photo, wey we mark",
+    beta: "Beta",
     note: "Na only you fit see dis photo. We no dey keep am.",
     alt: "Di photo wey you send, with marks where e no match di official notice",
   },

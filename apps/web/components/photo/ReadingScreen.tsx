@@ -8,6 +8,7 @@ import { apiBase } from "@/lib/upload";
 
 type Stage = "queued" | "reading_1" | "reading_2" | "comparing";
 const STAGES: Stage[] = ["queued", "reading_1", "reading_2", "comparing"];
+// "expired" = the check is gone or the server stopped answering (a restart loses jobs): one plain message.
 type View = { kind: "working"; stage: Stage } | { kind: "failed" } | { kind: "expired" };
 
 /**
@@ -39,7 +40,7 @@ export function ReadingScreen({ jobId, s }: { jobId: string; s: Strings["reading
         if (job.status === "failed") return setView({ kind: "failed" });
         setView({ kind: "working", stage: (STAGES as string[]).includes(job.stage) ? (job.stage as Stage) : "queued" });
       } catch {
-        if (++misses >= 8) return setView({ kind: "failed" }); // the server is not answering
+        if (++misses >= 8) return setView({ kind: "expired" }); // the server is not answering
       }
       if (!stopped) timer = setTimeout(poll, 700);
     };
@@ -55,6 +56,9 @@ export function ReadingScreen({ jobId, s }: { jobId: string; s: Strings["reading
     return (
       <div className="answer" style={{ maxWidth: 640 }}>
         <h1 className="display">{s.title}</h1>
+        <p className="beta-line">
+          <span className="beta">{s.beta}</span>
+        </p>
         <p className="status" role="alert">
           {view.kind === "failed" ? s.failed : s.expired}
         </p>
@@ -69,6 +73,9 @@ export function ReadingScreen({ jobId, s }: { jobId: string; s: Strings["reading
   return (
     <div className="answer" style={{ maxWidth: 640 }}>
       <h1 className="display">{s.title}</h1>
+      <p className="beta-line">
+        <span className="beta">{s.beta}</span>
+      </p>
       <ol className="stages" aria-live="polite">
         {STAGES.map((stage, i) => (
           <li

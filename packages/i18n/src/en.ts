@@ -62,11 +62,14 @@ export const en = {
     errorSize: "That picture is too big. Use one under 5 MB.",
     errorBusy: "Too many checks just now. Please try again in a minute.",
     errorDown: "We could not reach the checker. Please try again.",
+    beta: "Beta",
+    betaNote: "Photo checks are new and still being tested. They may say they cannot confirm a notice that is real. Pasting the text is more reliable.",
     errorOff: "Photo checks are not available right now. Please paste the text instead.",
   },
 
   reading: {
     title: "Reading your notice",
+    beta: "Beta",
     why: "We read the photo twice and only trust what both readings agree on.",
     stages: {
       queued: "Waiting its turn",
@@ -75,12 +78,13 @@ export const en = {
       comparing: "Comparing with the official record",
     },
     failed: "We could not read that photo. Try a clearer one, or paste the text.",
-    expired: "This check is no longer here. Please start again.",
+    expired: "Something went wrong, please try again.",
     back: "Check another notice",
   },
 
   photo: {
     heading: "Your photo, marked",
+    beta: "Beta",
     note: "Only you can see this photo. It is not kept.",
     alt: "The photo you sent, with marks where it differs from the official notice",
   },

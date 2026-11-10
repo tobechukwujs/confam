@@ -22,7 +22,7 @@ export function PhotoPanel({ code, changes, s }: { code: string; changes: Change
   return (
     <section className="photo-panel" aria-labelledby="photo-h">
       <h2 className="headline" id="photo-h">
-        {s.heading}
+        {s.heading} <span className="beta">{s.beta}</span>
       </h2>
       <p className="label">{s.note}</p>
       <div className="photo-frame">

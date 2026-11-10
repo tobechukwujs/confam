@@ -55,11 +55,14 @@ export const ig: Strings = {
     errorSize: "Foto ahụ buru ibu. Jiri nke dị ntakịrị karịa 5 MB.",
     errorBusy: "Nlele dị ọtụtụ ugbu a. Biko nwaa ọzọ mgbe nkeji otu gasịrị.",
     errorDown: "Anyị enweghị ike iru ebe nlele. Biko nwaa ọzọ.",
+    beta: "Beta",
+    betaNote: "Nlele foto bụ ihe ọhụrụ, a ka na-anwale ya. Ọ nwere ike ịsị na ọ pụghị ikwado ọkwa bụ eziokwu. Itinye ederede dị ntụkwasị obi karịa.",
     errorOff: "Nlele foto adịghị ugbu a. Biko tinye ederede kama.",
   },
 
   reading: {
     title: "Na-agụ ọkwa gị",
+    beta: "Beta",
     why: "Anyị na-agụ foto ahụ ugboro abụọ, ma anyị na-ekwere naanị ihe ọgụgụ abụọ ahụ kwenyere na ya.",
     stages: {
       queued: "Na-eche oge ya",
@@ -68,12 +71,13 @@ export const ig: Strings = {
       comparing: "Na-eji ya tụnyere ndekọ gọọmentị",
     },
     failed: "Anyị enweghị ike ịgụ foto ahụ. Nwaa nke doro anya, ma ọ bụ tinye ederede.",
-    expired: "Nlele a adịghị ebe a ọzọ. Biko malite ọzọ.",
+    expired: "Ihe adịghị mma mere, biko nwaa ọzọ.",
     back: "Lelee ọkwa ọzọ",
   },
 
   photo: {
     heading: "Foto gị, e kaara akara",
+    beta: "Beta",
     note: "Naanị gị nwere ike ịhụ foto a. Anyị anaghị edebe ya.",
     alt: "Foto i zitere, nwere akara ebe ọ dị iche na ọkwa gọọmentị",
   },

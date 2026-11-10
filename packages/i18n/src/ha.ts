@@ -55,11 +55,14 @@ export const ha: Strings = {
     errorSize: "Wannan hoto ya yi girma da yawa. Yi amfani da wanda bai kai 5 MB ba.",
     errorBusy: "Ana yawan bincike a yanzu. Ka sake gwadawa bayan minti ɗaya.",
     errorDown: "Ba mu iya isa ga mai bincike ba. Ka sake gwadawa.",
+    beta: "Beta",
+    betaNote: "Binciken hoto sabon abu ne kuma har yanzu ana gwada shi. Yana iya cewa ba zai iya tabbatar da sanarwa ta gaske ba. Liƙa rubutun ya fi aminci.",
     errorOff: "Binciken hoto bai samuwa a yanzu. Ka liƙa rubutun maimakon haka.",
   },
 
   reading: {
     title: "Ana karanta sanarwarka",
+    beta: "Beta",
     why: "Muna karanta hoton sau biyu, kuma muna amincewa da abin da karatun biyu suka amince a kai kawai.",
     stages: {
       queued: "Yana jiran lokacinsa",
@@ -68,12 +71,13 @@ export const ha: Strings = {
       comparing: "Ana kwatanta shi da bayanan hukuma",
     },
     failed: "Ba mu iya karanta wannan hoton ba. Gwada mai haske, ko ka liƙa rubutun.",
-    expired: "Wannan bincike ba ya nan kuma. Ka sake farawa.",
+    expired: "Wani abu ya faru, ka sake gwadawa.",
     back: "Duba wata sanarwa",
   },
 
   photo: {
     heading: "Hotonka, tare da alamomi",
+    beta: "Beta",
     note: "Kai kaɗai ne za ka iya ganin wannan hoton. Ba ma adana shi.",
     alt: "Hoton da ka aika, tare da alamomi a inda ya bambanta da sanarwar hukuma",
   },

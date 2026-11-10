@@ -208,10 +208,18 @@ test.describe("the reading screen when things go wrong", () => {
     await expect(page).toHaveURL(/localhost:3000\/$/);
   });
 
-  test("an expired check says so", async ({ page }) => {
+  test("a lost job (the server restarted) shows a plain message in bold black, not an error page", async ({ page }) => {
     await mockJob(page, [{ __status: 404 }]);
-    await page.goto(`/check/${JOB}`);
-    await expect(page.locator("p.status")).toHaveText("This check is no longer here. Please start again.");
+    const res = await page.goto(`/check/${JOB}`);
+    expect(res!.status()).toBe(200); // our page, not a crash page
+    const message = page.locator("p.status");
+    await expect(message).toHaveText("Something went wrong, please try again.");
+    expect(await message.evaluate((el) => getComputedStyle(el).fontWeight)).toBe("700");
+    expect(await message.evaluate((el) => getComputedStyle(el).color)).toBe("rgb(20, 23, 28)"); // print black, never red
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Reading your notice");
+    await expect(page.getByText(/Application error|Internal Server Error/i)).toHaveCount(0);
+    await page.getByRole("link", { name: "Check another notice" }).click();
+    await expect(page).toHaveURL(/localhost:3000\/$/);
   });
 
   test("the reading screen speaks the chosen language and fits a phone", async ({ page }) => {
@@ -246,5 +254,36 @@ test.describe("against the real API", () => {
       await page.getByRole("button", { name: "Check this notice" }).click();
       await expect(page.getByRole("heading", { level: 1 })).toHaveText("Cannot confirm");
     }
+  });
+});
+
+
+test.describe("Beta label", () => {
+  test("photo checks are labelled Beta with a plain warning; the text check is not", async ({ page }) => {
+    await page.goto("/");
+    const heading = page.getByRole("heading", { name: /Or check a photo/ });
+    await expect(heading.locator(".beta")).toHaveText("Beta");
+    await expect(page.locator(".beta-note")).toContainText("new and still being tested");
+    // not red, and not on the text check
+    expect(await heading.locator(".beta").evaluate((el) => getComputedStyle(el).color)).not.toBe("rgb(196, 13, 35)");
+    await expect(page.locator("form.field .beta")).toHaveCount(0);
+    expect(await page.locator("form.field").innerText()).not.toMatch(/beta/i);
+  });
+
+  test("the reading screen and the marked photo carry the Beta label", async ({ page }) => {
+    await mockJob(page, [working("reading_1")]);
+    await page.goto(`/check/${JOB}`);
+    await expect(page.locator(".beta")).toHaveText("Beta");
+  });
+
+  test("a verdict from pasted text has no Beta label anywhere", async ({ page }) => {
+    await page.goto("/v/A7T3R4ED");
+    await expect(page.locator(".beta")).toHaveCount(0);
+  });
+
+  test("the Beta note is translated and the label stays Beta", async ({ page }) => {
+    await page.goto("/?lang=ha");
+    await expect(page.locator("#upload .beta")).toHaveText("Beta");
+    await expect(page.locator(".beta-note")).toContainText("Binciken hoto sabon abu ne");
   });
 });

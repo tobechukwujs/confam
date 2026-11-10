@@ -732,3 +732,17 @@ a {
   height: 24px;
   font-size: 13px;
 }
+/* "Beta": photo checks only. Plain bold text, not a coloured pill and never red. */
+.beta {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--soft-print);
+  letter-spacing: 0.02em;
+  border-bottom: 2px solid var(--pencil);
+}
+.beta-line {
+  margin: 0;
+}
+.beta-note {
+  margin-top: 0;
+}

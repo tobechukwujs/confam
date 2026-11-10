@@ -1,10 +1,10 @@
 {
  "meta": {
-  "date": "2026-11-10T09:17:31+00:00",
-  "git_commit": "10c8ce9 + uncommitted changes",
+  "date": "2026-11-10T09:23:46+00:00",
+  "git_commit": "5e6a6dc + uncommitted changes",
   "python": "3.12.16",
   "tesseract": "C:\\Program Files\\Tesseract-OCR\\tesseract.EXE",
-  "seconds": 101.3,
+  "seconds": 97.4,
   "cases": 668,
   "skipped_suites": [],
   "record": "eval/record.json (fictional)",
@@ -134,7 +134,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration closes on 14th November. Register only at https://register.sec.example.",
    "notice_id": "SEC-E-001",
    "note": "",
-   "seconds": 0.5
+   "seconds": 0.65
   },
   {
    "id": "honest_image/SEC-E-001/clean_wrapped",
@@ -153,7 +153,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration closes on 14th November. Register only at https://register.sec.example.",
    "notice_id": "SEC-E-001",
    "note": "",
-   "seconds": 0.52
+   "seconds": 0.53
   },
   {
    "id": "honest_image/SEC-E-001/whatsapp_wrapped",
@@ -193,7 +193,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration closes on 14th November. Register only at https://register.sec.example.",
    "notice_id": "SEC-E-001",
    "note": "",
-   "seconds": 0.71
+   "seconds": 0.72
   },
   {
    "id": "honest_image/SEC-E-001/lowres",
@@ -231,7 +231,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration closes on 14th November. Register only at https://register.sec.example.",
    "notice_id": "SEC-E-001",
    "note": "",
-   "seconds": 0.36
+   "seconds": 0.35
   },
   {
    "id": "honest_image/SEC-E-002/whatsapp",
@@ -347,7 +347,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 8:00 am and close at 2:00 pm on Saturday 12th December. Bring your v",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.53
+   "seconds": 0.52
   },
   {
    "id": "honest_image/SEC-E-003/clean_wrapped",
@@ -366,7 +366,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 8:00 am and close at 2:00 pm on Saturday 12th December. Bring your v",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.61
+   "seconds": 0.62
   },
   {
    "id": "honest_image/SEC-E-003/whatsapp",
@@ -388,7 +388,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 8:00 am and close at 2:00 pm on Saturday 12th December. Bring your v",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.43
+   "seconds": 0.44
   },
   {
    "id": "honest_image/SEC-E-003/whatsapp_wrapped",
@@ -410,7 +410,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 8:00 am and close at 2:00 pm on Saturday 12th December. Bring your v",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.51
+   "seconds": 0.47
   },
   {
    "id": "honest_image/SEC-E-003/phone",
@@ -432,7 +432,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 8:00 am and close at 2:00 pm on Saturday 12th December. Bring your v",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.66
+   "seconds": 0.65
   },
   {
    "id": "honest_image/SEC-E-003/phone_wrapped",
@@ -451,7 +451,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 8:00 am and close at 2:00 pm on Saturday 12th December. Bring your v",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.82
+   "seconds": 0.79
   },
   {
    "id": "honest_image/SEC-E-003/lowres",
@@ -473,7 +473,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 8:00 am and close at 2:00 pm on Saturday 12th December. Bring your v",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.41
+   "seconds": 0.37
   },
   {
    "id": "honest_image/SEC-E-003/lowres_wrapped",
@@ -492,7 +492,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 8:00 am and close at 2:00 pm on Saturday 12th December. Bring your v",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.4
+   "seconds": 0.39
   },
   {
    "id": "honest_image/SEC-E-004/clean",
@@ -511,7 +511,7 @@
    "text": "The Simulated Electoral Commission confirms that you should not pay any fee to register. Report any request for a fee on 0800 100 2000.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.44
+   "seconds": 0.42
   },
   {
    "id": "honest_image/SEC-E-004/clean_wrapped",
@@ -530,7 +530,7 @@
    "text": "The Simulated Electoral Commission confirms that you should not pay any fee to register. Report any request for a fee on 0800 100 2000.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.52
+   "seconds": 0.49
   },
   {
    "id": "honest_image/SEC-E-004/whatsapp",
@@ -549,7 +549,7 @@
    "text": "The Simulated Electoral Commission confirms that you should not pay any fee to register. Report any request for a fee on 0800 100 2000.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.38
+   "seconds": 0.35
   },
   {
    "id": "honest_image/SEC-E-004/whatsapp_wrapped",
@@ -568,7 +568,7 @@
    "text": "The Simulated Electoral Commission confirms that you should not pay any fee to register. Report any request for a fee on 0800 100 2000.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.39
+   "seconds": 0.4
   },
   {
    "id": "honest_image/SEC-E-004/phone",
@@ -587,7 +587,7 @@
    "text": "The Simulated Electoral Commission confirms that you should not pay any fee to register. Report any request for a fee on 0800 100 2000.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.66
+   "seconds": 0.58
   },
   {
    "id": "honest_image/SEC-E-004/phone_wrapped",
@@ -606,7 +606,7 @@
    "text": "The Simulated Electoral Commission confirms that you should not pay any fee to register. Report any request for a fee on 0800 100 2000.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.68
+   "seconds": 0.74
   },
   {
    "id": "honest_image/SEC-E-004/lowres",
@@ -625,7 +625,7 @@
    "text": "The Simulated Electoral Commission confirms that you should not pay any fee to register. Report any request for a fee on 0800 100 2000.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.32
+   "seconds": 0.36
   },
   {
    "id": "honest_image/SEC-E-004/lowres_wrapped",
@@ -644,7 +644,7 @@
    "text": "The Simulated Electoral Commission confirms that you should not pay any fee to register. Report any request for a fee on 0800 100 2000.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.36
+   "seconds": 0.39
   },
   {
    "id": "honest_image/SEC-E-005/clean",
@@ -666,7 +666,7 @@
    "text": "Permanent voter cards can be collected from your local office between 9:00 am and 4:00 pm from Monday 7th December to Friday 11th December. ",
    "notice_id": "SEC-E-005",
    "note": "",
-   "seconds": 0.58
+   "seconds": 0.66
   },
   {
    "id": "honest_image/SEC-E-005/clean_wrapped",
@@ -687,7 +687,7 @@
    "text": "Permanent voter cards can be collected from your local office between 9:00 am and 4:00 pm from Monday 7th December to Friday 11th December. ",
    "notice_id": "SEC-E-005",
    "note": "",
-   "seconds": 0.68
+   "seconds": 0.72
   },
   {
    "id": "honest_image/SEC-E-005/whatsapp",
@@ -708,7 +708,7 @@
    "text": "Permanent voter cards can be collected from your local office between 9:00 am and 4:00 pm from Monday 7th December to Friday 11th December. ",
    "notice_id": "SEC-E-005",
    "note": "",
-   "seconds": 0.47
+   "seconds": 0.51
   },
   {
    "id": "honest_image/SEC-E-005/whatsapp_wrapped",
@@ -729,7 +729,7 @@
    "text": "Permanent voter cards can be collected from your local office between 9:00 am and 4:00 pm from Monday 7th December to Friday 11th December. ",
    "notice_id": "SEC-E-005",
    "note": "",
-   "seconds": 0.52
+   "seconds": 0.55
   },
   {
    "id": "honest_image/SEC-E-005/phone",
@@ -753,7 +753,7 @@
    "text": "Permanent voter cards can be collected from your local office between 9:00 am and 4:00 pm from Monday 7th December to Friday 11th December. ",
    "notice_id": "SEC-E-005",
    "note": "",
-   "seconds": 0.73
+   "seconds": 0.82
   },
   {
    "id": "honest_image/SEC-E-005/phone_wrapped",
@@ -775,7 +775,7 @@
    "text": "Permanent voter cards can be collected from your local office between 9:00 am and 4:00 pm from Monday 7th December to Friday 11th December. ",
    "notice_id": "SEC-E-005",
    "note": "",
-   "seconds": 0.87
+   "seconds": 0.94
   },
   {
    "id": "honest_image/SEC-E-005/lowres",
@@ -796,7 +796,7 @@
    "text": "Permanent voter cards can be collected from your local office between 9:00 am and 4:00 pm from Monday 7th December to Friday 11th December. ",
    "notice_id": "SEC-E-005",
    "note": "",
-   "seconds": 0.45
+   "seconds": 0.46
   },
   {
    "id": "honest_image/SEC-E-005/lowres_wrapped",
@@ -817,7 +817,7 @@
    "text": "Permanent voter cards can be collected from your local office between 9:00 am and 4:00 pm from Monday 7th December to Friday 11th December. ",
    "notice_id": "SEC-E-005",
    "note": "",
-   "seconds": 0.48
+   "seconds": 0.5
   },
   {
    "id": "honest_image/SEC-E-006/clean",
@@ -839,7 +839,7 @@
    "text": "Results will be published on https://results.sec.example within 24 hours of the close of polls. The commission will not announce results by ",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.56
+   "seconds": 0.57
   },
   {
    "id": "honest_image/SEC-E-006/clean_wrapped",
@@ -861,7 +861,7 @@
    "text": "Results will be published on https://results.sec.example within 24 hours of the close of polls. The commission will not announce results by ",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.62
+   "seconds": 0.66
   },
   {
    "id": "honest_image/SEC-E-006/whatsapp",
@@ -883,7 +883,7 @@
    "text": "Results will be published on https://results.sec.example within 24 hours of the close of polls. The commission will not announce results by ",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.5
+   "seconds": 0.47
   },
   {
    "id": "honest_image/SEC-E-006/whatsapp_wrapped",
@@ -904,7 +904,7 @@
    "text": "Results will be published on https://results.sec.example within 24 hours of the close of polls. The commission will not announce results by ",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.53
+   "seconds": 0.58
   },
   {
    "id": "honest_image/SEC-E-006/phone_wrapped",
@@ -926,7 +926,7 @@
    "text": "Results will be published on https://results.sec.example within 24 hours of the close of polls. The commission will not announce results by ",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.83
+   "seconds": 0.94
   },
   {
    "id": "honest_image/SEC-E-006/lowres",
@@ -947,7 +947,7 @@
    "text": "Results will be published on https://results.sec.example within 24 hours of the close of polls. The commission will not announce results by ",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.37
+   "seconds": 0.41
   },
   {
    "id": "honest_image/SEC-E-006/lowres_wrapped",
@@ -968,7 +968,7 @@
    "text": "Results will be published on https://results.sec.example within 24 hours of the close of polls. The commission will not announce results by ",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.4
+   "seconds": 0.42
   },
   {
    "id": "honest_image/SEC-E-007/clean",
@@ -989,7 +989,7 @@
    "text": "Observer accreditation costs N5,000 per organisation and closes on 20th November. Apply at https://observers.sec.example. Applications sent ",
    "notice_id": "SEC-E-007",
    "note": "",
-   "seconds": 0.51
+   "seconds": 0.58
   },
   {
    "id": "honest_image/SEC-E-007/clean_wrapped",
@@ -1010,7 +1010,7 @@
    "text": "Observer accreditation costs N5,000 per organisation and closes on 20th November. Apply at https://observers.sec.example. Applications sent ",
    "notice_id": "SEC-E-007",
    "note": "",
-   "seconds": 0.61
+   "seconds": 0.64
   },
   {
    "id": "honest_image/SEC-E-007/whatsapp",
@@ -1029,7 +1029,7 @@
    "text": "Observer accreditation costs N5,000 per organisation and closes on 20th November. Apply at https://observers.sec.example. Applications sent ",
    "notice_id": "SEC-E-007",
    "note": "",
-   "seconds": 0.42
+   "seconds": 0.44
   },
   {
    "id": "honest_image/SEC-E-007/whatsapp_wrapped",
@@ -1070,7 +1070,7 @@
    "text": "Observer accreditation costs N5,000 per organisation and closes on 20th November. Apply at https://observers.sec.example. Applications sent ",
    "notice_id": "SEC-E-007",
    "note": "",
-   "seconds": 0.83
+   "seconds": 0.84
   },
   {
    "id": "honest_image/SEC-E-007/lowres",
@@ -1089,7 +1089,7 @@
    "text": "Observer accreditation costs N5,000 per organisation and closes on 20th November. Apply at https://observers.sec.example. Applications sent ",
    "notice_id": "SEC-E-007",
    "note": "",
-   "seconds": 0.36
+   "seconds": 0.38
   },
   {
    "id": "honest_image/SEC-E-008/clean",
@@ -1110,7 +1110,7 @@
    "text": "The commission helpline is 0800 200 3000 and is open from 8:00 am to 6:00 pm every weekday. Calls are free. Do not share your voter card num",
    "notice_id": "SEC-E-008",
    "note": "",
-   "seconds": 0.48
+   "seconds": 0.5
   },
   {
    "id": "honest_image/SEC-E-008/clean_wrapped",
@@ -1132,7 +1132,7 @@
    "text": "The commission helpline is 0800 200 3000 and is open from 8:00 am to 6:00 pm every weekday. Calls are free. Do not share your voter card num",
    "notice_id": "SEC-E-008",
    "note": "",
-   "seconds": 0.57
+   "seconds": 0.6
   },
   {
    "id": "honest_image/SEC-E-008/whatsapp",
@@ -1153,7 +1153,7 @@
    "text": "The commission helpline is 0800 200 3000 and is open from 8:00 am to 6:00 pm every weekday. Calls are free. Do not share your voter card num",
    "notice_id": "SEC-E-008",
    "note": "",
-   "seconds": 0.4
+   "seconds": 0.43
   },
   {
    "id": "honest_image/SEC-E-008/whatsapp_wrapped",
@@ -1172,7 +1172,7 @@
    "text": "The commission helpline is 0800 200 3000 and is open from 8:00 am to 6:00 pm every weekday. Calls are free. Do not share your voter card num",
    "notice_id": "SEC-E-008",
    "note": "",
-   "seconds": 0.54
+   "seconds": 0.46
   },
   {
    "id": "honest_image/SEC-E-008/phone",
@@ -1194,7 +1194,7 @@
    "text": "The commission helpline is 0800 200 3000 and is open from 8:00 am to 6:00 pm every weekday. Calls are free. Do not share your voter card num",
    "notice_id": "SEC-E-008",
    "note": "",
-   "seconds": 0.63
+   "seconds": 0.64
   },
   {
    "id": "honest_image/SEC-E-008/phone_wrapped",
@@ -1216,7 +1216,7 @@
    "text": "The commission helpline is 0800 200 3000 and is open from 8:00 am to 6:00 pm every weekday. Calls are free. Do not share your voter card num",
    "notice_id": "SEC-E-008",
    "note": "",
-   "seconds": 0.77
+   "seconds": 0.78
   },
   {
    "id": "honest_image/SEC-E-008/lowres",
@@ -1235,7 +1235,7 @@
    "text": "The commission helpline is 0800 200 3000 and is open from 8:00 am to 6:00 pm every weekday. Calls are free. Do not share your voter card num",
    "notice_id": "SEC-E-008",
    "note": "",
-   "seconds": 0.36
+   "seconds": 0.37
   },
   {
    "id": "honest_image/SEC-E-008/lowres_wrapped",
@@ -1273,7 +1273,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration closes on 14th November. Register only at https://register-sec.example.",
    "notice_id": "SEC-E-001",
    "note": "",
-   "seconds": 0.53
+   "seconds": 0.38
   },
   {
    "id": "edits_image/SEC-E-002/link_host/lowres",
@@ -1292,7 +1292,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration now closes on 28th November. Register only at https://register-sec.exam",
    "notice_id": "SEC-E-002",
    "note": "",
-   "seconds": 0.41
+   "seconds": 0.38
   },
   {
    "id": "edits_image/SEC-E-004/phone/clean",
@@ -1311,7 +1311,7 @@
    "text": "The Simulated Electoral Commission confirms that you should not pay any fee to register. Report any request for a fee on 0800 100 2001.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.6
+   "seconds": 0.53
   },
   {
    "id": "edits_image/SEC-E-004/phone/whatsapp",
@@ -1330,7 +1330,7 @@
    "text": "The Simulated Electoral Commission confirms that you should not pay any fee to register. Report any request for a fee on 0800 100 2001.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.57
+   "seconds": 0.43
   },
   {
    "id": "edits_image/SEC-E-006/link_host/lowres",
@@ -1368,7 +1368,7 @@
    "text": "Observer accreditation costs N5,000 per organisation and closes on 20th November. Apply at https://observers-sec.example. Applications sent ",
    "notice_id": "SEC-E-007",
    "note": "",
-   "seconds": 0.79
+   "seconds": 0.83
   },
   {
    "id": "edits_image/SEC-E-007/link_host/lowres",
@@ -1387,7 +1387,7 @@
    "text": "Observer accreditation costs N5,000 per organisation and closes on 20th November. Apply at https://observers-sec.example. Applications sent ",
    "notice_id": "SEC-E-007",
    "note": "",
-   "seconds": 0.38
+   "seconds": 0.4
   },
   {
    "id": "edits_image/SEC-E-008/time/whatsapp",
@@ -1406,7 +1406,7 @@
    "text": "The commission helpline is 0800 200 3000 and is open from 9:00 am to 6:00 pm every weekday. Calls are free. Do not share your voter card num",
    "notice_id": "SEC-E-008",
    "note": "",
-   "seconds": 0.44
+   "seconds": 0.48
   },
   {
    "id": "crops_image/SEC-E-001/tail/clean",
@@ -1425,7 +1425,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration closes on 14th November. Register only at https://register.sec.example.",
    "notice_id": "SEC-E-001",
    "note": "",
-   "seconds": 0.4
+   "seconds": 0.42
   },
   {
    "id": "crops_image/SEC-E-001/tail/whatsapp",
@@ -1444,7 +1444,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration closes on 14th November. Register only at https://register.sec.example.",
    "notice_id": "SEC-E-001",
    "note": "",
-   "seconds": 0.36
+   "seconds": 0.37
   },
   {
    "id": "crops_image/SEC-E-003/tail/clean",
@@ -1465,7 +1465,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 8:00 am and close at 2:00 pm on Saturday 12th December. Bring your v",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.44
+   "seconds": 0.45
   },
   {
    "id": "crops_image/SEC-E-003/tail/whatsapp",
@@ -1486,7 +1486,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 8:00 am and close at 2:00 pm on Saturday 12th December. Bring your v",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.37
+   "seconds": 0.39
   },
   {
    "id": "crops_image/SEC-E-004/tail/clean",
@@ -1505,7 +1505,7 @@
    "text": "The Simulated Electoral Commission confirms that you should not pay any fee to register. Report any request for a fee on 0800 100 2000.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.41
+   "seconds": 0.43
   },
   {
    "id": "crops_image/SEC-E-004/tail/whatsapp",
@@ -1524,7 +1524,7 @@
    "text": "The Simulated Electoral Commission confirms that you should not pay any fee to register. Report any request for a fee on 0800 100 2000.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.37
+   "seconds": 0.38
   },
   {
    "id": "crops_image/SEC-E-005/tail/clean",
@@ -1569,7 +1569,7 @@
    "text": "Permanent voter cards can be collected from your local office between 9:00 am and 4:00 pm from Monday 7th December to Friday 11th December. ",
    "notice_id": "SEC-E-005",
    "note": "",
-   "seconds": 0.48
+   "seconds": 0.45
   },
   {
    "id": "crops_image/SEC-E-006/tail/clean",
@@ -1590,7 +1590,7 @@
    "text": "Results will be published on https://results.sec.example within 24 hours of the close of polls. The commission will not announce results by ",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.51
+   "seconds": 0.44
   },
   {
    "id": "crops_image/SEC-E-006/tail/whatsapp",
@@ -1611,7 +1611,7 @@
    "text": "Results will be published on https://results.sec.example within 24 hours of the close of polls. The commission will not announce results by ",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.48
+   "seconds": 0.43
   },
   {
    "id": "crops_image/SEC-E-007/tail/clean",
@@ -1632,7 +1632,7 @@
    "text": "Observer accreditation costs N5,000 per organisation and closes on 20th November. Apply at https://observers.sec.example. Applications sent ",
    "notice_id": "SEC-E-007",
    "note": "",
-   "seconds": 0.55
+   "seconds": 0.53
   },
   {
    "id": "crops_image/SEC-E-008/tail/clean",
@@ -1672,7 +1672,7 @@
    "text": "The commission helpline is 0800 200 3000 and is open from 8:00 am to 6:00 pm every weekday. Calls are free. Do not share your voter card num",
    "notice_id": "SEC-E-008",
    "note": "",
-   "seconds": 0.38
+   "seconds": 0.5
   }
  ],
  "cases": [
@@ -3802,7 +3802,7 @@
    "text": "Forwarded\n\nResults will be published on https://results.sec.example within 24 hours of the close of polls. The commission will not announce ",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.01
+   "seconds": 0.0
   },
   {
    "id": "honest_text/SEC-E-006/wrap_forwarded_many_times",
@@ -3821,7 +3821,7 @@
    "text": "Forwarded many times\n\nResults will be published on https://results.sec.example within 24 hours of the close of polls. The commission will no",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.01
+   "seconds": 0.0
   },
   {
    "id": "honest_text/SEC-E-006/wrap_sender_name",
@@ -4049,7 +4049,7 @@
    "text": "10:42 4G 87\nResults will be published on https://results.sec.example within 24 hours of the close of polls. The commission will not announce",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.01
+   "seconds": 0.0
   },
   {
    "id": "honest_text/SEC-E-006/wrap_combined",
@@ -4068,7 +4068,7 @@
    "text": "Forwarded\n~ Chidi Okafor\nPlease share, it is urgent!\nResults will be published on https://results.sec.example within 24 hours of the close o",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.01
+   "seconds": 0.0
   },
   {
    "id": "honest_text/SEC-E-007/identical",
@@ -4887,7 +4887,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration closes on 15th November. Register only at https://register.sec.example.",
    "notice_id": "SEC-E-001",
    "note": "",
-   "seconds": 0.0
+   "seconds": 0.01
   },
   {
    "id": "edits_text_wrapped/SEC-E-001/date_day/0",
@@ -5725,7 +5725,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration now closes on 28th November. Register only at http://register.sec.examp",
    "notice_id": "SEC-E-002",
    "note": "",
-   "seconds": 0.01
+   "seconds": 0.0
   },
   {
    "id": "edits_text_wrapped/SEC-E-002/link_scheme/4",
@@ -5788,7 +5788,7 @@
    "text": "Forwarded\n~ Chidi Okafor\nPlease share, it is urgent!\nThe Simulated Electoral Commission announces that voter registration now closes on 28th",
    "notice_id": "SEC-E-002",
    "note": "wrapper=combined",
-   "seconds": 0.01
+   "seconds": 0.0
   },
   {
    "id": "edits_text/SEC-E-002/lookalike_link/6",
@@ -5847,7 +5847,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration now closes on 28th November. Register only at https://register.sec.exam",
    "notice_id": "SEC-E-002",
    "note": "",
-   "seconds": 0.01
+   "seconds": 0.0
   },
   {
    "id": "edits_text_wrapped/SEC-E-002/word_free/7",
@@ -5889,7 +5889,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration now opens on 28th November. Register only at https://register.sec.examp",
    "notice_id": "SEC-E-002",
    "note": "",
-   "seconds": 0.01
+   "seconds": 0.0
   },
   {
    "id": "edits_text_wrapped/SEC-E-002/word_closes/8",
@@ -5931,7 +5931,7 @@
    "text": "The Simulated Electoral Commission denies that voter registration now closes on 28th November. Register only at https://register.sec.example",
    "notice_id": "SEC-E-002",
    "note": "",
-   "seconds": 0.01
+   "seconds": 0.0
   },
   {
    "id": "edits_text_wrapped/SEC-E-002/word_announces/9",
@@ -6021,7 +6021,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration now closes on 28th November. Registration may be refused without notice",
    "notice_id": "SEC-E-002",
    "note": "",
-   "seconds": 0.01
+   "seconds": 0.0
   },
   {
    "id": "edits_text_wrapped/SEC-E-002/inserted_sentence_words/11",
@@ -6044,7 +6044,7 @@
    "text": "Mama Ada (Church Group): The Simulated Electoral Commission announces that voter registration now closes on 28th November. Registration may ",
    "notice_id": "SEC-E-002",
    "note": "wrapper=group_prefix",
-   "seconds": 0.01
+   "seconds": 0.0
   },
   {
    "id": "edits_text/SEC-E-002/dropped_last_sentence/12",
@@ -6086,7 +6086,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration now closes on 28th November. Register only at https://register.sec.exam",
    "notice_id": "SEC-E-002",
    "note": "wrapper=timestamp_tail",
-   "seconds": 0.01
+   "seconds": 0.0
   },
   {
    "id": "edits_text/SEC-E-002/dropped_middle_sentence/13",
@@ -6151,7 +6151,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration now closes on 28th November. Register only at https://register.sec.exam",
    "notice_id": "SEC-E-002",
    "note": "",
-   "seconds": 0.01
+   "seconds": 0.0
   },
   {
    "id": "edits_text_wrapped/SEC-E-002/appended_link/14",
@@ -6172,7 +6172,7 @@
    "text": "Please share this with everyone, it is very important.\nThe Simulated Electoral Commission announces that voter registration now closes on 28",
    "notice_id": "SEC-E-002",
    "note": "wrapper=caption_above",
-   "seconds": 0.01
+   "seconds": 0.0
   },
   {
    "id": "edits_text/SEC-E-002/appended_phone/15",
@@ -6214,7 +6214,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration now closes on 28th November. Register only at https://register.sec.exam",
    "notice_id": "SEC-E-002",
    "note": "wrapper=caption_below",
-   "seconds": 0.01
+   "seconds": 0.0
   },
   {
    "id": "edits_text/SEC-E-003/time/0",
@@ -6275,7 +6275,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at B:00 am and close at 2:00 pm on Saturday 12th December. Bring your v",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.01
+   "seconds": 0.0
   },
   {
    "id": "edits_text_wrapped/SEC-E-003/lookalike_digit/1",
@@ -11671,7 +11671,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration closes on 14th November. Register only at https://register.sec.example.",
    "notice_id": "SEC-E-001",
    "note": "",
-   "seconds": 0.5
+   "seconds": 0.65
   },
   {
    "id": "honest_image/SEC-E-001/clean_wrapped",
@@ -11690,7 +11690,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration closes on 14th November. Register only at https://register.sec.example.",
    "notice_id": "SEC-E-001",
    "note": "",
-   "seconds": 0.52
+   "seconds": 0.53
   },
   {
    "id": "honest_image/SEC-E-001/whatsapp",
@@ -11768,7 +11768,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration closes on 14th November. Register only at https://register.sec.example.",
    "notice_id": "SEC-E-001",
    "note": "",
-   "seconds": 0.71
+   "seconds": 0.72
   },
   {
    "id": "honest_image/SEC-E-001/lowres",
@@ -11806,7 +11806,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration closes on 14th November. Register only at https://register.sec.example.",
    "notice_id": "SEC-E-001",
    "note": "",
-   "seconds": 0.36
+   "seconds": 0.35
   },
   {
    "id": "honest_image/SEC-E-002/clean",
@@ -11844,7 +11844,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration now closes on 28th November. Register only at https://register.sec.exam",
    "notice_id": "SEC-E-002",
    "note": "",
-   "seconds": 0.53
+   "seconds": 0.52
   },
   {
    "id": "honest_image/SEC-E-002/whatsapp",
@@ -11979,7 +11979,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 8:00 am and close at 2:00 pm on Saturday 12th December. Bring your v",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.53
+   "seconds": 0.52
   },
   {
    "id": "honest_image/SEC-E-003/clean_wrapped",
@@ -11998,7 +11998,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 8:00 am and close at 2:00 pm on Saturday 12th December. Bring your v",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.61
+   "seconds": 0.62
   },
   {
    "id": "honest_image/SEC-E-003/whatsapp",
@@ -12020,7 +12020,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 8:00 am and close at 2:00 pm on Saturday 12th December. Bring your v",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.43
+   "seconds": 0.44
   },
   {
    "id": "honest_image/SEC-E-003/whatsapp_wrapped",
@@ -12042,7 +12042,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 8:00 am and close at 2:00 pm on Saturday 12th December. Bring your v",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.51
+   "seconds": 0.47
   },
   {
    "id": "honest_image/SEC-E-003/phone",
@@ -12064,7 +12064,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 8:00 am and close at 2:00 pm on Saturday 12th December. Bring your v",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.66
+   "seconds": 0.65
   },
   {
    "id": "honest_image/SEC-E-003/phone_wrapped",
@@ -12083,7 +12083,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 8:00 am and close at 2:00 pm on Saturday 12th December. Bring your v",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.82
+   "seconds": 0.79
   },
   {
    "id": "honest_image/SEC-E-003/lowres",
@@ -12105,7 +12105,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 8:00 am and close at 2:00 pm on Saturday 12th December. Bring your v",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.41
+   "seconds": 0.37
   },
   {
    "id": "honest_image/SEC-E-003/lowres_wrapped",
@@ -12124,7 +12124,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 8:00 am and close at 2:00 pm on Saturday 12th December. Bring your v",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.4
+   "seconds": 0.39
   },
   {
    "id": "honest_image/SEC-E-004/clean",
@@ -12143,7 +12143,7 @@
    "text": "The Simulated Electoral Commission confirms that you should not pay any fee to register. Report any request for a fee on 0800 100 2000.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.44
+   "seconds": 0.42
   },
   {
    "id": "honest_image/SEC-E-004/clean_wrapped",
@@ -12162,7 +12162,7 @@
    "text": "The Simulated Electoral Commission confirms that you should not pay any fee to register. Report any request for a fee on 0800 100 2000.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.52
+   "seconds": 0.49
   },
   {
    "id": "honest_image/SEC-E-004/whatsapp",
@@ -12181,7 +12181,7 @@
    "text": "The Simulated Electoral Commission confirms that you should not pay any fee to register. Report any request for a fee on 0800 100 2000.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.38
+   "seconds": 0.35
   },
   {
    "id": "honest_image/SEC-E-004/whatsapp_wrapped",
@@ -12200,7 +12200,7 @@
    "text": "The Simulated Electoral Commission confirms that you should not pay any fee to register. Report any request for a fee on 0800 100 2000.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.39
+   "seconds": 0.4
   },
   {
    "id": "honest_image/SEC-E-004/phone",
@@ -12219,7 +12219,7 @@
    "text": "The Simulated Electoral Commission confirms that you should not pay any fee to register. Report any request for a fee on 0800 100 2000.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.66
+   "seconds": 0.58
   },
   {
    "id": "honest_image/SEC-E-004/phone_wrapped",
@@ -12238,7 +12238,7 @@
    "text": "The Simulated Electoral Commission confirms that you should not pay any fee to register. Report any request for a fee on 0800 100 2000.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.68
+   "seconds": 0.74
   },
   {
    "id": "honest_image/SEC-E-004/lowres",
@@ -12257,7 +12257,7 @@
    "text": "The Simulated Electoral Commission confirms that you should not pay any fee to register. Report any request for a fee on 0800 100 2000.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.32
+   "seconds": 0.36
   },
   {
    "id": "honest_image/SEC-E-004/lowres_wrapped",
@@ -12276,7 +12276,7 @@
    "text": "The Simulated Electoral Commission confirms that you should not pay any fee to register. Report any request for a fee on 0800 100 2000.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.36
+   "seconds": 0.39
   },
   {
    "id": "honest_image/SEC-E-005/clean",
@@ -12298,7 +12298,7 @@
    "text": "Permanent voter cards can be collected from your local office between 9:00 am and 4:00 pm from Monday 7th December to Friday 11th December. ",
    "notice_id": "SEC-E-005",
    "note": "",
-   "seconds": 0.58
+   "seconds": 0.66
   },
   {
    "id": "honest_image/SEC-E-005/clean_wrapped",
@@ -12319,7 +12319,7 @@
    "text": "Permanent voter cards can be collected from your local office between 9:00 am and 4:00 pm from Monday 7th December to Friday 11th December. ",
    "notice_id": "SEC-E-005",
    "note": "",
-   "seconds": 0.68
+   "seconds": 0.72
   },
   {
    "id": "honest_image/SEC-E-005/whatsapp",
@@ -12340,7 +12340,7 @@
    "text": "Permanent voter cards can be collected from your local office between 9:00 am and 4:00 pm from Monday 7th December to Friday 11th December. ",
    "notice_id": "SEC-E-005",
    "note": "",
-   "seconds": 0.47
+   "seconds": 0.51
   },
   {
    "id": "honest_image/SEC-E-005/whatsapp_wrapped",
@@ -12361,7 +12361,7 @@
    "text": "Permanent voter cards can be collected from your local office between 9:00 am and 4:00 pm from Monday 7th December to Friday 11th December. ",
    "notice_id": "SEC-E-005",
    "note": "",
-   "seconds": 0.52
+   "seconds": 0.55
   },
   {
    "id": "honest_image/SEC-E-005/phone",
@@ -12385,7 +12385,7 @@
    "text": "Permanent voter cards can be collected from your local office between 9:00 am and 4:00 pm from Monday 7th December to Friday 11th December. ",
    "notice_id": "SEC-E-005",
    "note": "",
-   "seconds": 0.73
+   "seconds": 0.82
   },
   {
    "id": "honest_image/SEC-E-005/phone_wrapped",
@@ -12407,7 +12407,7 @@
    "text": "Permanent voter cards can be collected from your local office between 9:00 am and 4:00 pm from Monday 7th December to Friday 11th December. ",
    "notice_id": "SEC-E-005",
    "note": "",
-   "seconds": 0.87
+   "seconds": 0.94
   },
   {
    "id": "honest_image/SEC-E-005/lowres",
@@ -12428,7 +12428,7 @@
    "text": "Permanent voter cards can be collected from your local office between 9:00 am and 4:00 pm from Monday 7th December to Friday 11th December. ",
    "notice_id": "SEC-E-005",
    "note": "",
-   "seconds": 0.45
+   "seconds": 0.46
   },
   {
    "id": "honest_image/SEC-E-005/lowres_wrapped",
@@ -12449,7 +12449,7 @@
    "text": "Permanent voter cards can be collected from your local office between 9:00 am and 4:00 pm from Monday 7th December to Friday 11th December. ",
    "notice_id": "SEC-E-005",
    "note": "",
-   "seconds": 0.48
+   "seconds": 0.5
   },
   {
    "id": "honest_image/SEC-E-006/clean",
@@ -12471,7 +12471,7 @@
    "text": "Results will be published on https://results.sec.example within 24 hours of the close of polls. The commission will not announce results by ",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.56
+   "seconds": 0.57
   },
   {
    "id": "honest_image/SEC-E-006/clean_wrapped",
@@ -12493,7 +12493,7 @@
    "text": "Results will be published on https://results.sec.example within 24 hours of the close of polls. The commission will not announce results by ",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.62
+   "seconds": 0.66
   },
   {
    "id": "honest_image/SEC-E-006/whatsapp",
@@ -12515,7 +12515,7 @@
    "text": "Results will be published on https://results.sec.example within 24 hours of the close of polls. The commission will not announce results by ",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.5
+   "seconds": 0.47
   },
   {
    "id": "honest_image/SEC-E-006/whatsapp_wrapped",
@@ -12536,7 +12536,7 @@
    "text": "Results will be published on https://results.sec.example within 24 hours of the close of polls. The commission will not announce results by ",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.53
+   "seconds": 0.58
   },
   {
    "id": "honest_image/SEC-E-006/phone",
@@ -12555,7 +12555,7 @@
    "text": "Results will be published on https://results.sec.example within 24 hours of the close of polls. The commission will not announce results by ",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.71
+   "seconds": 0.87
   },
   {
    "id": "honest_image/SEC-E-006/phone_wrapped",
@@ -12577,7 +12577,7 @@
    "text": "Results will be published on https://results.sec.example within 24 hours of the close of polls. The commission will not announce results by ",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.83
+   "seconds": 0.94
   },
   {
    "id": "honest_image/SEC-E-006/lowres",
@@ -12598,7 +12598,7 @@
    "text": "Results will be published on https://results.sec.example within 24 hours of the close of polls. The commission will not announce results by ",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.37
+   "seconds": 0.41
   },
   {
    "id": "honest_image/SEC-E-006/lowres_wrapped",
@@ -12619,7 +12619,7 @@
    "text": "Results will be published on https://results.sec.example within 24 hours of the close of polls. The commission will not announce results by ",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.4
+   "seconds": 0.42
   },
   {
    "id": "honest_image/SEC-E-007/clean",
@@ -12640,7 +12640,7 @@
    "text": "Observer accreditation costs N5,000 per organisation and closes on 20th November. Apply at https://observers.sec.example. Applications sent ",
    "notice_id": "SEC-E-007",
    "note": "",
-   "seconds": 0.51
+   "seconds": 0.58
   },
   {
    "id": "honest_image/SEC-E-007/clean_wrapped",
@@ -12661,7 +12661,7 @@
    "text": "Observer accreditation costs N5,000 per organisation and closes on 20th November. Apply at https://observers.sec.example. Applications sent ",
    "notice_id": "SEC-E-007",
    "note": "",
-   "seconds": 0.61
+   "seconds": 0.64
   },
   {
    "id": "honest_image/SEC-E-007/whatsapp",
@@ -12680,7 +12680,7 @@
    "text": "Observer accreditation costs N5,000 per organisation and closes on 20th November. Apply at https://observers.sec.example. Applications sent ",
    "notice_id": "SEC-E-007",
    "note": "",
-   "seconds": 0.42
+   "seconds": 0.44
   },
   {
    "id": "honest_image/SEC-E-007/whatsapp_wrapped",
@@ -12740,7 +12740,7 @@
    "text": "Observer accreditation costs N5,000 per organisation and closes on 20th November. Apply at https://observers.sec.example. Applications sent ",
    "notice_id": "SEC-E-007",
    "note": "",
-   "seconds": 0.83
+   "seconds": 0.84
   },
   {
    "id": "honest_image/SEC-E-007/lowres",
@@ -12759,7 +12759,7 @@
    "text": "Observer accreditation costs N5,000 per organisation and closes on 20th November. Apply at https://observers.sec.example. Applications sent ",
    "notice_id": "SEC-E-007",
    "note": "",
-   "seconds": 0.36
+   "seconds": 0.38
   },
   {
    "id": "honest_image/SEC-E-007/lowres_wrapped",
@@ -12778,7 +12778,7 @@
    "text": "Observer accreditation costs N5,000 per organisation and closes on 20th November. Apply at https://observers.sec.example. Applications sent ",
    "notice_id": "SEC-E-007",
    "note": "",
-   "seconds": 0.39
+   "seconds": 0.4
   },
   {
    "id": "honest_image/SEC-E-008/clean",
@@ -12799,7 +12799,7 @@
    "text": "The commission helpline is 0800 200 3000 and is open from 8:00 am to 6:00 pm every weekday. Calls are free. Do not share your voter card num",
    "notice_id": "SEC-E-008",
    "note": "",
-   "seconds": 0.48
+   "seconds": 0.5
   },
   {
    "id": "honest_image/SEC-E-008/clean_wrapped",
@@ -12821,7 +12821,7 @@
    "text": "The commission helpline is 0800 200 3000 and is open from 8:00 am to 6:00 pm every weekday. Calls are free. Do not share your voter card num",
    "notice_id": "SEC-E-008",
    "note": "",
-   "seconds": 0.57
+   "seconds": 0.6
   },
   {
    "id": "honest_image/SEC-E-008/whatsapp",
@@ -12842,7 +12842,7 @@
    "text": "The commission helpline is 0800 200 3000 and is open from 8:00 am to 6:00 pm every weekday. Calls are free. Do not share your voter card num",
    "notice_id": "SEC-E-008",
    "note": "",
-   "seconds": 0.4
+   "seconds": 0.43
   },
   {
    "id": "honest_image/SEC-E-008/whatsapp_wrapped",
@@ -12861,7 +12861,7 @@
    "text": "The commission helpline is 0800 200 3000 and is open from 8:00 am to 6:00 pm every weekday. Calls are free. Do not share your voter card num",
    "notice_id": "SEC-E-008",
    "note": "",
-   "seconds": 0.54
+   "seconds": 0.46
   },
   {
    "id": "honest_image/SEC-E-008/phone",
@@ -12883,7 +12883,7 @@
    "text": "The commission helpline is 0800 200 3000 and is open from 8:00 am to 6:00 pm every weekday. Calls are free. Do not share your voter card num",
    "notice_id": "SEC-E-008",
    "note": "",
-   "seconds": 0.63
+   "seconds": 0.64
   },
   {
    "id": "honest_image/SEC-E-008/phone_wrapped",
@@ -12905,7 +12905,7 @@
    "text": "The commission helpline is 0800 200 3000 and is open from 8:00 am to 6:00 pm every weekday. Calls are free. Do not share your voter card num",
    "notice_id": "SEC-E-008",
    "note": "",
-   "seconds": 0.77
+   "seconds": 0.78
   },
   {
    "id": "honest_image/SEC-E-008/lowres",
@@ -12924,7 +12924,7 @@
    "text": "The commission helpline is 0800 200 3000 and is open from 8:00 am to 6:00 pm every weekday. Calls are free. Do not share your voter card num",
    "notice_id": "SEC-E-008",
    "note": "",
-   "seconds": 0.36
+   "seconds": 0.37
   },
   {
    "id": "honest_image/SEC-E-008/lowres_wrapped",
@@ -12985,7 +12985,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration closes on 15th November. Register only at https://register.sec.example.",
    "notice_id": "SEC-E-001",
    "note": "",
-   "seconds": 0.46
+   "seconds": 0.44
   },
   {
    "id": "edits_image/SEC-E-001/date_day/phone",
@@ -13006,7 +13006,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration closes on 15th November. Register only at https://register.sec.example.",
    "notice_id": "SEC-E-001",
    "note": "",
-   "seconds": 0.76
+   "seconds": 0.77
   },
   {
    "id": "edits_image/SEC-E-001/date_day/lowres",
@@ -13070,7 +13070,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration closes on 14th December. Register only at https://register.sec.example.",
    "notice_id": "SEC-E-001",
    "note": "",
-   "seconds": 0.47
+   "seconds": 0.44
   },
   {
    "id": "edits_image/SEC-E-001/date_month/phone",
@@ -13091,7 +13091,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration closes on 14th December. Register only at https://register.sec.example.",
    "notice_id": "SEC-E-001",
    "note": "",
-   "seconds": 1.0
+   "seconds": 0.76
   },
   {
    "id": "edits_image/SEC-E-001/date_month/lowres",
@@ -13112,7 +13112,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration closes on 14th December. Register only at https://register.sec.example.",
    "notice_id": "SEC-E-001",
    "note": "",
-   "seconds": 0.57
+   "seconds": 0.39
   },
   {
    "id": "edits_image/SEC-E-001/link_host/clean",
@@ -13133,7 +13133,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration closes on 14th November. Register only at https://register-sec.example.",
    "notice_id": "SEC-E-001",
    "note": "",
-   "seconds": 0.97
+   "seconds": 0.56
   },
   {
    "id": "edits_image/SEC-E-001/link_host/whatsapp",
@@ -13155,7 +13155,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration closes on 14th November. Register only at https://register-sec.example.",
    "notice_id": "SEC-E-001",
    "note": "",
-   "seconds": 0.93
+   "seconds": 0.44
   },
   {
    "id": "edits_image/SEC-E-001/link_host/phone",
@@ -13176,7 +13176,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration closes on 14th November. Register only at https://register-sec.example.",
    "notice_id": "SEC-E-001",
    "note": "",
-   "seconds": 1.21
+   "seconds": 0.74
   },
   {
    "id": "edits_image/SEC-E-001/link_host/lowres",
@@ -13195,7 +13195,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration closes on 14th November. Register only at https://register-sec.example.",
    "notice_id": "SEC-E-001",
    "note": "",
-   "seconds": 0.53
+   "seconds": 0.38
   },
   {
    "id": "edits_image/SEC-E-002/date_day/clean",
@@ -13216,7 +13216,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration now closes on 1st November. Register only at https://register.sec.examp",
    "notice_id": "SEC-E-002",
    "note": "",
-   "seconds": 0.72
+   "seconds": 0.56
   },
   {
    "id": "edits_image/SEC-E-002/date_day/whatsapp",
@@ -13237,7 +13237,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration now closes on 1st November. Register only at https://register.sec.examp",
    "notice_id": "SEC-E-002",
    "note": "",
-   "seconds": 0.59
+   "seconds": 0.45
   },
   {
    "id": "edits_image/SEC-E-002/date_day/phone",
@@ -13259,7 +13259,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration now closes on 1st November. Register only at https://register.sec.examp",
    "notice_id": "SEC-E-002",
    "note": "",
-   "seconds": 1.11
+   "seconds": 0.77
   },
   {
    "id": "edits_image/SEC-E-002/date_day/lowres",
@@ -13280,7 +13280,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration now closes on 1st November. Register only at https://register.sec.examp",
    "notice_id": "SEC-E-002",
    "note": "",
-   "seconds": 0.9
+   "seconds": 0.4
   },
   {
    "id": "edits_image/SEC-E-002/date_month/clean",
@@ -13301,7 +13301,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration now closes on 28th December. Register only at https://register.sec.exam",
    "notice_id": "SEC-E-002",
    "note": "",
-   "seconds": 0.69
+   "seconds": 0.57
   },
   {
    "id": "edits_image/SEC-E-002/date_month/whatsapp",
@@ -13322,7 +13322,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration now closes on 28th December. Register only at https://register.sec.exam",
    "notice_id": "SEC-E-002",
    "note": "",
-   "seconds": 1.2
+   "seconds": 0.45
   },
   {
    "id": "edits_image/SEC-E-002/date_month/phone",
@@ -13343,7 +13343,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration now closes on 28th December. Register only at https://register.sec.exam",
    "notice_id": "SEC-E-002",
    "note": "",
-   "seconds": 0.78
+   "seconds": 0.77
   },
   {
    "id": "edits_image/SEC-E-002/date_month/lowres",
@@ -13364,7 +13364,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration now closes on 28th December. Register only at https://register.sec.exam",
    "notice_id": "SEC-E-002",
    "note": "",
-   "seconds": 0.48
+   "seconds": 0.39
   },
   {
    "id": "edits_image/SEC-E-002/link_host/clean",
@@ -13385,7 +13385,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration now closes on 28th November. Register only at https://register-sec.exam",
    "notice_id": "SEC-E-002",
    "note": "",
-   "seconds": 0.63
+   "seconds": 0.57
   },
   {
    "id": "edits_image/SEC-E-002/link_host/whatsapp",
@@ -13406,7 +13406,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration now closes on 28th November. Register only at https://register-sec.exam",
    "notice_id": "SEC-E-002",
    "note": "",
-   "seconds": 0.49
+   "seconds": 0.45
   },
   {
    "id": "edits_image/SEC-E-002/link_host/phone",
@@ -13428,7 +13428,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration now closes on 28th November. Register only at https://register-sec.exam",
    "notice_id": "SEC-E-002",
    "note": "",
-   "seconds": 0.8
+   "seconds": 0.78
   },
   {
    "id": "edits_image/SEC-E-002/link_host/lowres",
@@ -13447,7 +13447,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration now closes on 28th November. Register only at https://register-sec.exam",
    "notice_id": "SEC-E-002",
    "note": "",
-   "seconds": 0.41
+   "seconds": 0.38
   },
   {
    "id": "edits_image/SEC-E-003/date_day/clean",
@@ -13468,7 +13468,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 8:00 am and close at 2:00 pm on Saturday 13th December. Bring your v",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 1.11
+   "seconds": 0.65
   },
   {
    "id": "edits_image/SEC-E-003/date_day/whatsapp",
@@ -13491,7 +13491,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 8:00 am and close at 2:00 pm on Saturday 13th December. Bring your v",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.7
+   "seconds": 0.51
   },
   {
    "id": "edits_image/SEC-E-003/date_day/phone",
@@ -13512,7 +13512,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 8:00 am and close at 2:00 pm on Saturday 13th December. Bring your v",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.95
+   "seconds": 0.87
   },
   {
    "id": "edits_image/SEC-E-003/date_day/lowres",
@@ -13533,7 +13533,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 8:00 am and close at 2:00 pm on Saturday 13th December. Bring your v",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.48
+   "seconds": 0.42
   },
   {
    "id": "edits_image/SEC-E-003/date_month/clean",
@@ -13554,7 +13554,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 8:00 am and close at 2:00 pm on Saturday 12th January. Bring your vo",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.67
+   "seconds": 0.64
   },
   {
    "id": "edits_image/SEC-E-003/date_month/whatsapp",
@@ -13577,7 +13577,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 8:00 am and close at 2:00 pm on Saturday 12th January. Bring your vo",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.51
+   "seconds": 0.5
   },
   {
    "id": "edits_image/SEC-E-003/date_month/phone",
@@ -13598,7 +13598,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 8:00 am and close at 2:00 pm on Saturday 12th January. Bring your vo",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.93
+   "seconds": 0.85
   },
   {
    "id": "edits_image/SEC-E-003/date_month/lowres",
@@ -13619,7 +13619,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 8:00 am and close at 2:00 pm on Saturday 12th January. Bring your vo",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.51
+   "seconds": 0.44
   },
   {
    "id": "edits_image/SEC-E-003/time/clean",
@@ -13640,7 +13640,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 9:00 am and close at 2:00 pm on Saturday 12th December. Bring your v",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.72
+   "seconds": 0.65
   },
   {
    "id": "edits_image/SEC-E-003/time/whatsapp",
@@ -13663,7 +13663,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 9:00 am and close at 2:00 pm on Saturday 12th December. Bring your v",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.61
+   "seconds": 0.51
   },
   {
    "id": "edits_image/SEC-E-003/time/phone",
@@ -13684,7 +13684,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 9:00 am and close at 2:00 pm on Saturday 12th December. Bring your v",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 1.18
+   "seconds": 0.87
   },
   {
    "id": "edits_image/SEC-E-003/time/lowres",
@@ -13707,7 +13707,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 9:00 am and close at 2:00 pm on Saturday 12th December. Bring your v",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.59
+   "seconds": 0.44
   },
   {
    "id": "edits_image/SEC-E-004/phone/clean",
@@ -13726,7 +13726,7 @@
    "text": "The Simulated Electoral Commission confirms that you should not pay any fee to register. Report any request for a fee on 0800 100 2001.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.6
+   "seconds": 0.53
   },
   {
    "id": "edits_image/SEC-E-004/phone/whatsapp",
@@ -13745,7 +13745,7 @@
    "text": "The Simulated Electoral Commission confirms that you should not pay any fee to register. Report any request for a fee on 0800 100 2001.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.57
+   "seconds": 0.43
   },
   {
    "id": "edits_image/SEC-E-004/phone/phone",
@@ -13766,7 +13766,7 @@
    "text": "The Simulated Electoral Commission confirms that you should not pay any fee to register. Report any request for a fee on 0800 100 2001.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.85
+   "seconds": 0.73
   },
   {
    "id": "edits_image/SEC-E-004/phone/lowres",
@@ -13787,7 +13787,7 @@
    "text": "The Simulated Electoral Commission confirms that you should not pay any fee to register. Report any request for a fee on 0800 100 2001.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.42
+   "seconds": 0.38
   },
   {
    "id": "edits_image/SEC-E-004/negation_removed/clean",
@@ -13808,7 +13808,7 @@
    "text": "The Simulated Electoral Commission confirms that you should pay any fee to register. Report any request for a fee on 0800 100 2000.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.53
+   "seconds": 0.57
   },
   {
    "id": "edits_image/SEC-E-004/negation_removed/whatsapp",
@@ -13829,7 +13829,7 @@
    "text": "The Simulated Electoral Commission confirms that you should pay any fee to register. Report any request for a fee on 0800 100 2000.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.46
+   "seconds": 0.45
   },
   {
    "id": "edits_image/SEC-E-004/negation_removed/phone",
@@ -13851,7 +13851,7 @@
    "text": "The Simulated Electoral Commission confirms that you should pay any fee to register. Report any request for a fee on 0800 100 2000.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.76
+   "seconds": 1.18
   },
   {
    "id": "edits_image/SEC-E-004/negation_removed/lowres",
@@ -13872,7 +13872,7 @@
    "text": "The Simulated Electoral Commission confirms that you should pay any fee to register. Report any request for a fee on 0800 100 2000.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.38
+   "seconds": 0.41
   },
   {
    "id": "edits_image/SEC-E-005/date_day/clean",
@@ -13894,7 +13894,7 @@
    "text": "Permanent voter cards can be collected from your local office between 9:00 am and 4:00 pm from Monday 8th December to Friday 11th December. ",
    "notice_id": "SEC-E-005",
    "note": "",
-   "seconds": 0.8
+   "seconds": 0.72
   },
   {
    "id": "edits_image/SEC-E-005/date_day/whatsapp",
@@ -13916,7 +13916,7 @@
    "text": "Permanent voter cards can be collected from your local office between 9:00 am and 4:00 pm from Monday 8th December to Friday 11th December. ",
    "notice_id": "SEC-E-005",
    "note": "",
-   "seconds": 0.61
+   "seconds": 0.55
   },
   {
    "id": "edits_image/SEC-E-005/date_day/phone",
@@ -13939,7 +13939,7 @@
    "text": "Permanent voter cards can be collected from your local office between 9:00 am and 4:00 pm from Monday 8th December to Friday 11th December. ",
    "notice_id": "SEC-E-005",
    "note": "",
-   "seconds": 1.03
+   "seconds": 0.94
   },
   {
    "id": "edits_image/SEC-E-005/date_day/lowres",
@@ -13961,7 +13961,7 @@
    "text": "Permanent voter cards can be collected from your local office between 9:00 am and 4:00 pm from Monday 8th December to Friday 11th December. ",
    "notice_id": "SEC-E-005",
    "note": "",
-   "seconds": 0.46
+   "seconds": 0.47
   },
   {
    "id": "edits_image/SEC-E-005/date_month/clean",
@@ -13983,7 +13983,7 @@
    "text": "Permanent voter cards can be collected from your local office between 9:00 am and 4:00 pm from Monday 7th January to Friday 11th December. C",
    "notice_id": "SEC-E-005",
    "note": "",
-   "seconds": 0.76
+   "seconds": 0.7
   },
   {
    "id": "edits_image/SEC-E-005/date_month/whatsapp",
@@ -14006,7 +14006,7 @@
    "text": "Permanent voter cards can be collected from your local office between 9:00 am and 4:00 pm from Monday 7th January to Friday 11th December. C",
    "notice_id": "SEC-E-005",
    "note": "",
-   "seconds": 0.56
+   "seconds": 0.54
   },
   {
    "id": "edits_image/SEC-E-005/date_month/phone",
@@ -14028,7 +14028,7 @@
    "text": "Permanent voter cards can be collected from your local office between 9:00 am and 4:00 pm from Monday 7th January to Friday 11th December. C",
    "notice_id": "SEC-E-005",
    "note": "",
-   "seconds": 1.04
+   "seconds": 0.94
   },
   {
    "id": "edits_image/SEC-E-005/date_month/lowres",
@@ -14050,7 +14050,7 @@
    "text": "Permanent voter cards can be collected from your local office between 9:00 am and 4:00 pm from Monday 7th January to Friday 11th December. C",
    "notice_id": "SEC-E-005",
    "note": "",
-   "seconds": 0.48
+   "seconds": 0.47
   },
   {
    "id": "edits_image/SEC-E-005/time/clean",
@@ -14072,7 +14072,7 @@
    "text": "Permanent voter cards can be collected from your local office between 10:00 am and 4:00 pm from Monday 7th December to Friday 11th December.",
    "notice_id": "SEC-E-005",
    "note": "",
-   "seconds": 0.69
+   "seconds": 0.7
   },
   {
    "id": "edits_image/SEC-E-005/time/whatsapp",
@@ -14117,7 +14117,7 @@
    "text": "Permanent voter cards can be collected from your local office between 10:00 am and 4:00 pm from Monday 7th December to Friday 11th December.",
    "notice_id": "SEC-E-005",
    "note": "",
-   "seconds": 0.93
+   "seconds": 1.11
   },
   {
    "id": "edits_image/SEC-E-005/time/lowres",
@@ -14139,7 +14139,7 @@
    "text": "Permanent voter cards can be collected from your local office between 10:00 am and 4:00 pm from Monday 7th December to Friday 11th December.",
    "notice_id": "SEC-E-005",
    "note": "",
-   "seconds": 0.48
+   "seconds": 0.59
   },
   {
    "id": "edits_image/SEC-E-006/link_host/clean",
@@ -14162,7 +14162,7 @@
    "text": "Results will be published on https://results-sec.example within 24 hours of the close of polls. The commission will not announce results by ",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.63
+   "seconds": 0.71
   },
   {
    "id": "edits_image/SEC-E-006/link_host/whatsapp",
@@ -14184,7 +14184,7 @@
    "text": "Results will be published on https://results-sec.example within 24 hours of the close of polls. The commission will not announce results by ",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.49
+   "seconds": 0.52
   },
   {
    "id": "edits_image/SEC-E-006/link_host/phone",
@@ -14205,7 +14205,7 @@
    "text": "Results will be published on https://results-sec.example within 24 hours of the close of polls. The commission will not announce results by ",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.84
+   "seconds": 0.87
   },
   {
    "id": "edits_image/SEC-E-006/link_host/lowres",
@@ -14247,7 +14247,7 @@
    "text": "Results will be published on https://results.sec.example within 25 hours of the close of polls. The commission will not announce results by ",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.61
+   "seconds": 0.64
   },
   {
    "id": "edits_image/SEC-E-006/number/whatsapp",
@@ -14269,7 +14269,7 @@
    "text": "Results will be published on https://results.sec.example within 25 hours of the close of polls. The commission will not announce results by ",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.47
+   "seconds": 0.5
   },
   {
    "id": "edits_image/SEC-E-006/number/phone",
@@ -14290,7 +14290,7 @@
    "text": "Results will be published on https://results.sec.example within 25 hours of the close of polls. The commission will not announce results by ",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.83
+   "seconds": 0.87
   },
   {
    "id": "edits_image/SEC-E-006/number/lowres",
@@ -14311,7 +14311,7 @@
    "text": "Results will be published on https://results.sec.example within 25 hours of the close of polls. The commission will not announce results by ",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.4
+   "seconds": 0.45
   },
   {
    "id": "edits_image/SEC-E-006/negation_removed/clean",
@@ -14334,7 +14334,7 @@
    "text": "Results will be published on https://results.sec.example within 24 hours of the close of polls. The commission will announce results by phon",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.6
+   "seconds": 0.65
   },
   {
    "id": "edits_image/SEC-E-006/negation_removed/whatsapp",
@@ -14356,7 +14356,7 @@
    "text": "Results will be published on https://results.sec.example within 24 hours of the close of polls. The commission will announce results by phon",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.47
+   "seconds": 0.49
   },
   {
    "id": "edits_image/SEC-E-006/negation_removed/phone",
@@ -14378,7 +14378,7 @@
    "text": "Results will be published on https://results.sec.example within 24 hours of the close of polls. The commission will announce results by phon",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.82
+   "seconds": 0.88
   },
   {
    "id": "edits_image/SEC-E-006/negation_removed/lowres",
@@ -14401,7 +14401,7 @@
    "text": "Results will be published on https://results.sec.example within 24 hours of the close of polls. The commission will announce results by phon",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.4
+   "seconds": 0.41
   },
   {
    "id": "edits_image/SEC-E-007/date_day/clean",
@@ -14422,7 +14422,7 @@
    "text": "Observer accreditation costs N5,000 per organisation and closes on 21st November. Apply at https://observers.sec.example. Applications sent ",
    "notice_id": "SEC-E-007",
    "note": "",
-   "seconds": 0.59
+   "seconds": 0.61
   },
   {
    "id": "edits_image/SEC-E-007/date_day/whatsapp",
@@ -14444,7 +14444,7 @@
    "text": "Observer accreditation costs N5,000 per organisation and closes on 21st November. Apply at https://observers.sec.example. Applications sent ",
    "notice_id": "SEC-E-007",
    "note": "",
-   "seconds": 0.47
+   "seconds": 0.48
   },
   {
    "id": "edits_image/SEC-E-007/date_day/phone",
@@ -14465,7 +14465,7 @@
    "text": "Observer accreditation costs N5,000 per organisation and closes on 21st November. Apply at https://observers.sec.example. Applications sent ",
    "notice_id": "SEC-E-007",
    "note": "",
-   "seconds": 0.8
+   "seconds": 0.85
   },
   {
    "id": "edits_image/SEC-E-007/date_day/lowres",
@@ -14486,7 +14486,7 @@
    "text": "Observer accreditation costs N5,000 per organisation and closes on 21st November. Apply at https://observers.sec.example. Applications sent ",
    "notice_id": "SEC-E-007",
    "note": "",
-   "seconds": 0.41
+   "seconds": 0.39
   },
   {
    "id": "edits_image/SEC-E-007/date_month/clean",
@@ -14507,7 +14507,7 @@
    "text": "Observer accreditation costs N5,000 per organisation and closes on 20th December. Apply at https://observers.sec.example. Applications sent ",
    "notice_id": "SEC-E-007",
    "note": "",
-   "seconds": 0.59
+   "seconds": 0.61
   },
   {
    "id": "edits_image/SEC-E-007/date_month/whatsapp",
@@ -14528,7 +14528,7 @@
    "text": "Observer accreditation costs N5,000 per organisation and closes on 20th December. Apply at https://observers.sec.example. Applications sent ",
    "notice_id": "SEC-E-007",
    "note": "",
-   "seconds": 0.45
+   "seconds": 0.46
   },
   {
    "id": "edits_image/SEC-E-007/date_month/phone",
@@ -14550,7 +14550,7 @@
    "text": "Observer accreditation costs N5,000 per organisation and closes on 20th December. Apply at https://observers.sec.example. Applications sent ",
    "notice_id": "SEC-E-007",
    "note": "",
-   "seconds": 0.79
+   "seconds": 0.83
   },
   {
    "id": "edits_image/SEC-E-007/date_month/lowres",
@@ -14571,7 +14571,7 @@
    "text": "Observer accreditation costs N5,000 per organisation and closes on 20th December. Apply at https://observers.sec.example. Applications sent ",
    "notice_id": "SEC-E-007",
    "note": "",
-   "seconds": 0.38
+   "seconds": 0.39
   },
   {
    "id": "edits_image/SEC-E-007/link_host/clean",
@@ -14593,7 +14593,7 @@
    "text": "Observer accreditation costs N5,000 per organisation and closes on 20th November. Apply at https://observers-sec.example. Applications sent ",
    "notice_id": "SEC-E-007",
    "note": "",
-   "seconds": 0.59
+   "seconds": 0.6
   },
   {
    "id": "edits_image/SEC-E-007/link_host/whatsapp",
@@ -14616,7 +14616,7 @@
    "text": "Observer accreditation costs N5,000 per organisation and closes on 20th November. Apply at https://observers-sec.example. Applications sent ",
    "notice_id": "SEC-E-007",
    "note": "",
-   "seconds": 0.45
+   "seconds": 0.47
   },
   {
    "id": "edits_image/SEC-E-007/link_host/phone",
@@ -14635,7 +14635,7 @@
    "text": "Observer accreditation costs N5,000 per organisation and closes on 20th November. Apply at https://observers-sec.example. Applications sent ",
    "notice_id": "SEC-E-007",
    "note": "",
-   "seconds": 0.79
+   "seconds": 0.83
   },
   {
    "id": "edits_image/SEC-E-007/link_host/lowres",
@@ -14654,7 +14654,7 @@
    "text": "Observer accreditation costs N5,000 per organisation and closes on 20th November. Apply at https://observers-sec.example. Applications sent ",
    "notice_id": "SEC-E-007",
    "note": "",
-   "seconds": 0.38
+   "seconds": 0.4
   },
   {
    "id": "edits_image/SEC-E-008/time/clean",
@@ -14677,7 +14677,7 @@
    "text": "The commission helpline is 0800 200 3000 and is open from 9:00 am to 6:00 pm every weekday. Calls are free. Do not share your voter card num",
    "notice_id": "SEC-E-008",
    "note": "",
-   "seconds": 0.57
+   "seconds": 0.63
   },
   {
    "id": "edits_image/SEC-E-008/time/whatsapp",
@@ -14696,7 +14696,7 @@
    "text": "The commission helpline is 0800 200 3000 and is open from 9:00 am to 6:00 pm every weekday. Calls are free. Do not share your voter card num",
    "notice_id": "SEC-E-008",
    "note": "",
-   "seconds": 0.44
+   "seconds": 0.48
   },
   {
    "id": "edits_image/SEC-E-008/time/phone",
@@ -14717,7 +14717,7 @@
    "text": "The commission helpline is 0800 200 3000 and is open from 9:00 am to 6:00 pm every weekday. Calls are free. Do not share your voter card num",
    "notice_id": "SEC-E-008",
    "note": "",
-   "seconds": 0.76
+   "seconds": 0.92
   },
   {
    "id": "edits_image/SEC-E-008/time/lowres",
@@ -14738,7 +14738,7 @@
    "text": "The commission helpline is 0800 200 3000 and is open from 9:00 am to 6:00 pm every weekday. Calls are free. Do not share your voter card num",
    "notice_id": "SEC-E-008",
    "note": "",
-   "seconds": 0.39
+   "seconds": 0.45
   },
   {
    "id": "edits_image/SEC-E-008/phone/clean",
@@ -14760,7 +14760,7 @@
    "text": "The commission helpline is 0800 200 3001 and is open from 8:00 am to 6:00 pm every weekday. Calls are free. Do not share your voter card num",
    "notice_id": "SEC-E-008",
    "note": "",
-   "seconds": 0.55
+   "seconds": 0.63
   },
   {
    "id": "edits_image/SEC-E-008/phone/whatsapp",
@@ -14781,7 +14781,7 @@
    "text": "The commission helpline is 0800 200 3001 and is open from 8:00 am to 6:00 pm every weekday. Calls are free. Do not share your voter card num",
    "notice_id": "SEC-E-008",
    "note": "",
-   "seconds": 0.44
+   "seconds": 0.47
   },
   {
    "id": "edits_image/SEC-E-008/phone/phone",
@@ -14803,7 +14803,7 @@
    "text": "The commission helpline is 0800 200 3001 and is open from 8:00 am to 6:00 pm every weekday. Calls are free. Do not share your voter card num",
    "notice_id": "SEC-E-008",
    "note": "",
-   "seconds": 0.75
+   "seconds": 0.77
   },
   {
    "id": "edits_image/SEC-E-008/phone/lowres",
@@ -14824,7 +14824,7 @@
    "text": "The commission helpline is 0800 200 3001 and is open from 8:00 am to 6:00 pm every weekday. Calls are free. Do not share your voter card num",
    "notice_id": "SEC-E-008",
    "note": "",
-   "seconds": 0.4
+   "seconds": 0.41
   },
   {
    "id": "edits_image/SEC-E-008/negation_removed/clean",
@@ -14845,7 +14845,7 @@
    "text": "The commission helpline is 0800 200 3000 and is open from 8:00 am to 6:00 pm every weekday. Calls are free. Do share your voter card number ",
    "notice_id": "SEC-E-008",
    "note": "",
-   "seconds": 0.58
+   "seconds": 0.59
   },
   {
    "id": "edits_image/SEC-E-008/negation_removed/whatsapp",
@@ -14866,7 +14866,7 @@
    "text": "The commission helpline is 0800 200 3000 and is open from 8:00 am to 6:00 pm every weekday. Calls are free. Do share your voter card number ",
    "notice_id": "SEC-E-008",
    "note": "",
-   "seconds": 0.46
+   "seconds": 0.45
   },
   {
    "id": "edits_image/SEC-E-008/negation_removed/phone",
@@ -14910,7 +14910,7 @@
    "text": "The commission helpline is 0800 200 3000 and is open from 8:00 am to 6:00 pm every weekday. Calls are free. Do share your voter card number ",
    "notice_id": "SEC-E-008",
    "note": "",
-   "seconds": 0.38
+   "seconds": 0.39
   },
   {
    "id": "crops_image/SEC-E-001/tail/clean",
@@ -14929,7 +14929,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration closes on 14th November. Register only at https://register.sec.example.",
    "notice_id": "SEC-E-001",
    "note": "",
-   "seconds": 0.4
+   "seconds": 0.42
   },
   {
    "id": "crops_image/SEC-E-001/tail/whatsapp",
@@ -14948,7 +14948,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration closes on 14th November. Register only at https://register.sec.example.",
    "notice_id": "SEC-E-001",
    "note": "",
-   "seconds": 0.36
+   "seconds": 0.37
   },
   {
    "id": "crops_image/SEC-E-002/tail/clean",
@@ -14967,7 +14967,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration now closes on 28th November. Register only at https://register.sec.exam",
    "notice_id": "SEC-E-002",
    "note": "",
-   "seconds": 0.41
+   "seconds": 0.43
   },
   {
    "id": "crops_image/SEC-E-002/tail/whatsapp",
@@ -14986,7 +14986,7 @@
    "text": "The Simulated Electoral Commission announces that voter registration now closes on 28th November. Register only at https://register.sec.exam",
    "notice_id": "SEC-E-002",
    "note": "",
-   "seconds": 0.37
+   "seconds": 0.38
   },
   {
    "id": "crops_image/SEC-E-003/tail/clean",
@@ -15007,7 +15007,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 8:00 am and close at 2:00 pm on Saturday 12th December. Bring your v",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.44
+   "seconds": 0.45
   },
   {
    "id": "crops_image/SEC-E-003/tail/whatsapp",
@@ -15028,7 +15028,7 @@
    "text": "The Simulated Electoral Commission announces that polling units open at 8:00 am and close at 2:00 pm on Saturday 12th December. Bring your v",
    "notice_id": "SEC-E-003",
    "note": "",
-   "seconds": 0.37
+   "seconds": 0.39
   },
   {
    "id": "crops_image/SEC-E-004/tail/clean",
@@ -15047,7 +15047,7 @@
    "text": "The Simulated Electoral Commission confirms that you should not pay any fee to register. Report any request for a fee on 0800 100 2000.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.41
+   "seconds": 0.43
   },
   {
    "id": "crops_image/SEC-E-004/tail/whatsapp",
@@ -15066,7 +15066,7 @@
    "text": "The Simulated Electoral Commission confirms that you should not pay any fee to register. Report any request for a fee on 0800 100 2000.",
    "notice_id": "SEC-E-004",
    "note": "",
-   "seconds": 0.37
+   "seconds": 0.38
   },
   {
    "id": "crops_image/SEC-E-005/tail/clean",
@@ -15111,7 +15111,7 @@
    "text": "Permanent voter cards can be collected from your local office between 9:00 am and 4:00 pm from Monday 7th December to Friday 11th December. ",
    "notice_id": "SEC-E-005",
    "note": "",
-   "seconds": 0.48
+   "seconds": 0.45
   },
   {
    "id": "crops_image/SEC-E-006/tail/clean",
@@ -15132,7 +15132,7 @@
    "text": "Results will be published on https://results.sec.example within 24 hours of the close of polls. The commission will not announce results by ",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.51
+   "seconds": 0.44
   },
   {
    "id": "crops_image/SEC-E-006/tail/whatsapp",
@@ -15153,7 +15153,7 @@
    "text": "Results will be published on https://results.sec.example within 24 hours of the close of polls. The commission will not announce results by ",
    "notice_id": "SEC-E-006",
    "note": "",
-   "seconds": 0.48
+   "seconds": 0.43
   },
   {
    "id": "crops_image/SEC-E-007/tail/clean",
@@ -15174,7 +15174,7 @@
    "text": "Observer accreditation costs N5,000 per organisation and closes on 20th November. Apply at https://observers.sec.example. Applications sent ",
    "notice_id": "SEC-E-007",
    "note": "",
-   "seconds": 0.55
+   "seconds": 0.53
   },
   {
    "id": "crops_image/SEC-E-007/tail/whatsapp",
@@ -15193,7 +15193,7 @@
    "text": "Observer accreditation costs N5,000 per organisation and closes on 20th November. Apply at https://observers.sec.example. Applications sent ",
    "notice_id": "SEC-E-007",
    "note": "",
-   "seconds": 0.41
+   "seconds": 0.36
   },
   {
    "id": "crops_image/SEC-E-008/tail/clean",
@@ -15233,7 +15233,7 @@
    "text": "The commission helpline is 0800 200 3000 and is open from 8:00 am to 6:00 pm every weekday. Calls are free. Do not share your voter card num",
    "notice_id": "SEC-E-008",
    "note": "",
-   "seconds": 0.38
+   "seconds": 0.5
   }
  ]
 }

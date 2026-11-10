@@ -55,11 +55,14 @@ export const yo: Strings = {
     errorSize: "Àwòrán yẹn tóbi jù. Lo èyí tí kò tó 5 MB.",
     errorBusy: "Àyẹ̀wò pọ̀ jù báyìí. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan sí i lẹ́yìn ìṣẹ́jú kan.",
     errorDown: "A kò lè dé ibi àyẹ̀wò. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan sí i.",
+    beta: "Beta",
+    betaNote: "Àyẹ̀wò fọ́tò jẹ́ tuntun, a sì ṣì ń dán an wò. Ó lè sọ pé òun kò lè jẹ́rìí ìkéde tó jẹ́ òótọ́. Lílẹ ọ̀rọ̀ inú ìkéde ṣeé gbẹ́kẹ̀lé jù.",
     errorOff: "Àyẹ̀wò fọ́tò kò sí lọ́wọ́lọ́wọ́. Jọ̀wọ́ lẹ ọ̀rọ̀ inú ìkéde dípò rẹ̀.",
   },
 
   reading: {
     title: "À ń ka ìkéde rẹ",
+    beta: "Beta",
     why: "À ń ka fọ́tò náà lẹ́ẹ̀mejì, a sì ń gbẹ́kẹ̀lé ohun tí ìkàwé méjèèjì fohùn ṣọ̀kan lé lórí nìkan.",
     stages: {
       queued: "Ó ń dúró dè àkókò rẹ̀",
@@ -68,12 +71,13 @@ export const yo: Strings = {
       comparing: "À ń fi wé ìwé àkọsílẹ̀ àṣẹ",
     },
     failed: "A kò lè ka fọ́tò yẹn. Gbìyànjú èyí tó mọ́ gaara, tàbí lẹ ọ̀rọ̀ inú rẹ̀.",
-    expired: "Àyẹ̀wò yìí kò sí níbí mọ́. Jọ̀wọ́ bẹ̀rẹ̀ lẹ́ẹ̀kan sí i.",
+    expired: "Nǹkan kan ṣẹlẹ̀, jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan sí i.",
     back: "Ṣàyẹ̀wò ìkéde mìíràn",
   },
 
   photo: {
     heading: "Fọ́tò rẹ, tí a sàmì sí",
+    beta: "Beta",
     note: "Ìwọ nìkan ló lè rí fọ́tò yìí. A kì í tọ́jú rẹ̀.",
     alt: "Fọ́tò tí o fi ránṣẹ́, pẹ̀lú àmì níbi tó ti yàtọ̀ sí ìkéde àṣẹ",
   },

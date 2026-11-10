@@ -88,9 +88,10 @@ export function UploadZone({ s, lang }: { s: Strings["upload"]; lang: Lang }) {
   return (
     <section id="upload" className={`upload${over ? " over" : ""}`} aria-labelledby="upload-h">
       <h2 className="headline" id="upload-h">
-        {s.heading}
+        {s.heading} <span className="beta">{s.beta}</span>
       </h2>
       <p>{s.lead}</p>
+      <p className="label beta-note">{s.betaNote}</p>
       <div
         className="dropzone"
         onDragOver={(e) => {
