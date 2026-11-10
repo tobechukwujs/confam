@@ -138,17 +138,18 @@ def _compare(copy: list[Token], m: Match, record: Sequence[OfficialNotice]) -> O
         return Outcome("partial", notice=m.notice)
     return Outcome("confirmed", notice=m.notice, superseded_by=supersession_for(m.notice, record))
 
-def evaluate(text: str, record: Sequence[OfficialNotice]) -> Outcome:
-    copy = tokenize(text)
-    if not copy:
-        return Outcome("cannot_confirm", reason="no_fact")
+# A copy is only an EDIT of a notice if it lines up with most of that notice. A short message built
+# from common words, or one quoted sentence, also shares words with a notice but is not an edited
+# copy of it: below this share of the notice's words it is not called altered, and goes the
+# not_official / cannot_confirm way instead. (Crops with no edits are partial and are not affected.)
+# 0.0 switches the check off. 0.45 is from the sweep (eval/alignment_sweep.py, docs/EVAL.md): in the
+# fictional suites real edits line up with at least 0.59 of their notice, paraphrases with 0.22-0.33.
+MIN_ALIGNMENT_FOR_ALTERED = 0.45
 
-    match = find_notice(copy, record)
-    if match is not None:
-        return _compare(copy, match, record)
 
-    # Nothing matched. A contradicted official fact is `not_official`; anything else is
-    # "not in our record", which is never "fake" (rule 1).
+def no_match_outcome(copy: list[Token], record: Sequence[OfficialNotice]) -> Outcome:
+    """The copy is not a copy of any notice. A contradicted official fact is `not_official`;
+    anything else is "not in our record", which is never "fake" (rule 1)."""
     found = find_conflicts(copy, record)
     if found is not None:
         notice, conflicts = found
@@ -156,3 +157,18 @@ def evaluate(text: str, record: Sequence[OfficialNotice]) -> Outcome:
     if not any(t.meaningful for t in copy):
         return Outcome("cannot_confirm", reason="no_fact")
     return Outcome("cannot_confirm", reason="not_in_record")
+
+
+def evaluate(text: str, record: Sequence[OfficialNotice], min_alignment: float | None = None) -> Outcome:
+    min_alignment = MIN_ALIGNMENT_FOR_ALTERED if min_alignment is None else min_alignment
+    copy = tokenize(text)
+    if not copy:
+        return Outcome("cannot_confirm", reason="no_fact")
+
+    match = find_notice(copy, record)
+    if match is not None:
+        outcome = _compare(copy, match, record)
+        if outcome.verdict != "altered" or match.notice_coverage >= min_alignment:
+            return outcome
+        # lines up with too little of the notice to be an edit of it: treat as not matching
+    return no_match_outcome(copy, record)

@@ -1,6 +1,6 @@
 # Evaluation results
 
-Run `2026-11-10T09:08:33+00:00` on commit `9b202ed + uncommitted changes` by `uv run python eval/run.py`.
+Run `2026-11-10T09:17:31+00:00` on commit `10c8ce9 + uncommitted changes` by `uv run python eval/run.py`.
 
 > SYNTHETIC. Every case is built from the fictional Simulated Electoral Commission record in eval/record.json. These numbers say nothing about real notices, real letterheads or stamps, or real photographs.
 
@@ -11,13 +11,13 @@ Run `2026-11-10T09:08:33+00:00` on commit `9b202ed + uncommitted changes` by `uv
 | edits_text_wrapped | 131 | 131 | 0 | - | - |
 | crops_text | 24 | 24 | 0 | - | - |
 | invented | 15 | 15 | 0 | - | - |
-| modified_real | 3 | 2 | 0 | - | - |
-| paraphrases | 4 | 2 | 0 | - | - |
+| modified_real | 3 | 1 | 0 | - | - |
+| paraphrases | 4 | 4 | 0 | - | - |
 | pidgin_rumours | 20 | 20 | 0 | - | - |
 | honest_image | 64 | 8 | 0 | 30 | 26 |
 | edits_image | 92 | 84 | 0 | - | - |
 | crops_image | 16 | 3 | 0 | - | - |
-| **total** | 668 | 588 | 0 | 30 | 26 |
+| **total** | 668 | 589 | 0 | 30 | 26 |
 
 - Forged or invented copies confirmed as genuine: **0** (must be 0).
 - Crops confirmed as complete: 0.
@@ -27,9 +27,8 @@ Run `2026-11-10T09:08:33+00:00` on commit `9b202ed + uncommitted changes` by `uv
 
 | case | expected | got | changes |
 |---|---|---|---|
+| `modified_real/00` | altered/not_official | cannot_confirm/not_in_record | - |
 | `modified_real/02` | altered/not_official | cannot_confirm/not_in_record | - |
-| `paraphrase/00` | cannot_confirm | altered | delete link None->'https://register.sec.example'; delete date None->'14th November'; delete text None->'Simulated Electoral'; replace text 'said'->'announces that' |
-| `paraphrase/01` | cannot_confirm | altered | replace text 'I heard that'->'Results will be published on within hours of the close of polls' |
 | `honest_image/SEC-E-001/clean` | confirmed | altered | insert number '9'->None |
 | `honest_image/SEC-E-001/clean_wrapped` | confirmed | cannot_confirm/unclear | - |
 | `honest_image/SEC-E-001/whatsapp_wrapped` | confirmed | altered | delete text None->'on' |

@@ -20,6 +20,7 @@ from ..check import verdict_from_outcome
 from ..compare.diff import Diff, diff_tokens
 from ..compare.match import Match, find_notice
 from ..compare.tokenize import Token
+from .. import evaluate as _ev
 from ..evaluate import Outcome, order_changes, visible_diffs
 from ..explain import find_conflicts
 from ..model import OfficialNotice
@@ -87,14 +88,31 @@ def _low(d: Diff, min_conf: float | None) -> bool:
     return min_conf is not None and d.conf is not None and d.conf < min_conf
 
 
+def _no_match(ta: list[Token], tb: list[Token], record: Sequence[OfficialNotice]) -> Outcome:
+    """Neither reading is a copy of a notice. A conflict counts only if BOTH readings find the same
+    one; anything else is "not in our record" (never "fake", rule 1)."""
+    fa, fb = find_conflicts(ta, record), find_conflicts(tb, record)
+    if fa and fb and fa[0].id == fb[0].id:
+        key = lambda cs: {(c["kind"], c["copy"].casefold(), c["official"].casefold()) for c in cs}
+        shared = key(fa[1]) & key(fb[1])
+        kept = [c for c in fa[1] if (c["kind"], c["copy"].casefold(), c["official"].casefold()) in shared]
+        if kept:
+            return Outcome("not_official", notice=fa[0], conflicts=kept)
+    if not any(t.meaningful for t in ta + tb):
+        return Outcome("cannot_confirm", reason="no_fact")
+    return Outcome("cannot_confirm", reason="not_in_record")
+
+
 def evaluate_readings(
     readings: Sequence[Reading],
     record: Sequence[OfficialNotice],
     min_confidence: float | None | object = _USE_DEFAULT,
+    min_alignment: float | None = None,
 ) -> Outcome:
     if len(readings) < 2:
         raise ValueError("an image needs two independent readings")
     min_conf = DEFAULT_MIN_CONFIDENCE if min_confidence is _USE_DEFAULT else min_confidence
+    min_align = _ev.MIN_ALIGNMENT_FOR_ALTERED if min_alignment is None else min_alignment
     ra, rb = readings[0], readings[1]
     ta, ba, ca, ma = _per_reading(ra, record)
     tb, bb, cb, mb = _per_reading(rb, record)
@@ -104,17 +122,7 @@ def evaluate_readings(
         return Outcome("cannot_confirm", reason="unclear")
 
     if ma is None and mb is None:
-        # no notice in either reading: a conflict counts only if both readings find the same one
-        fa, fb = find_conflicts(ta, record), find_conflicts(tb, record)
-        if fa and fb and fa[0].id == fb[0].id:
-            key = lambda cs: {(c["kind"], c["copy"].casefold(), c["official"].casefold()) for c in cs}
-            shared = key(fa[1]) & key(fb[1])
-            kept = [c for c in fa[1] if (c["kind"], c["copy"].casefold(), c["official"].casefold()) in shared]
-            if kept:
-                return Outcome("not_official", notice=fa[0], conflicts=kept)
-        if not any(t.meaningful for t in ta + tb):
-            return Outcome("cannot_confirm", reason="no_fact")
-        return Outcome("cannot_confirm", reason="not_in_record")
+        return _no_match(ta, tb, record)
 
     if ma is None or mb is None or ma.notice.id != mb.notice.id:
         # only one reading found a notice (or they found different ones): not enough to decide
@@ -157,6 +165,9 @@ def evaluate_readings(
 
     notice = ma.notice
     if agreed:
+        # lines up with too little of the notice to be an edit of it: not a copy of it at all
+        if min(ma.notice_coverage, mb.notice_coverage) < min_align:
+            return _no_match(ta, tb, record)
         return Outcome("altered", notice=notice, changes=order_changes(agreed))
     if uncertain:
         return Outcome("cannot_confirm", reason="unclear", notice=notice)
