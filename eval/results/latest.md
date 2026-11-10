@@ -1,6 +1,6 @@
 # Evaluation results
 
-Run `2026-11-09T09:19:41+00:00` on commit `612354c + uncommitted changes` by `uv run python eval/run.py`.
+Run `2026-11-10T07:22:30+00:00` on commit `9d5017f + uncommitted changes` by `uv run python eval/run.py`.
 
 > SYNTHETIC. Every case is built from the fictional Simulated Electoral Commission record in eval/record.json. These numbers say nothing about real notices, real letterheads or stamps, or real photographs.
 
@@ -14,10 +14,10 @@ Run `2026-11-09T09:19:41+00:00` on commit `612354c + uncommitted changes` by `uv
 | modified_real | 3 | 2 | 0 | - | - |
 | paraphrases | 4 | 2 | 0 | - | - |
 | pidgin_rumours | 20 | 20 | 0 | - | - |
-| honest_image | 64 | 5 | 0 | 41 | 18 |
-| edits_image | 92 | 85 | 0 | - | - |
-| crops_image | 16 | 1 | 0 | - | - |
-| **total** | 668 | 584 | 0 | 41 | 18 |
+| honest_image | 64 | 8 | 0 | 30 | 26 |
+| edits_image | 92 | 84 | 0 | - | - |
+| crops_image | 16 | 3 | 0 | - | - |
+| **total** | 668 | 588 | 0 | 30 | 26 |
 
 - Forged or invented copies confirmed as genuine: **0** (must be 0).
 - Crops confirmed as complete: 0.
@@ -28,45 +28,43 @@ Run `2026-11-09T09:19:41+00:00` on commit `612354c + uncommitted changes` by `uv
 | case | expected | got | changes |
 |---|---|---|---|
 | `modified_real/02` | altered/not_official | cannot_confirm/not_in_record | - |
-| `paraphrase/00` | cannot_confirm | altered | delete text None->'Simulated Electoral'; replace text 'said'->'announces that'; delete text None->'registration closes on'; delete date None->'14th November' |
+| `paraphrase/00` | cannot_confirm | altered | delete link None->'https://register.sec.example'; delete date None->'14th November'; delete text None->'Simulated Electoral'; replace text 'said'->'announces that' |
 | `paraphrase/01` | cannot_confirm | altered | replace text 'I heard that'->'Results will be published on within hours of the close of polls' |
 | `honest_image/SEC-E-001/clean` | confirmed | altered | insert number '9'->None |
-| `honest_image/SEC-E-001/clean_wrapped` | confirmed | altered | insert number '4'->None; replace text 'nnounces'->'announces' |
-| `honest_image/SEC-E-001/whatsapp` | confirmed | cannot_confirm/unclear | - |
+| `honest_image/SEC-E-001/clean_wrapped` | confirmed | cannot_confirm/unclear | - |
 | `honest_image/SEC-E-001/whatsapp_wrapped` | confirmed | altered | delete text None->'on' |
 | `honest_image/SEC-E-001/phone_wrapped` | confirmed | cannot_confirm/unclear | - |
 | `honest_image/SEC-E-001/lowres` | confirmed | cannot_confirm/unclear | - |
 | `honest_image/SEC-E-001/lowres_wrapped` | confirmed | cannot_confirm/unclear | - |
-| `honest_image/SEC-E-002/clean_wrapped` | confirmed | altered | insert number '4'->None; replace text 'nnounces'->'announces' |
 | `honest_image/SEC-E-002/whatsapp` | confirmed | cannot_confirm/unclear | - |
 | `honest_image/SEC-E-002/phone` | confirmed | cannot_confirm/unclear | - |
 | `honest_image/SEC-E-002/phone_wrapped` | confirmed | altered | insert number '0'->None |
 | `honest_image/SEC-E-002/lowres` | confirmed | cannot_confirm/unclear | - |
 | `honest_image/SEC-E-002/lowres_wrapped` | confirmed | cannot_confirm/unclear | - |
-| `honest_image/SEC-E-003/clean` | confirmed | altered | insert number '4'->None; replace text 'nnounces'->'announces' |
-| `honest_image/SEC-E-003/clean_wrapped` | confirmed | altered | insert number '4'->None; replace text 'nnounces'->'announces' |
+| `honest_image/SEC-E-003/clean` | confirmed | cannot_confirm/unclear | - |
+| `honest_image/SEC-E-003/clean_wrapped` | confirmed | cannot_confirm/unclear | - |
 | `honest_image/SEC-E-003/whatsapp` | confirmed | altered | insert number '2'->None; insert text 'M'->None |
 | `honest_image/SEC-E-003/whatsapp_wrapped` | confirmed | altered | insert number '2'->None; insert text 'M'->None |
 | `honest_image/SEC-E-003/phone` | confirmed | altered | replace time '2:00 '->'2:00 pm'; insert text 'P'->None |
 | `honest_image/SEC-E-003/phone_wrapped` | confirmed | cannot_confirm/unclear | - |
 | `honest_image/SEC-E-003/lowres` | confirmed | altered | insert number '2'->None; insert text 'M'->None |
 | `honest_image/SEC-E-003/lowres_wrapped` | confirmed | cannot_confirm/unclear | - |
-| `honest_image/SEC-E-004/clean` | confirmed | altered | insert number '4'->None; delete text None->'a' |
-| `honest_image/SEC-E-004/clean_wrapped` | confirmed | altered | insert number '4'->None; delete text None->'a' |
-| `honest_image/SEC-E-004/whatsapp` | confirmed | altered | insert number '4'->None; delete text None->'a' |
+| `honest_image/SEC-E-004/clean` | confirmed | cannot_confirm/unclear | - |
+| `honest_image/SEC-E-004/clean_wrapped` | confirmed | cannot_confirm/unclear | - |
+| `honest_image/SEC-E-004/whatsapp` | confirmed | cannot_confirm/unclear | - |
 | `honest_image/SEC-E-004/whatsapp_wrapped` | confirmed | cannot_confirm/unclear | - |
-| `honest_image/SEC-E-004/phone` | confirmed | altered | insert number '4'->None; delete text None->'a' |
-| `honest_image/SEC-E-004/phone_wrapped` | confirmed | altered | insert number '4'->None; delete text None->'a' |
-| `honest_image/SEC-E-004/lowres` | confirmed | altered | insert number '4'->None; delete text None->'a' |
-| `honest_image/SEC-E-004/lowres_wrapped` | confirmed | altered | insert number '4'->None; delete text None->'a' |
-| `honest_image/SEC-E-005/clean` | confirmed | altered | insert number '4'->None; insert text 'M'->None; delete text None->'a' |
+| `honest_image/SEC-E-004/phone` | confirmed | cannot_confirm/unclear | - |
+| `honest_image/SEC-E-004/phone_wrapped` | confirmed | cannot_confirm/unclear | - |
+| `honest_image/SEC-E-004/lowres` | confirmed | cannot_confirm/unclear | - |
+| `honest_image/SEC-E-004/lowres_wrapped` | confirmed | cannot_confirm/unclear | - |
+| `honest_image/SEC-E-005/clean` | confirmed | altered | insert number '4'->None; insert text 'M'->None |
 | `honest_image/SEC-E-005/clean_wrapped` | confirmed | altered | insert text 'M'->None |
-| `honest_image/SEC-E-005/whatsapp` | confirmed | altered | insert text 'M'->None; delete text None->'a' |
+| `honest_image/SEC-E-005/whatsapp` | confirmed | altered | insert text 'M'->None |
 | `honest_image/SEC-E-005/whatsapp_wrapped` | confirmed | altered | replace text 'YOUF'->'your' |
 | `honest_image/SEC-E-005/phone` | confirmed | altered | insert number '4'->None; delete text None->'can'; replace text 'YOU'->'your'; insert text 'M'->None |
 | `honest_image/SEC-E-005/phone_wrapped` | confirmed | altered | replace time '4:00 '->'4:00 pm'; insert text 'P'->None |
-| `honest_image/SEC-E-005/lowres` | confirmed | altered | insert text 'M'->None; insert number '4'->None; delete text None->'a' |
-| `honest_image/SEC-E-005/lowres_wrapped` | confirmed | altered | insert text 'M'->None; insert number '4'->None; delete text None->'a' |
+| `honest_image/SEC-E-005/lowres` | confirmed | altered | insert text 'M'->None |
+| `honest_image/SEC-E-005/lowres_wrapped` | confirmed | altered | insert text 'M'->None |
 | `honest_image/SEC-E-006/clean` | confirmed | altered | delete text None->'on'; replace text 'OF'->'or' |
 | `honest_image/SEC-E-006/clean_wrapped` | confirmed | altered | delete text None->'on'; replace text 'OF'->'or' |
 | `honest_image/SEC-E-006/whatsapp` | confirmed | altered | delete text None->'on'; replace text 'Of'->'or' |
@@ -78,7 +76,6 @@ Run `2026-11-09T09:19:41+00:00` on commit `612354c + uncommitted changes` by `uv
 | `honest_image/SEC-E-007/clean_wrapped` | confirmed | altered | replace text 'N'->'on' |
 | `honest_image/SEC-E-007/whatsapp` | confirmed | cannot_confirm/unclear | - |
 | `honest_image/SEC-E-007/whatsapp_wrapped` | confirmed | altered | replace text 'Pel'->'per'; replace text 'N'->'on' |
-| `honest_image/SEC-E-007/phone` | confirmed | cannot_confirm/unclear | - |
 | `honest_image/SEC-E-007/phone_wrapped` | confirmed | cannot_confirm/unclear | - |
 | `honest_image/SEC-E-007/lowres` | confirmed | cannot_confirm/unclear | - |
 | `honest_image/SEC-E-008/clean` | confirmed | altered | insert number '4'->None |
@@ -91,6 +88,7 @@ Run `2026-11-09T09:19:41+00:00` on commit `612354c + uncommitted changes` by `uv
 | `honest_image/SEC-E-008/lowres_wrapped` | confirmed | cannot_confirm/unclear | - |
 | `edits_image/SEC-E-001/link_host/lowres` | altered | cannot_confirm/unclear | - |
 | `edits_image/SEC-E-002/link_host/lowres` | altered | cannot_confirm/unclear | - |
+| `edits_image/SEC-E-004/phone/clean` | altered | cannot_confirm/unclear | - |
 | `edits_image/SEC-E-004/phone/whatsapp` | altered | cannot_confirm/unclear | - |
 | `edits_image/SEC-E-006/link_host/lowres` | altered | cannot_confirm/unclear | - |
 | `edits_image/SEC-E-007/link_host/phone` | altered | cannot_confirm/unclear | - |
@@ -98,14 +96,12 @@ Run `2026-11-09T09:19:41+00:00` on commit `612354c + uncommitted changes` by `uv
 | `edits_image/SEC-E-008/time/whatsapp` | altered | cannot_confirm/unclear | - |
 | `crops_image/SEC-E-001/tail/clean` | partial | cannot_confirm/unclear | - |
 | `crops_image/SEC-E-001/tail/whatsapp` | partial | cannot_confirm/unclear | - |
-| `crops_image/SEC-E-002/tail/clean` | partial | cannot_confirm/unclear | - |
-| `crops_image/SEC-E-002/tail/whatsapp` | partial | cannot_confirm/unclear | - |
-| `crops_image/SEC-E-003/tail/clean` | partial | altered | insert number '4'->None; replace text 'nnounces'->'announces'; replace date '12th'->'12th December' |
+| `crops_image/SEC-E-003/tail/clean` | partial | altered | replace date '12th'->'12th December' |
 | `crops_image/SEC-E-003/tail/whatsapp` | partial | altered | replace date '12th'->'12th December' |
-| `crops_image/SEC-E-004/tail/clean` | partial | altered | insert number '4'->None; delete text None->'a' |
-| `crops_image/SEC-E-004/tail/whatsapp` | partial | altered | delete text None->'a' |
-| `crops_image/SEC-E-005/tail/clean` | partial | altered | insert number '4'->None; insert text 'M'->None; delete text None->'a' |
-| `crops_image/SEC-E-005/tail/whatsapp` | partial | altered | replace text 'YOU'->'your'; insert number '2'->None; insert text 'M'->None; delete text None->'a' |
+| `crops_image/SEC-E-004/tail/clean` | partial | cannot_confirm/unclear | - |
+| `crops_image/SEC-E-004/tail/whatsapp` | partial | cannot_confirm/unclear | - |
+| `crops_image/SEC-E-005/tail/clean` | partial | altered | insert number '4'->None; insert text 'M'->None |
+| `crops_image/SEC-E-005/tail/whatsapp` | partial | altered | insert number '2'->None; replace text 'YOU'->'your'; insert text 'M'->None |
 | `crops_image/SEC-E-006/tail/clean` | partial | altered | delete text None->'on' |
 | `crops_image/SEC-E-006/tail/whatsapp` | partial | altered | delete text None->'on' |
 | `crops_image/SEC-E-007/tail/clean` | partial | altered | replace text 'N'->'on' |

@@ -32,6 +32,14 @@ class Diff:
     # official notice lined up right next to them. That is wrapper text (a "Forwarded" label, a
     # sender, a timestamp, a caption), not part of the notice.
     edge: str | None = None
+    # Set on look-alike differences, used on the PHOTO path only. `mixed`: the copy has letters and
+    # digits in one word ("4nnounces"). `wordlike`: the copy side is only ordinary words. Either
+    # one is a reading slip. A standalone fact (B:00 am) is neither and stays uncertain.
+    mixed: bool = False
+    wordlike: bool = False
+    # Lowest reading confidence over the copy words this difference rests on (photo path, internal
+    # only: it is never serialised, shown, or returned). None when unknown.
+    conf: float | None = None
 
     def to_change(self) -> dict:
         """The contract Change shape without a box (used for record-to-record changes)."""
@@ -43,6 +51,12 @@ class Diff:
         if self.box is not None:
             change["box"] = [round(v, 4) for v in self.box]
         return change
+
+
+def _is_mixed(tokens: list[Token]) -> bool:
+    """Letters and digits touching inside one written word, e.g. 4nnounces, 2Bth, O800."""
+    has_digit = lambda t: any(ch.isdigit() for ch in t.text)
+    return any(a.end == b.start and has_digit(a) != has_digit(b) for a, b in zip(tokens, tokens[1:]))
 
 
 def _join(tokens: list[Token]) -> str:
@@ -84,7 +98,13 @@ def _pair_block(old: list[Token], new: list[Token], i0: int, j0: int) -> list[tu
     if old and new and is_lookalike("".join(t.text for t in old), "".join(t.text for t in new)):
         kind = next((t.kind for t in new if t.meaningful), "text")
         return [
-            (i0, Diff("replace", kind, _join(new), _join(old), (i0, i0 + len(old)), (j0, j0 + len(new)), lookalike=True))
+            (
+                i0,
+                Diff(
+                    "replace", kind, _join(new), _join(old), (i0, i0 + len(old)), (j0, j0 + len(new)),
+                    lookalike=True, mixed=_is_mixed(old), wordlike=all(t.kind == "text" for t in old),
+                ),
+            )
         ]
     old_m = [(i0 + n, t) for n, t in enumerate(old) if t.meaningful]
     new_m = [(j0 + n, t) for n, t in enumerate(new) if t.meaningful]

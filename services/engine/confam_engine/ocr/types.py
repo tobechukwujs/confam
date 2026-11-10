@@ -8,13 +8,16 @@ from typing import Protocol
 class Word:
     """One word read from a photo. The box is x, y, width, height, each 0 to 1 of the image.
 
-    No confidence is kept here: reading confidence is never shown to a user (rule 4)."""
+    Confidence (`conf`) is internal to the engine and is never shown or returned (rule 4)."""
 
     text: str
     x: float
     y: float
     w: float
     h: float
+    # Reading confidence 0-100, used ONLY inside the engine to decide whether a change can be
+    # trusted. It is never returned, serialised or shown (rule 4). None when unknown (typed text).
+    conf: float | None = None
 
 
 @dataclass(frozen=True)

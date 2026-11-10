@@ -1,0 +1,215 @@
+{
+ "meta": {
+  "date": "2026-11-10T07:22:12+00:00",
+  "reading_seconds": 203.3,
+  "honest": 64,
+  "edits": 92,
+  "crops": 16,
+  "disclaimer": "SYNTHETIC fictional pictures only (eval/record.json). Says nothing about real photographs."
+ },
+ "table": [
+  {
+   "threshold": null,
+   "honest": {
+    "false_alarm": 30,
+    "withheld": 26,
+    "confirmed": 8
+   },
+   "edits": {
+    "caught": 84,
+    "withheld": 8
+   },
+   "crops": {
+    "other": 13,
+    "partial": 3
+   }
+  },
+  {
+   "threshold": 30,
+   "honest": {
+    "withheld": 33,
+    "confirmed": 8,
+    "false_alarm": 23
+   },
+   "edits": {
+    "caught": 82,
+    "withheld": 10
+   },
+   "crops": {
+    "other": 13,
+    "partial": 3
+   }
+  },
+  {
+   "threshold": 40,
+   "honest": {
+    "withheld": 36,
+    "confirmed": 8,
+    "false_alarm": 20
+   },
+   "edits": {
+    "caught": 80,
+    "withheld": 12
+   },
+   "crops": {
+    "other": 13,
+    "partial": 3
+   }
+  },
+  {
+   "threshold": 50,
+   "honest": {
+    "withheld": 38,
+    "confirmed": 8,
+    "false_alarm": 18
+   },
+   "edits": {
+    "caught": 77,
+    "withheld": 15
+   },
+   "crops": {
+    "other": 13,
+    "partial": 3
+   }
+  },
+  {
+   "threshold": 60,
+   "honest": {
+    "withheld": 40,
+    "confirmed": 8,
+    "false_alarm": 16
+   },
+   "edits": {
+    "caught": 73,
+    "withheld": 19
+   },
+   "crops": {
+    "other": 13,
+    "partial": 3
+   }
+  },
+  {
+   "threshold": 65,
+   "honest": {
+    "withheld": 42,
+    "confirmed": 8,
+    "false_alarm": 14
+   },
+   "edits": {
+    "caught": 69,
+    "withheld": 23
+   },
+   "crops": {
+    "other": 13,
+    "partial": 3
+   }
+  },
+  {
+   "threshold": 70,
+   "honest": {
+    "withheld": 45,
+    "confirmed": 8,
+    "false_alarm": 11
+   },
+   "edits": {
+    "caught": 69,
+    "withheld": 23
+   },
+   "crops": {
+    "other": 13,
+    "partial": 3
+   }
+  },
+  {
+   "threshold": 75,
+   "honest": {
+    "withheld": 48,
+    "confirmed": 8,
+    "false_alarm": 8
+   },
+   "edits": {
+    "caught": 68,
+    "withheld": 24
+   },
+   "crops": {
+    "other": 13,
+    "partial": 3
+   }
+  },
+  {
+   "threshold": 80,
+   "honest": {
+    "withheld": 50,
+    "confirmed": 8,
+    "false_alarm": 6
+   },
+   "edits": {
+    "caught": 67,
+    "withheld": 25
+   },
+   "crops": {
+    "other": 13,
+    "partial": 3
+   }
+  },
+  {
+   "threshold": 85,
+   "honest": {
+    "withheld": 50,
+    "confirmed": 8,
+    "false_alarm": 6
+   },
+   "edits": {
+    "caught": 62,
+    "withheld": 30
+   },
+   "crops": {
+    "other": 13,
+    "partial": 3
+   }
+  },
+  {
+   "threshold": 90,
+   "honest": {
+    "withheld": 50,
+    "confirmed": 8,
+    "false_alarm": 6
+   },
+   "edits": {
+    "caught": 61,
+    "withheld": 31
+   },
+   "crops": {
+    "other": 13,
+    "partial": 3
+   }
+  },
+  {
+   "threshold": 95,
+   "honest": {
+    "withheld": 56,
+    "confirmed": 8
+   },
+   "edits": {
+    "withheld": 60,
+    "caught": 32
+   },
+   "crops": {
+    "other": 13,
+    "partial": 3
+   }
+  }
+ ],
+ "noise_confidence": {
+  "n": 47,
+  "min": 0.0,
+  "median": 65.0,
+  "max": 95.0
+ },
+ "real_change_confidence": {
+  "n": 82,
+  "min": 0.0,
+  "median": 93.5,
+  "max": 96.0
+ }
+}

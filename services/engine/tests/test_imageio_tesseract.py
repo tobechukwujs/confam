@@ -179,11 +179,13 @@ def test_reader_clamps_boxes_that_run_past_the_edge(monkeypatch):
     assert w.x + w.w <= 1.0000001 and w.y + w.h <= 1.0000001
 
 
-def test_a_reading_carries_no_confidence(monkeypatch):
-    data = {"text": ["x"], "left": [0], "top": [0], "width": [10], "height": [10], "conf": ["77"]}
+def test_confidence_is_kept_inside_the_engine_only(monkeypatch):
+    """Word.conf feeds the confidence gate. It is never part of a verdict (see test_photo_slips)."""
+    data = {"text": ["x", "y"], "left": [0, 20], "top": [0, 0], "width": [10, 10], "height": [10, 10], "conf": ["77", "not a number"]}
     r, _ = reader_with(data, monkeypatch)
-    word = r.read(picture(100, 100)).words[0]
-    assert not hasattr(word, "conf") and not hasattr(word, "confidence")
+    words = r.read(picture(100, 100)).words
+    assert words[0].conf == 77.0 and words[1].conf is None
+    assert not hasattr(words[0], "confidence")
 
 
 def test_reader_says_so_when_tesseract_is_missing(monkeypatch):

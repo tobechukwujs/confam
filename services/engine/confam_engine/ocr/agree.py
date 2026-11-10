@@ -20,15 +20,22 @@ from ..check import verdict_from_outcome
 from ..compare.diff import Diff, diff_tokens
 from ..compare.match import Match, find_notice
 from ..compare.tokenize import Token
-from ..evaluate import Outcome, visible_diffs
+from ..evaluate import Outcome, order_changes, visible_diffs
 from ..explain import find_conflicts
 from ..model import OfficialNotice
 from ..supersession import supersession_for
-from .boxed import Box, boxed_tokens, union
+from .boxed import Box, boxed_tokens_conf, union
 from .types import Reading
 
 MIN_TOKENS = 3  # fewer words than this is not a readable notice
 NEAR = 0.03  # boxes within this distance (of the image) are "the same spot"
+
+# Confidence gate: a change resting on a word read with LESS confidence than this (0-100) in either
+# reading is cannot_confirm / unclear, never altered. None switches the gate off. The threshold is
+# the product owner's choice (see docs/EVAL.md for the trade-off); it is OFF until they choose.
+# Confidence stays inside the engine: it is never returned, serialised or shown (rule 4).
+DEFAULT_MIN_CONFIDENCE: float | None = None
+_USE_DEFAULT = object()
 
 
 def _near(a: Box | None, b: Box | None) -> bool:
@@ -50,34 +57,47 @@ def _is_fact(d: Diff) -> bool:
     return d.kind != "text" or bool(re.search(r"\d", (d.copy or "") + (d.official or "")))
 
 
-def _with_boxes(diffs: list[Diff], boxes: list[Box | None]) -> list[Diff]:
+def _with_boxes(diffs: list[Diff], boxes: list[Box | None], confs: list[float | None]) -> list[Diff]:
     out = []
     for d in diffs:
         a, b = d.old_span
         if b > a:
             box = union([bx for bx in boxes[a:b] if bx is not None])
+            known = [c for c in confs[a:b] if c is not None]
         else:  # something missing from the copy: point at the words around the gap
-            near = [bx for bx in (boxes[a - 1] if a - 1 >= 0 else None, boxes[a] if a < len(boxes) else None) if bx]
-            box = union(near)
-        out.append(replace(d, box=box))
+            idx = [i for i in (a - 1, a) if 0 <= i < len(boxes)]
+            box = union([boxes[i] for i in idx if boxes[i] is not None])
+            known = [confs[i] for i in idx if confs[i] is not None]
+        out.append(replace(d, box=box, conf=min(known) if known else None))
     return out
 
 
 def _per_reading(reading: Reading, record: Sequence[OfficialNotice]):
-    tokens, boxes = boxed_tokens(reading)
-    return tokens, boxes, find_notice(tokens, record)
+    tokens, boxes, confs = boxed_tokens_conf(reading)
+    return tokens, boxes, confs, find_notice(tokens, record)
 
 
-def _visible(tokens: list[Token], boxes: list[Box | None], m: Match, record: Sequence[OfficialNotice]):
-    visible, cropped = visible_diffs(tokens, m, record)
-    return _with_boxes(visible, boxes), cropped
+def _visible(tokens: list[Token], boxes: list[Box | None], confs: list[float | None], m: Match, record: Sequence[OfficialNotice]):
+    # ocr=True: a reading slip (a look-alike mixed into a word) is not a change on a photo
+    visible, cropped = visible_diffs(tokens, m, record, ocr=True)
+    return _with_boxes(visible, boxes, confs), cropped
 
-def evaluate_readings(readings: Sequence[Reading], record: Sequence[OfficialNotice]) -> Outcome:
+
+def _low(d: Diff, min_conf: float | None) -> bool:
+    return min_conf is not None and d.conf is not None and d.conf < min_conf
+
+
+def evaluate_readings(
+    readings: Sequence[Reading],
+    record: Sequence[OfficialNotice],
+    min_confidence: float | None | object = _USE_DEFAULT,
+) -> Outcome:
     if len(readings) < 2:
         raise ValueError("an image needs two independent readings")
+    min_conf = DEFAULT_MIN_CONFIDENCE if min_confidence is _USE_DEFAULT else min_confidence
     ra, rb = readings[0], readings[1]
-    ta, ba, ma = _per_reading(ra, record)
-    tb, bb, mb = _per_reading(rb, record)
+    ta, ba, ca, ma = _per_reading(ra, record)
+    tb, bb, cb, mb = _per_reading(rb, record)
 
     if len(ta) < MIN_TOKENS and len(tb) < MIN_TOKENS:
         # OCR read no usable text. The only case where unclear has no notice (approved contract change).
@@ -101,8 +121,8 @@ def evaluate_readings(readings: Sequence[Reading], record: Sequence[OfficialNoti
         found = ma or mb
         return Outcome("cannot_confirm", reason="unclear", notice=found.notice)
 
-    da, crop_a = _visible(ta, ba, ma, record)
-    db, crop_b = _visible(tb, bb, mb, record)
+    da, crop_a = _visible(ta, ba, ca, ma, record)
+    db, crop_b = _visible(tb, bb, cb, mb, record)
 
     agreed: list[Diff] = []
     uncertain = False
@@ -126,6 +146,9 @@ def evaluate_readings(readings: Sequence[Reading], record: Sequence[OfficialNoti
         if d.lookalike or e.lookalike:
             uncertain = True
             continue
+        if _low(d, min_conf) or _low(e, min_conf):
+            uncertain = True  # a change on a low-confidence word is never called altered
+            continue
         box = union([b for b in (d.box, e.box) if b is not None])
         agreed.append(replace(d, box=box))
     for j, e in enumerate(db):
@@ -134,8 +157,7 @@ def evaluate_readings(readings: Sequence[Reading], record: Sequence[OfficialNoti
 
     notice = ma.notice
     if agreed:
-        agreed.sort(key=lambda x: (x.old_span[0], x.new_span[0]))
-        return Outcome("altered", notice=notice, changes=agreed)
+        return Outcome("altered", notice=notice, changes=order_changes(agreed))
     if uncertain:
         return Outcome("cannot_confirm", reason="unclear", notice=notice)
     if crop_a and crop_b:
@@ -150,7 +172,8 @@ def check_readings(
     record_as_of: datetime,
     lang: str = "en",
     now: datetime | None = None,
+    min_confidence: float | None | object = _USE_DEFAULT,
 ) -> Verdict:
     return verdict_from_outcome(
-        evaluate_readings(readings, record), lang=lang, record_as_of=record_as_of, now=now
+        evaluate_readings(readings, record, min_confidence), lang=lang, record_as_of=record_as_of, now=now
     )

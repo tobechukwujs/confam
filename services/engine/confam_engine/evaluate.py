@@ -93,16 +93,34 @@ def _unlisted(copy: list[Token], allowed: set[str], diffs: list[Diff], skip: set
     return out
 
 
-def visible_diffs(copy: list[Token], m: Match, record: Sequence[OfficialNotice]) -> tuple[list[Diff], bool]:
+# The real edit must never be buried under noise: the change list is ordered by what matters most
+# to a voter. Within a kind, in reading order.
+KIND_ORDER = ["link", "money", "phone", "date", "time", "number", "negation", "weekday", "text"]
+
+
+def order_changes(diffs: list[Diff]) -> list[Diff]:
+    rank = {k: i for i, k in enumerate(KIND_ORDER)}
+    return sorted(diffs, key=lambda d: (rank.get(d.kind, len(rank)), d.old_span[0], d.new_span[0]))
+
+
+def visible_diffs(
+    copy: list[Token], m: Match, record: Sequence[OfficialNotice], ocr: bool = False
+) -> tuple[list[Diff], bool]:
     """Differences between the copy and the matched notice that COUNT, and whether the copy is
     cropped. The copy is aligned to the notice: wrapper text outside it is ignored, a missing head
-    or tail of the notice means cropped, and everything inside the notice counts."""
+    or tail of the notice means cropped, and everything inside the notice counts.
+
+    `ocr=True` (a photo): a look-alike mixed into a word ("4nnounces") or inside an ordinary word is
+    a READING SLIP, not a change, so it is dropped. Typed text never gets this: a look-alike there
+    may be deliberate."""
     diffs = diff_tokens(copy, m.tokens)
     cropped = [d for d in diffs if _outside_the_visible_slice(d, m)]
     inside = [d for d in diffs if d not in cropped]
     head = {i for d in inside if d.edge == "head" for i in range(*d.old_span)}
     allowed = _payload_keys(m, record)
     kept = [d for d in inside if not _is_wrapper_noise(d, allowed)]
+    if ocr:
+        kept = [d for d in kept if not (d.lookalike and (d.mixed or d.wordlike))]
     kept += _unlisted(copy, _allow_list(record), kept, head)
     return kept, bool(cropped)
 
@@ -113,8 +131,7 @@ def _compare(copy: list[Token], m: Match, record: Sequence[OfficialNotice]) -> O
     uncertain = [d for d in visible if d.lookalike]
 
     if definite:
-        definite.sort(key=lambda d: (d.old_span[0], d.new_span[0]))
-        return Outcome("altered", notice=m.notice, changes=definite)
+        return Outcome("altered", notice=m.notice, changes=order_changes(definite))
     if uncertain:
         return Outcome("cannot_confirm", reason="unclear", notice=m.notice)
     if cropped:

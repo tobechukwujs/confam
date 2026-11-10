@@ -22,8 +22,15 @@ def union(boxes: list[Box]) -> Box | None:
 
 def boxed_tokens(reading: Reading) -> tuple[list[Token], list[Box | None]]:
     """Tokens of the reading's text, and for each token the box of the word(s) it came from."""
+    tokens, boxes, _ = boxed_tokens_conf(reading)
+    return tokens, boxes
+
+
+def boxed_tokens_conf(reading: Reading) -> tuple[list[Token], list[Box | None], list[float | None]]:
+    """Like boxed_tokens, plus the LOWEST confidence of the word(s) each token came from (None if
+    none of them carries one). Internal only."""
     text_parts: list[str] = []
-    spans: list[tuple[int, int, Box]] = []
+    spans: list[tuple[int, int, Box, float | None]] = []
     pos = 0
     for word in reading.words:
         if not word.text.strip():
@@ -31,13 +38,16 @@ def boxed_tokens(reading: Reading) -> tuple[list[Token], list[Box | None]]:
         start = pos
         text_parts.append(word.text)
         pos += len(word.text)
-        spans.append((start, pos, (word.x, word.y, word.w, word.h)))
+        spans.append((start, pos, (word.x, word.y, word.w, word.h), word.conf))
         text_parts.append(" ")
         pos += 1
     text = "".join(text_parts)
     tokens = tokenize(text)
     boxes: list[Box | None] = []
+    confs: list[float | None] = []
     for t in tokens:
-        hits = [b for a, z, b in spans if a < t.end and z > t.start]
-        boxes.append(union(hits))
-    return tokens, boxes
+        hits = [(b, c) for a, z, b, c in spans if a < t.end and z > t.start]
+        boxes.append(union([b for b, _ in hits]))
+        known = [c for _, c in hits if c is not None]
+        confs.append(min(known) if known else None)
+    return tokens, boxes, confs

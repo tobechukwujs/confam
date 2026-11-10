@@ -109,7 +109,11 @@ class TesseractReader:
             y0 = max(0.0, data["top"][i] / height)
             x1 = min(1.0, (data["left"][i] + data["width"][i]) / width)
             y1 = min(1.0, (data["top"][i] + data["height"][i]) / height)
-            words.append(Word(str(text).strip(), x0, y0, max(0.0, x1 - x0), max(0.0, y1 - y0)))
+            try:
+                conf = float(data["conf"][i])
+            except (TypeError, ValueError):
+                conf = None
+            words.append(Word(str(text).strip(), x0, y0, max(0.0, x1 - x0), max(0.0, y1 - y0), conf))
         return Reading(words)
 
 

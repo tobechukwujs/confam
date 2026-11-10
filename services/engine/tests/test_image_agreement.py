@@ -103,16 +103,27 @@ def test_a_change_only_one_reading_shows_is_never_altered_or_confirmed():
         assert v.notice.id == "SEC-2026-140"
 
 
-def test_readings_that_disagree_on_a_digit_are_unclear():
-    v = check(NEW_TEXT.replace("28th", "2Bth"), NEW_TEXT)
+def test_a_look_alike_mixed_into_a_word_in_a_photo_is_a_reading_slip_not_unclear():
+    """Changed rule (photo false alarms): 2Bth equals 28th after look-alike normalisation and mixes
+    a letter and a digit in one word, so it is OCR noise. Typed text keeps the stricter rule."""
+    for a, b in ((NEW_TEXT.replace("28th", "2Bth"), NEW_TEXT), (NEW_TEXT, NEW_TEXT.replace("28th", "2Bth")), (NEW_TEXT.replace("28th", "2Bth"),) * 2):
+        assert check(a, b).verdict.value == "confirmed"
+
+
+def test_readings_that_disagree_on_a_standalone_fact_are_unclear():
+    v = check(NEW_TEXT.replace("28th", "29th"), NEW_TEXT)
     assert v.verdict.value == "cannot_confirm" and v.reason.value == "unclear"
 
 
-def test_both_readings_showing_a_lookalike_are_unclear_not_altered():
-    bad = NEW_TEXT.replace("28th", "2Bth")
-    v = check(bad, bad)
+def test_both_readings_showing_a_standalone_lookalike_are_unclear_not_altered():
+    notice = OfficialNotice(
+        id="SEC-2026-150", title="Simulated Electoral Commission: hours", published="2026-10-09",
+        url="https://sec.example/n/150",
+        text="The Simulated Electoral Commission announces that polling units open at 8:00 am on Saturday and close at 2:00 pm. Bring your voter card.",
+    )
+    bad = notice.text.replace("8:00", "B:00")
+    v = check(bad, bad, record=[notice])
     assert v.verdict.value == "cannot_confirm" and v.reason.value == "unclear"
-
 
 def test_readings_that_disagree_on_what_the_change_is_are_unclear():
     a = NEW_TEXT.replace("28th", "29th")
@@ -170,7 +181,7 @@ def test_unclear_with_a_null_notice_never_happens_when_text_was_read():
     readable photo always names the notice it compared with."""
     v = check("Collect your new ballot cards at the market square on Sunday.", "Collect your new ballot cards at the market square on Sunday.")
     assert v.reason.value == "not_in_record"
-    v = check(NEW_TEXT.replace("28th", "2Bth"), NEW_TEXT)
+    v = check(NEW_TEXT.replace("28th", "29th"), NEW_TEXT)
     assert v.reason.value == "unclear" and v.notice is not None
 
 def test_one_reading_that_cannot_find_the_notice_does_not_confirm():
@@ -206,7 +217,8 @@ def test_no_edit_in_either_reading_is_ever_confirmed():
     want = facts(NEW_TEXT)
 
     def edit(text: str) -> str:
-        kind = rng.choice(["digit", "drop", "negate", "link", "lookalike", "append"])
+        # (a look-alike mixed into a word is now a reading slip on a photo, so it is not an edit here)
+        kind = rng.choice(["digit", "drop", "negate", "link", "append"])
         if kind == "digit":
             ms = list(re.finditer(r"\d", text))
             m = rng.choice(ms)
